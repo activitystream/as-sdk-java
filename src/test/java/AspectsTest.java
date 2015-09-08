@@ -1,6 +1,6 @@
 import com.activitystream.Event;
 import com.activitystream.EventType;
-import com.activitystream.aspects.AddressAspect;
+import com.activitystream.aspects.ClientDevice;
 import com.activitystream.aspects.ClientIPAddress;
 import org.junit.Test;
 
@@ -28,6 +28,25 @@ public class AspectsTest extends EventTestBase {
                 "            ], " +
                 "            \"aspects\" : {" +
                 "                   \"client_ip\": \"127.0.0.1\" " +
+                "               }, " +
+                "           \"event\" : \"type\"" +
+                "        }")));
+    }
+    @Test
+    public void client_device() {
+        HashMap props = new HashMap();
+        props.put("favourite_programming_language", "javascript");
+        Event ev = new Event()
+                .type(new EventType("type"))
+                .aspects(new ClientDevice().clientDevice("iPhone"))
+                .involves(ACTOR(entityRef(PERSON, "Petar")));
+        assertThat(ev.toJson(), equalTo(json("{\n" +
+                "            \"involves\" : [\n" +
+                "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
+                "                }\n" +
+                "            ], " +
+                "            \"aspects\" : {" +
+                "                   \"client_device\": \"iPhone\" " +
                 "               }, " +
                 "           \"event\" : \"type\"" +
                 "        }")));
