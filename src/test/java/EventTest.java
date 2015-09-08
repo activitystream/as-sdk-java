@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static com.activitystream.EntityType.create;
-import static com.activitystream.Predefined.ACTOR;
+import static com.activitystream.Predefined.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -41,16 +41,16 @@ public class EventTest {
         Event ev = new Event()
                 .id(new EventId("id"))
                 .involves(ACTOR(new EntityEmbedded()
-                        .id(PERSON, "Petar")
-                        .properties(props)
-                        .relations(
-                                new EntityRelation()
-                                        .link(LinkType.AKA(), new EntityRef(new EntityType("Email"), "pshomov@gmail.com")),
-                                new EntityRelation()
-                                        .link(LinkType.AKA(), new EntityRef(new EntityType("Twitter"), "pshomov")),
-                                new EntityRelation()
-                                        .link(LinkType.AKA(), new EntityRef(new EntityType("Building"), "Laugavegur 26"))
-                        )
+                                .id(PERSON, "Petar")
+                                .properties(props)
+                                .relations(
+                                        new EntityRelation()
+                                                .link(AKA, new EntityRef(new EntityType("Email"), "pshomov@gmail.com")),
+                                        new EntityRelation()
+                                                .link(AKA, new EntityRef(new EntityType("Twitter"), "pshomov")),
+                                        new EntityRelation()
+                                                .link(AKA, new EntityRef(new EntityType("Building"), "Laugavegur 26"))
+                                )
                 ));
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 "            \"involves\" : [\n" +
@@ -75,10 +75,10 @@ public class EventTest {
         Event ev = new Event()
                 .id(new EventId("id"))
                 .involves(ACTOR(new EntityEmbedded()
-                        .id(PERSON, "Petar")
-                        .relations(
-                                new EntityRelation()
-                        )
+                                .id(PERSON, "Petar")
+                                .relations(
+                                        new EntityRelation()
+                                )
                 ));
         try{
             ev.toJson();

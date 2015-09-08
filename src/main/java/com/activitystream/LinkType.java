@@ -12,5 +12,4 @@ public class LinkType {
         return aka;
     }
 
-    public static LinkType AKA() {return new LinkType("AKA");}
 }
