@@ -7,8 +7,10 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static com.activitystream.EntityType.create;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.fail;
 
 public class EventTest {
     @Test
@@ -65,6 +67,24 @@ public class EventTest {
                 "            ],                \n" +
                 "           \"event\" : \"id\""+
                 "        }")));
+    }
+    @Test
+    public void should_not_allow_relationship_with_no_linked_entity(){
+        EntityType PERSON = create("Person");
+        Event ev = new Event()
+                .id(new EventId("id"))
+                .involves(new ACTOR(new EntityEmbedded()
+                        .id(PERSON, "Petar")
+                        .relations(
+                                new EntityRelation()
+                        )
+                ));
+        try{
+            ev.toJson();
+            fail("that should not have been possible");
+        } catch (RuntimeException e){
+            assertThat(e.getMessage(), containsString("linked entity"));
+        }
     }
 
     private String json(String json) {
