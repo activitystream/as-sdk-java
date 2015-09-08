@@ -19,7 +19,11 @@ public class Involved {
     public JSONObject toJson() {
         JSONObject obj=new JSONObject();
         JSONObject jsonObject = ent.toJson();
-        obj.put(involvement, jsonObject.get("ref"));
+        if ((boolean)jsonObject.get("byref")){
+            obj.put(involvement, jsonObject.get("ref"));
+        } else {
+            obj.put(involvement, jsonObject.get("val"));
+        }
 
         return obj;
     }
