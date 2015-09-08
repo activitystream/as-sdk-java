@@ -11,5 +11,5 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile 'io.fastjson:boon:0.33'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
 }

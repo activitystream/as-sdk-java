@@ -1,24 +1,20 @@
 package com.activitystream;
 
-import org.boon.json.JsonFactory;
-import org.boon.json.ObjectMapper;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.Date;
 
-class ASEvent {
-
-    public String event;
-}
 public class Event {
     private EventId event;
-    private ASEvent ev = new ASEvent();
+    private Involved[] involved = new Involved[]{};
 
     public Event id(EventId id){
         this.event = id;
-        ev.event = id.id;
         return this;
     }
     public Event involves(Involved ... involved){
+        this.involved = involved;
         return this;
     }
 
@@ -30,9 +26,17 @@ public class Event {
         return this;
     }
 
-    @Override
-    public String toString() {
-        ObjectMapper mapper =  JsonFactory.create();
-        return mapper.writeValueAsString(ev);
+    public String toJson() {
+        JSONObject obj=new JSONObject();
+        obj.put("event", event.id);
+
+        if (involved.length > 0){
+            JSONArray inv = new JSONArray();
+            for (int i = 0; i < involved.length; i++) {
+                inv.add(involved[i].toJson());
+            }
+            obj.put("involves", inv);
+        }
+        return obj.toJSONString();
     }
 }
