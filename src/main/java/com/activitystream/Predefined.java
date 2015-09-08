@@ -12,4 +12,10 @@ public class Predefined {
     public static LinkType PART_OF = new LinkType("PART_OF");
     public static LinkType PROXY_FOR = new LinkType("PROXY_FOR");
     public static LinkType BELONGS_TO = new LinkType("BELONGS_TO");
+
+    public static EntityType EMAIL = new EntityType("Email");
+    public static EntityType TWITTER = new EntityType("Twitter");
+    public static EntityType EMPLOYEE = new EntityType("Employee");
+    public static EntityType PERSON = new EntityType("Person");
+
 }
