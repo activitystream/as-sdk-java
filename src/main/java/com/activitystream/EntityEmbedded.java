@@ -28,8 +28,7 @@ public class EntityEmbedded implements Entity {
     }
 
     @Override
-    public JSONObject toJson() {
-        JSONObject jsonObject = new JSONObject();
+    public void addToObject(JSONObject jsonObject) {
         JSONObject value = new JSONObject();
         value.put("entity_ref", type.toJson() + "/" + id);
 
@@ -43,9 +42,6 @@ public class EntityEmbedded implements Entity {
         if (props.size() > 0){
             value.put("properties", props);
         }
-
-        jsonObject.put("byref", false);
-        jsonObject.put("val", value);
-        return jsonObject;
+        jsonObject.put("entity", value);
     }
 }

@@ -33,7 +33,7 @@ public class EventTest {
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 " \"event\" : \"id\"," +
                 "            \"involves\" : [\n" +
-                "                { \"ACTOR\" : \"Employee/Petar\"}\n" +
+                "                { \"role\" : \"ACTOR\", \"entity_ref\" : \"Employee/Petar\"}\n" +
                 "            ]                \n" +
                 "        }")));
     }
@@ -54,14 +54,14 @@ public class EventTest {
                 ));
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 "            \"involves\" : [\n" +
-                "                { \"ACTOR\" : \n" +
+                "                { \"role\": \"ACTOR\", \"entity\" : \n" +
                 "                    {\n" +
                 "                        \"entity_ref\" : \"Person/Petar\",\n" +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "                        \"relations\" : [\n" +
-                "                            {\"AKA\" : \"Email/pshomov@gmail.com\"},\n" +
-                "                            {\"AKA\" : \"Twitter/pshomov\"},\n" +
-                "                            {\"AKA\" : \"Building/Laugavegur 26\"}\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\"},\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
                 "                        ]   \n" +
                 "                    }\n" +
                 "                }\n" +

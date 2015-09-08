@@ -33,13 +33,8 @@ public class EntityRelation {
 
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
-        JSONObject jsonObject = entity.toJson();
-
-        if ((boolean) jsonObject.get("byref")) {
-            obj.put(linkType.toJson(), jsonObject.get("ref"));
-        } else {
-            obj.put(linkType.toJson(), jsonObject.get("val"));
-        }
+        obj.put("type", linkType.toJson());
+        entity.addToObject(obj);
 
         return obj;
     }

@@ -16,10 +16,7 @@ public class EntityRef implements Entity {
     }
 
     @Override
-    public JSONObject toJson() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("byref", true);
-        jsonObject.put("ref", type.toJson() + "/" + id);
-        return jsonObject;
+    public void addToObject(JSONObject jsonObject) {
+        jsonObject.put("entity_ref", type.toJson() + "/" + id);
     }
 }

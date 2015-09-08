@@ -12,19 +12,10 @@ public class Involved {
         this.ent = ent;
     }
 
-    public static Involved ACTOR(Entity ent){
-       return new Involved("ACTOR", ent);
-    }
-
     public JSONObject toJson() {
         JSONObject obj=new JSONObject();
-        JSONObject jsonObject = ent.toJson();
-        if ((boolean)jsonObject.get("byref")){
-            obj.put(involvement, jsonObject.get("ref"));
-        } else {
-            obj.put(involvement, jsonObject.get("val"));
-        }
-
+        obj.put("role", involvement);
+        ent.addToObject(obj);
         return obj;
     }
 }
