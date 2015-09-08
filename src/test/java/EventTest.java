@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static com.activitystream.EntityType.create;
+import static com.activitystream.Predefined.ACTOR;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,7 +24,7 @@ public class EventTest {
         EntityType EMPLOYEE = create("Employee");
         Event ev = new Event()
                 .id(new EventId("id"))
-                .involves(new ACTOR(new EntityRef(EMPLOYEE, "Petar")));
+                .involves(ACTOR(new EntityRef(EMPLOYEE, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 " \"event\" : \"id\"," +
                 "            \"involves\" : [\n" +
@@ -39,7 +40,7 @@ public class EventTest {
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
                 .id(new EventId("id"))
-                .involves(new ACTOR(new EntityEmbedded()
+                .involves(ACTOR(new EntityEmbedded()
                         .id(PERSON, "Petar")
                         .properties(props)
                         .relations(
@@ -73,7 +74,7 @@ public class EventTest {
         EntityType PERSON = create("Person");
         Event ev = new Event()
                 .id(new EventId("id"))
-                .involves(new ACTOR(new EntityEmbedded()
+                .involves(ACTOR(new EntityEmbedded()
                         .id(PERSON, "Petar")
                         .relations(
                                 new EntityRelation()
