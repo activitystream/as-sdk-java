@@ -29,9 +29,9 @@ public class EntityRelation {
     }
 
     public JSONObject toJson() {
-        JSONObject obj = new JSONObject();
-
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
+
+        JSONObject obj = new JSONObject();
 
         obj.put("type", linkType.toJson());
         entity.addToObject(obj);
