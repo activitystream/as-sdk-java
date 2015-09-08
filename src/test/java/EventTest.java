@@ -1,10 +1,7 @@
-import com.activitystream.AddressAspect;
+import com.activitystream.aspects.AddressAspect;
 import com.activitystream.EntityType;
 import com.activitystream.Event;
 import com.activitystream.EventType;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -16,7 +13,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 
-public class EventTest {
+public class EventTest extends EventTestBase {
 
     public static final EntityType BUILDING = new EntityType("Building");
 
@@ -114,13 +111,4 @@ public class EventTest {
         }
     }
 
-    private String json(String json) {
-        try {
-            Object parsed = null;
-            parsed = new JSONParser().parse(json);
-            return JSONValue.toJSONString(parsed);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
