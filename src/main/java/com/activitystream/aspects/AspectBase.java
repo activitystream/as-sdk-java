@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class AspectBase implements Aspect {
     protected Map<String, AspectProperty> aspectPropertyMap = new HashMap<>();
@@ -31,7 +32,7 @@ public class AspectBase implements Aspect {
     }
 
     protected class AspectProperty {
-        public String value;
+        public Object value;
         public boolean required;
 
         public AspectProperty(boolean required) {
