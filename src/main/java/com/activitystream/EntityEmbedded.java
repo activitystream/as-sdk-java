@@ -1,12 +1,31 @@
 package com.activitystream;
 
-public class EntityEmbedded extends Entity {
+import org.json.simple.JSONObject;
 
-    public Entity properties(){
+public class EntityEmbedded implements Entity {
+    private EntityType type;
+    private String id;
+    private EntityRelation[] relation;
+
+    public EntityEmbedded id(EntityType type, String id){
+        this.type = type;
+        this.id = id;
+        return this;
+    }
+    public EntityEmbedded properties(){
         return this;
     }
 
-    public Entity relations(EntityRelation relation) {
+    public EntityEmbedded relations(EntityRelation... relation) {
+        this.relation = relation;
         return this;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("byref", true);
+        jsonObject.put("ref", type.toJson() + "/" + id);
+        return jsonObject;
     }
 }
