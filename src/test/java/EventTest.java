@@ -4,6 +4,8 @@ import com.activitystream.Event;
 import com.activitystream.EventType;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 import static com.activitystream.Predefined.*;
@@ -37,7 +39,7 @@ public class EventTest extends EventTestBase {
     }
 
     @Test
-    public void should_create_event_with_involved_embedded_actor() {
+    public void should_create_event_with_involved_embedded_actor() throws ParseException {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
@@ -45,7 +47,7 @@ public class EventTest extends EventTestBase {
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
                                 .properties(props)
                                 .relations(
-                                        rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")),
+                                        rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
                                         rel().link(AKA, entityRef(TWITTER, "pshomov")),
                                         rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
                                 )
@@ -57,7 +59,7 @@ public class EventTest extends EventTestBase {
                 "                        \"entity_ref\" : \"Person/Petar\",\n" +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "                        \"relations\" : [\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\"},\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
                 "                            {\"type\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
                 "                            {\"type\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
                 "                        ]   \n" +
