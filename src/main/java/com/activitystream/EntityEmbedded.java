@@ -30,22 +30,22 @@ public class EntityEmbedded implements Entity {
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
-        JSONObject v = new JSONObject();
-        v.put("entity_ref", type.toJson() + "/" + id);
+        JSONObject value = new JSONObject();
+        value.put("entity_ref", type.toJson() + "/" + id);
 
         if (relations.length > 0){
             JSONArray inv = new JSONArray();
             for (int i = 0; i < relations.length; i++) {
                 inv.add(relations[i].toJson());
             }
-            v.put("relations", inv);
+            value.put("relations", inv);
         }
         if (props.size() > 0){
-            v.put("properties", props);
+            value.put("properties", props);
         }
 
         jsonObject.put("byref", false);
-        jsonObject.put("val", v);
+        jsonObject.put("val", value);
         return jsonObject;
     }
 }
