@@ -1,6 +1,7 @@
+import com.activitystream.AddressAspect;
 import com.activitystream.EntityType;
 import com.activitystream.Event;
-import com.activitystream.EventId;
+import com.activitystream.EventType;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,17 +22,17 @@ public class EventTest {
 
     @Test
     public void should_create_an_event_with_id() {
-        Event ev = new Event().id(new EventId("as.xcommerce.purchase.completed"));
+        Event ev = new Event().type(new EventType("as.xcommerce.purchase.completed"));
         assertThat(ev.toJson(), equalTo(json("{ \"event\" : \"as.xcommerce.purchase.completed\" }")));
     }
 
     @Test
     public void should_create_event_with_involved_actor_by_ref() {
         Event ev = new Event()
-                .id(new EventId("id"))
+                .type(new EventType("type"))
                 .involves(ACTOR(entityRef(EMPLOYEE, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
-                " \"event\" : \"id\"," +
+                " \"event\" : \"type\"," +
                 "            \"involves\" : [\n" +
                 "                { \"role\" : \"ACTOR\", \"entity_ref\" : \"Employee/Petar\"}\n" +
                 "            ]                \n" +
@@ -43,7 +44,7 @@ public class EventTest {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
-                .id(new EventId("id"))
+                .type(new EventType("type"))
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
                                 .properties(props)
                                 .relations(
@@ -66,14 +67,40 @@ public class EventTest {
                 "                    }\n" +
                 "                }\n" +
                 "            ],                \n" +
-                "           \"event\" : \"id\"" +
+                "           \"event\" : \"type\"" +
+                "        }")));
+    }
+    @Test
+    public void should_create_event_with_aspects() {
+        HashMap props = new HashMap();
+        props.put("favourite_programming_language", "javascript");
+        Event ev = new Event()
+                .type(new EventType("type"))
+                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
+                .involves(ACTOR(entityRef(PERSON, "Petar")));
+        assertThat(ev.toJson(), equalTo(json("{\n" +
+                "            \"involves\" : [\n" +
+                "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
+                "                }\n" +
+                "            ], " +
+                "            \"aspects\" : {" +
+                "               \"address\": {" +
+                "                    \"address\" : \"Laugavegur 26\"," +
+                "                   \"address2\" : \"\"," +
+                "                    \"zip_code\" : \"2400\"," +
+                "                   \"city\" :\"Reykjavík\"," +
+                "                   \"country_code\": \"IS\" " +
+                "               } " +
+
+                "            }   \n" +
+                "           \"event\" : \"type\"" +
                 "        }")));
     }
 
     @Test
     public void should_not_allow_relationship_with_no_linked_entity() {
         Event ev = new Event()
-                .id(new EventId("id"))
+                .type(new EventType("type"))
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
                                 .relations(
                                         rel()

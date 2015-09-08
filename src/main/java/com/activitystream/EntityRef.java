@@ -1,6 +1,7 @@
 package com.activitystream;
 
 import org.json.simple.JSONObject;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class EntityRef implements Entity {
     private EntityType type;
@@ -13,6 +14,9 @@ public class EntityRef implements Entity {
     }
     public EntityRef(EntityType type, String id){
         this.id(type, id);
+    }
+    public EntityRef(String ref){
+        throw new NotImplementedException();
     }
 
     @Override

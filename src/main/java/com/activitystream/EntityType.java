@@ -11,7 +11,7 @@ public class EntityType {
     public String toJson(){
         return type;
     }
-    public static EntityType extend(EntityType base, String type){
-        return new EntityType(base.type + ":" + type);
+    public EntityType extend(String type){
+        return new EntityType(this.type + ":" + type);
     }
 }

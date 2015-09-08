@@ -1,9 +1,9 @@
 package com.activitystream;
 
-public class EventId {
+public class EventType {
     public String id;
 
-    public EventId(String id) {
+    public EventType(String id) {
 
         this.id = id;
     }

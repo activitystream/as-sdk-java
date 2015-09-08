@@ -6,15 +6,21 @@ import org.json.simple.JSONObject;
 import java.util.Date;
 
 public class Event {
-    private EventId event;
-    private Involved[] involved = new Involved[]{};
+    private EventType event;
+    private Role[] involved = new Role[]{};
+    private Aspect[] aspects = new Aspect[]{};
 
-    public Event id(EventId id){
+    public Event type(EventType id){
         this.event = id;
         return this;
     }
-    public Event involves(Involved ... involved){
-        this.involved = involved;
+    public Event involves(Role... role){
+        this.involved = role;
+        return this;
+    }
+
+    public Event aspects(Aspect...aspects){
+        this.aspects = aspects;
         return this;
     }
 
@@ -36,6 +42,14 @@ public class Event {
                 inv.add(involved[i].toJson());
             }
             obj.put("involves", inv);
+        }
+
+        if (aspects.length > 0){
+            JSONObject aspectsJson = new JSONObject();
+            for (Aspect aspect : aspects){
+                aspect.addToObject(aspectsJson);
+            }
+            obj.put("aspects", aspectsJson);
         }
         return obj.toJSONString();
     }
