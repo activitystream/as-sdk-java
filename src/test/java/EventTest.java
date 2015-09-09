@@ -10,9 +10,9 @@ import java.util.HashMap;
 
 import static com.activitystream.Predefined.*;
 import static com.activitystream.Sugar.*;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.fail;
 
 public class EventTest extends EventTestBase {
@@ -66,6 +66,20 @@ public class EventTest extends EventTestBase {
                 "                    }\n" +
                 "                }\n" +
                 "            ],                \n" +
+                "           \"event\" : \"type\"" +
+                "        }")));
+    }
+    @Test
+    public void should_create_event_with_all_attributes() throws ParseException {
+        HashMap props = new HashMap();
+        props.put("favourite_programming_language", "javascript");
+        Event ev = new Event()
+                .type(new EventType("type"))
+                .properties(props)
+                .occured(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
+        assertThat(ev.toJson(), equalTo(json("{\n" +
+                "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
+                "           \"occurred_at\" : \"2014-12-01T10:00:00.000Z\"," +
                 "           \"event\" : \"type\"" +
                 "        }")));
     }
