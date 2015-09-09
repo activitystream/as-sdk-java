@@ -13,8 +13,8 @@ public class Event {
     private Date timestamp;
     private Map props;
 
-    public Event type(EventType id){
-        this.event = id;
+    public Event type(EventType type){
+        this.event = type;
         return this;
     }
     public Event involves(Role... role){

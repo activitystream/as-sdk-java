@@ -1,7 +1,7 @@
 import com.activitystream.Event;
 import com.activitystream.EventType;
-import com.activitystream.aspects.ClientDevice;
-import com.activitystream.aspects.ClientIPAddress;
+import com.activitystream.aspects.ClientDeviceAspect;
+import com.activitystream.aspects.ClientIPAddressAspect;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class AspectsTest extends EventTestBase {
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
                 .type(new EventType("type"))
-                .aspects(new ClientIPAddress().clientIp("127.0.0.1"))
+                .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 "            \"involves\" : [\n" +
@@ -38,7 +38,7 @@ public class AspectsTest extends EventTestBase {
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
                 .type(new EventType("type"))
-                .aspects(new ClientDevice().clientDevice("iPhone"))
+                .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 "            \"involves\" : [\n" +
