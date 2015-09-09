@@ -11,12 +11,14 @@ public class Event {
     private Role[] involved = new Role[]{};
     private Aspect[] aspects = new Aspect[]{};
     private Date timestamp;
+    private String origin;
     private Map props;
 
     public Event type(EventType type){
         this.event = type;
         return this;
     }
+
     public Event involves(Role... role){
         this.involved = role;
         return this;
@@ -29,6 +31,11 @@ public class Event {
 
     public Event occured(Date timestamp){
         this.timestamp = timestamp;
+        return this;
+    }
+
+    public Event origin(String origin) {
+        this.origin = origin;
         return this;
     }
 
@@ -57,6 +64,7 @@ public class Event {
             obj.put("aspects", aspectsJson);
         }
         if (props != null) obj.put("properties", props);
+        if (origin != null) obj.put("origin", origin);
         if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
         return obj.toJSONString();
     }

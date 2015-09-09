@@ -75,11 +75,13 @@ public class EventTest extends EventTestBase {
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
                 .type(new EventType("type"))
+                .origin("browserX")
                 .properties(props)
                 .occured(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "           \"occurred_at\" : \"2014-12-01T10:00:00.000Z\"," +
+                "           \"origin\":\"browserX\"," +
                 "           \"event\" : \"type\"" +
                 "        }")));
     }
