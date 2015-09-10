@@ -100,11 +100,11 @@ public class EventTest extends EventTestBase {
                 "            ], " +
                 "            \"aspects\" : {" +
                 "               \"address\": {" +
+                "                    \"address\" : \"Laugavegur 26\"," +
                 "                   \"country_code\": \"IS\", " +
                 "                   \"city\" :\"Reykjavík\"," +
                 "                   \"address2\" : \"\"," +
-                "                    \"zip_code\" : \"2400\"," +
-                "                    \"address\" : \"Laugavegur 26\"" +
+                "                    \"zip_code\" : \"2400\"" +
                 "               } " +
 
                 "            }   \n" +
