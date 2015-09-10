@@ -1,44 +1,18 @@
-import com.activitystream.aspects.AddressAspect;
-import com.activitystream.EntityType;
-import com.activitystream.Event;
-import com.activitystream.EventType;
-import org.junit.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-
-import static com.activitystream.Predefined.*;
-import static com.activitystream.Sugar.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.Assert.fail;
-
-import org.specs2.mutable.Specification
+import com.activitystream._
+import com.activitystream.aspects.ClientDeviceAspect
 import org.specs2.matcher.JsonMatchers
-
+import org.specs2.mutable.Specification
 
 
 class EventTest extends Specification with JsonMatchers {
 
-
-"Should create an event with id" should {
+  "Should create an event with id" should {
     "ev is equal to" in {
-        val event = ev.toJson
-        event must /("event" -> "as.xcommerce.purchase.completed")
+      val event = new Event().action(new EventType("as.xcommerce.purchase.completed")).aspects(new ClientDeviceAspect().clientDevice("firefox")).toJson
+      event must /("action" -> "as.xcommerce.purchase.completed")
+      event must /("aspects") /("client_device" -> "firefox")
     }
-}
-
-....
-
-    public static final EntityType BUILDING = new EntityType("Building");
-
-    @Test
-    public void should_create_an_event_with_id() {
-        Event ev = new Event().type(new EventType("as.xcommerce.purchase.completed"));
-        assertThat(ev.toJson(), equalTo(json("{ \"event\" : \"as.xcommerce.purchase.completed\" }")));
-    }
-
+  }
 
 }
