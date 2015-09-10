@@ -1,17 +1,12 @@
 import com.activitystream.*;
-import com.activitystream.aspects.ClientDeviceAspect;
-import com.activitystream.aspects.ClientIPAddressAspect;
-import com.activitystream.aspects.ECommerceAspect;
-import com.activitystream.aspects.ECommerceAspectItem;
+import com.activitystream.aspects.*;
 import org.junit.Test;
 
 import java.util.HashMap;
 
 import static com.activitystream.Predefined.ACTOR;
 import static com.activitystream.Predefined.PERSON;
-import static com.activitystream.Sugar.eCommerce;
-import static com.activitystream.Sugar.entityRef;
-import static com.activitystream.Sugar.item;
+import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -64,14 +59,14 @@ public class AspectsTest extends EventTestBase {
                 .type(new EventType("type"))
                 .aspects(eCommerce(
                                 item()
-                                    .involves(PURCHASED(entityRef(POI, "12344542352345345")))
-                                    .commissionFixed(1540.0)
-                                    .itemCount(2)
-                                    .itemPrice(15400.0)
-                                    .description("desc")
-                                    .variant("variant")
-                                    .priceCategory("A")
-                                    .currency("ISK")
+                                        .involves(PURCHASED(entityRef(POI, "12344542352345345")))
+                                        .commissionFixed(1540.0)
+                                        .itemCount(2)
+                                        .itemPrice(15400.0)
+                                        .description("desc")
+                                        .variant("variant")
+                                        .priceCategory("A")
+                                        .currency("ISK")
                         )
                 );
         assertThat(json(ev.toJson()), equalTo(json("" +
@@ -95,6 +90,30 @@ public class AspectsTest extends EventTestBase {
                 "                    \"commission_fixed\": 1540.0\n" +
                 "                }\n" +
                 "            ]\n" +
+                "        }\n" +
+                "    }\n")));
+    }
+
+    @Test
+    public void classification() {
+        EntityType POI = new EntityType("Poi");
+        Event ev = new Event()
+                .type(new EventType("type"))
+                .aspects(classificationAsepct()
+                                .categories(new String[]{"Nature", "Waterfalls"})
+                                .type("Poi")
+                );
+        assertThat(ev.toJson(), equalTo(json("" +
+                "    {\n" +
+                "        \"event\": \"type\",\n" +
+                "        \"aspects\": {\n" +
+                "                    \"classification\": {\n" +
+                "                        \"type\": \"Poi\",\n" +
+                "                        \"categories\": [\n" +
+                "                                \"Nature\",\n" +
+                "                            \"Waterfalls\"\n" +
+                "                        ]\n" +
+                "                    }\n" +
                 "        }\n" +
                 "    }\n")));
     }

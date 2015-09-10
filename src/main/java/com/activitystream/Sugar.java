@@ -1,5 +1,6 @@
 package com.activitystream;
 
+import com.activitystream.aspects.ClassificationAsepct;
 import com.activitystream.aspects.ECommerceAspect;
 import com.activitystream.aspects.ECommerceAspectItem;
 
@@ -10,4 +11,5 @@ public class Sugar {
     public static EntityRelation rel(){return new EntityRelation();}
     public static ECommerceAspect eCommerce(ECommerceAspectItem ... items) {return new ECommerceAspect().items(items);}
     public static ECommerceAspectItem item() {return new ECommerceAspectItem();}
+    public static ClassificationAsepct classificationAsepct() {return new ClassificationAsepct();}
 }
