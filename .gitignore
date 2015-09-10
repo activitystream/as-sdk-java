@@ -3,3 +3,4 @@
 build/
 *.i??
 target/
+dependency-reduced-pom.xml
