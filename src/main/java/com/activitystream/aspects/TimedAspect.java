@@ -2,11 +2,10 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 import com.activitystream.DateHelpers;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TimedAspect implements Aspect {
     private Date starts;
@@ -30,8 +29,8 @@ public class TimedAspect implements Aspect {
         return this;
     }
     @Override
-    public void addToObject(JSONObject jsonObject) {
-        JSONObject timed = new JSONObject();
+    public void addToObject(Map jsonObject) {
+        Map timed = new HashMap();
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
         }

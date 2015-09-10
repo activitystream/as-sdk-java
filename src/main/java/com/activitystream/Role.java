@@ -1,6 +1,7 @@
 package com.activitystream;
 
-import org.json.simple.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Role {
     private final String involvement;
@@ -12,8 +13,8 @@ public class Role {
         this.ent = ent;
     }
 
-    public JSONObject toJson() {
-        JSONObject obj=new JSONObject();
+    public Map toJson() {
+        Map obj=new HashMap();
         obj.put("role", involvement);
         ent.addToObject(obj);
         return obj;

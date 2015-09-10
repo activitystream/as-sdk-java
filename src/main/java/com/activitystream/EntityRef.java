@@ -1,7 +1,8 @@
 package com.activitystream;
 
-import org.json.simple.JSONObject;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.Map;
 
 public class EntityRef implements Entity {
     private EntityType type;
@@ -20,7 +21,7 @@ public class EntityRef implements Entity {
     }
 
     @Override
-    public void addToObject(JSONObject jsonObject) {
+    public void addToObject(Map jsonObject) {
         jsonObject.put("entity_ref", type.toJson() + "/" + id);
     }
 }

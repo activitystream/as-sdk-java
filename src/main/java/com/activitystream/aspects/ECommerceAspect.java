@@ -1,12 +1,10 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import com.activitystream.EventType;
-import com.activitystream.Role;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ECommerceAspect implements Aspect{
 
@@ -18,9 +16,9 @@ public class ECommerceAspect implements Aspect{
     }
 
     @Override
-    public void addToObject(JSONObject jsonObject) {
+    public void addToObject(Map jsonObject) {
         if (items.length > 0){
-            JSONArray inv = new JSONArray();
+            List inv = new ArrayList();
             for (ECommerceAspectItem item : items) {
                 inv.add(item.toJson());
             }

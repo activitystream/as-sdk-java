@@ -1,10 +1,8 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import java.util.Collections;
+import java.util.*;
 
 public class ClassificationAspect implements Aspect {
 
@@ -22,11 +20,11 @@ public class ClassificationAspect implements Aspect {
         return this;
     }
     @Override
-    public void addToObject(JSONObject jsonObject) {
-        JSONObject classification = new JSONObject();
+    public void addToObject(Map jsonObject) {
+        Map classification = new HashMap();
         if (type != null) classification.put("action", type);
         if (categories != null) {
-            JSONArray jsonArray = new JSONArray();
+            List jsonArray = new ArrayList();
             Collections.addAll(jsonArray, categories);
             classification.put("categories", jsonArray);
         }

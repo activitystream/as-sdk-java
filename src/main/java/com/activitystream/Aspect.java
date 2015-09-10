@@ -1,7 +1,7 @@
 package com.activitystream;
 
-import org.json.simple.JSONObject;
+import java.util.Map;
 
 public interface Aspect {
-    void addToObject(JSONObject jsonObject);
+    void addToObject(Map jsonObject);
 }

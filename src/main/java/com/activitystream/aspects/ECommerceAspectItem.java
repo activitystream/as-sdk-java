@@ -2,10 +2,8 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 import com.activitystream.Role;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import java.util.Date;
+import java.util.*;
 
 public class ECommerceAspectItem {
     private Role[] involved = new Role[]{};
@@ -79,11 +77,11 @@ public class ECommerceAspectItem {
         return this;
     }
 
-    public JSONObject toJson() {
-        JSONObject obj=new JSONObject();
+    public Map toJson() {
+        Map obj=new HashMap();
 
         if (involved.length > 0){
-            JSONArray inv = new JSONArray();
+            List inv = new ArrayList();
             for (int i = 0; i < involved.length; i++) {
                 inv.add(involved[i].toJson());
             }
@@ -99,7 +97,7 @@ public class ECommerceAspectItem {
         if (itemCount != null) obj.put("item_count", itemCount);
 
         if (aspects.length > 0){
-            JSONObject aspectsJson = new JSONObject();
+            Map aspectsJson = new HashMap();
             for (Aspect aspect : aspects){
                 aspect.addToObject(aspectsJson);
             }

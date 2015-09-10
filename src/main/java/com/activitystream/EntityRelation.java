@@ -2,10 +2,8 @@ package com.activitystream;
 
 import org.json.simple.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class EntityRelation {
     private LinkType linkType;

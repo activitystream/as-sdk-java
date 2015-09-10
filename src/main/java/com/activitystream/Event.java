@@ -1,10 +1,8 @@
 package com.activitystream;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 public class Event {
     private EventType event;
@@ -45,11 +43,11 @@ public class Event {
     }
 
     public String toJson() {
-        JSONObject obj=new JSONObject();
+        Map obj=new HashMap();
         obj.put("action", event.id);
 
         if (involved.length > 0){
-            JSONArray inv = new JSONArray();
+            List inv = new ArrayList();
             for (int i = 0; i < involved.length; i++) {
                 inv.add(involved[i].toJson());
             }
@@ -57,7 +55,7 @@ public class Event {
         }
 
         if (aspects.length > 0){
-            JSONObject aspectsJson = new JSONObject();
+            Map aspectsJson = new HashMap();
             for (Aspect aspect : aspects){
                 aspect.addToObject(aspectsJson);
             }
@@ -66,6 +64,6 @@ public class Event {
         if (props != null) obj.put("properties", props);
         if (origin != null) obj.put("origin", origin);
         if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
-        return obj.toJSONString().replace("\\/", "/");
+        return JSONObject.toJSONString(obj).replace("\\/", "/");
     }
 }

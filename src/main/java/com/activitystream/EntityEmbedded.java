@@ -28,8 +28,8 @@ public class EntityEmbedded implements Entity {
     }
 
     @Override
-    public void addToObject(JSONObject jsonObject) {
-        JSONObject value = new JSONObject();
+    public void addToObject(Map jsonObject) {
+        Map value = new HashMap();
         value.put("entity_ref", type.toJson() + "/" + id);
 
         if (relations.length > 0){

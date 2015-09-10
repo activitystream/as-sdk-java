@@ -1,7 +1,6 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import org.json.simple.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,17 +10,17 @@ public class AspectBase implements Aspect {
     protected Map<String, AspectProperty> aspectPropertyMap = new HashMap<>();
 
     @Override
-    public void addToObject(JSONObject aspectJson) {
+    public void addToObject(Map aspectJson) {
         for (Map.Entry<String, AspectProperty> aspect : aspectPropertyMap.entrySet()) {
             if (aspect.getValue().required && aspect.getValue().value == null) throw new RuntimeException("Property "+aspect.getValue()+" is required ");
             String[] levels = aspect.getKey().split("\\.");
             String aspectPropertyKey = levels[levels.length-1];
             levels = Arrays.copyOf(levels, levels.length - 1);
-            JSONObject propertyParent = aspectJson;
+            Map propertyParent = aspectJson;
             for(String level : levels){
-                JSONObject drill = (JSONObject) propertyParent.get(level);
+                Map drill = (Map) propertyParent.get(level);
                 if (drill == null) {
-                    drill = new JSONObject();
+                    drill = new HashMap();
                     propertyParent.put(level, drill);
                 }
                 propertyParent = drill;
