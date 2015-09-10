@@ -8,7 +8,7 @@ public class LinkType {
         this.aka = aka;
     }
 
-    public String toJson(){
+    public String toJson() {
         return aka;
     }
 

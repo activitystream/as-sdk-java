@@ -8,15 +8,17 @@ public class EntityRef implements Entity {
     private EntityType type;
     private String id;
 
-    public EntityRef id(EntityType type, String id){
+    public EntityRef id(EntityType type, String id) {
         this.type = type;
         this.id = id;
         return this;
     }
-    public EntityRef(EntityType type, String id){
+
+    public EntityRef(EntityType type, String id) {
         this.id(type, id);
     }
-    public EntityRef(String ref){
+
+    public EntityRef(String ref) {
         throw new NotImplementedException();
     }
 

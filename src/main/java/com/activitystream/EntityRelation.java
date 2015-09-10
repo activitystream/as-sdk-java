@@ -19,19 +19,22 @@ public class EntityRelation {
         return this;
     }
 
-    public EntityRelation properties(Map props){
+    public EntityRelation properties(Map props) {
         this.props = props;
         return this;
     }
-    public EntityRelation validFrom(Date startDate){
+
+    public EntityRelation validFrom(Date startDate) {
         this.startDate = startDate;
         return this;
     }
-    public EntityRelation activeUntil(Date endDate){
+
+    public EntityRelation activeUntil(Date endDate) {
         this.endDate = endDate;
         return this;
     }
-    public EntityRelation weight(Double weight){
+
+    public EntityRelation weight(Double weight) {
         this.weight = weight;
         return this;
     }

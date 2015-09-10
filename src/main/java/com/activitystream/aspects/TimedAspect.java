@@ -28,6 +28,7 @@ public class TimedAspect implements Aspect {
         this.type = type;
         return this;
     }
+
     @Override
     public void addToObject(Map jsonObject) {
         Map timed = new HashMap();

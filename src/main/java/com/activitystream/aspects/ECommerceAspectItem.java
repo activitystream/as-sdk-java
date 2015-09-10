@@ -9,12 +9,12 @@ public class ECommerceAspectItem {
     private Role[] involved = new Role[]{};
     private Aspect[] aspects = new Aspect[]{};
 
-    public ECommerceAspectItem involves(Role... role){
+    public ECommerceAspectItem involves(Role... role) {
         this.involved = role;
         return this;
     }
 
-    public ECommerceAspectItem aspects(Aspect...aspects){
+    public ECommerceAspectItem aspects(Aspect... aspects) {
         this.aspects = aspects;
         return this;
     }
@@ -69,18 +69,18 @@ public class ECommerceAspectItem {
     }
 
 
-    public ECommerceAspectItem occured(Date timestamp){
+    public ECommerceAspectItem occured(Date timestamp) {
         return this;
     }
 
-    public ECommerceAspectItem properties(){
+    public ECommerceAspectItem properties() {
         return this;
     }
 
     public Map toJson() {
-        Map obj=new HashMap();
+        Map obj = new HashMap();
 
-        if (involved.length > 0){
+        if (involved.length > 0) {
             List inv = new ArrayList();
             for (int i = 0; i < involved.length; i++) {
                 inv.add(involved[i].toJson());
@@ -96,9 +96,9 @@ public class ECommerceAspectItem {
         if (itemPrice != null) obj.put("item_price", itemPrice);
         if (itemCount != null) obj.put("item_count", itemCount);
 
-        if (aspects.length > 0){
+        if (aspects.length > 0) {
             Map aspectsJson = new HashMap();
-            for (Aspect aspect : aspects){
+            for (Aspect aspect : aspects) {
                 aspect.addToObject(aspectsJson);
             }
             obj.put("aspects", aspectsJson);

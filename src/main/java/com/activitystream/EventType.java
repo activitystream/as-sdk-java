@@ -10,6 +10,6 @@ public class EventType {
 
     @Override
     public String toString() {
-        return "EventID: "+id;
+        return "EventID: " + id;
     }
 }

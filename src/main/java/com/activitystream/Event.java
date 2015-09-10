@@ -15,26 +15,27 @@ public class Event {
     public Event(String action) {
         this.event = new EventType(action);
     }
+
     public Event() {
     }
 
     @Deprecated()
-    public Event action(EventType type){
+    public Event action(EventType type) {
         this.event = type;
         return this;
     }
 
-    public Event involves(Role... role){
+    public Event involves(Role... role) {
         this.involved = role;
         return this;
     }
 
-    public Event aspects(Aspect...aspects){
+    public Event aspects(Aspect... aspects) {
         this.aspects = aspects;
         return this;
     }
 
-    public Event occured(Date timestamp){
+    public Event occured(Date timestamp) {
         this.timestamp = timestamp;
         return this;
     }
@@ -44,7 +45,7 @@ public class Event {
         return this;
     }
 
-    public Event properties(Map props){
+    public Event properties(Map props) {
         this.props = props;
         return this;
     }
@@ -52,11 +53,12 @@ public class Event {
     public String toJson() {
         return JSONObject.toJSONString(toMap()).replace("\\/", "/");
     }
+
     public Map toMap() {
-        Map obj=new HashMap();
+        Map obj = new HashMap();
         obj.put("action", event.id);
 
-        if (involved.length > 0){
+        if (involved.length > 0) {
             List inv = new ArrayList();
             for (int i = 0; i < involved.length; i++) {
                 inv.add(involved[i].toJson());
@@ -64,9 +66,9 @@ public class Event {
             obj.put("involves", inv);
         }
 
-        if (aspects.length > 0){
+        if (aspects.length > 0) {
             Map aspectsJson = new HashMap();
-            for (Aspect aspect : aspects){
+            for (Aspect aspect : aspects) {
                 aspect.addToObject(aspectsJson);
             }
             obj.put("aspects", aspectsJson);

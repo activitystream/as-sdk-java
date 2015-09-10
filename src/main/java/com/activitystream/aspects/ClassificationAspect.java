@@ -19,6 +19,7 @@ public class ClassificationAspect implements Aspect {
         this.categories = categories;
         return this;
     }
+
     @Override
     public void addToObject(Map jsonObject) {
         Map classification = new HashMap();

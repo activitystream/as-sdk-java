@@ -12,12 +12,13 @@ public class AspectBase implements Aspect {
     @Override
     public void addToObject(Map aspectJson) {
         for (Map.Entry<String, AspectProperty> aspect : aspectPropertyMap.entrySet()) {
-            if (aspect.getValue().required && aspect.getValue().value == null) throw new RuntimeException("Property "+aspect.getValue()+" is required ");
+            if (aspect.getValue().required && aspect.getValue().value == null)
+                throw new RuntimeException("Property " + aspect.getValue() + " is required ");
             String[] levels = aspect.getKey().split("\\.");
-            String aspectPropertyKey = levels[levels.length-1];
+            String aspectPropertyKey = levels[levels.length - 1];
             levels = Arrays.copyOf(levels, levels.length - 1);
             Map propertyParent = aspectJson;
-            for(String level : levels){
+            for (String level : levels) {
                 Map drill = (Map) propertyParent.get(level);
                 if (drill == null) {
                     drill = new HashMap();

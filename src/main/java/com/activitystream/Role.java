@@ -14,7 +14,7 @@ public class Role {
     }
 
     public Map toJson() {
-        Map obj=new HashMap();
+        Map obj = new HashMap();
         obj.put("role", involvement);
         ent.addToObject(obj);
         return obj;
