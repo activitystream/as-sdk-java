@@ -1,4 +1,5 @@
-import com.activitystream.*;
+package com.activitystream;
+
 import com.activitystream.aspects.*;
 import org.junit.Test;
 

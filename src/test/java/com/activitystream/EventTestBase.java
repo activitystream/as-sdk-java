@@ -1,3 +1,5 @@
+package com.activitystream;
+
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

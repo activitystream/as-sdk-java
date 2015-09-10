@@ -1,7 +1,6 @@
+package com.activitystream;
+
 import com.activitystream.aspects.AddressAspect;
-import com.activitystream.EntityType;
-import com.activitystream.Event;
-import com.activitystream.EventType;
 import org.junit.Test;
 
 import java.text.ParseException;
