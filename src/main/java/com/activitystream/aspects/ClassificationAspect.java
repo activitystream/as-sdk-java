@@ -6,18 +6,18 @@ import org.json.simple.JSONObject;
 
 import java.util.Collections;
 
-public class ClassificationAsepct implements Aspect {
+public class ClassificationAspect implements Aspect {
 
     private String type;
 
-    public ClassificationAsepct type(String type) {
+    public ClassificationAspect type(String type) {
         this.type = type;
         return this;
     }
 
     private String[] categories;
 
-    public ClassificationAsepct categories(String... categories) {
+    public ClassificationAspect categories(String... categories) {
         this.categories = categories;
         return this;
     }

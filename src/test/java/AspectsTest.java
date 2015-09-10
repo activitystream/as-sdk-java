@@ -2,6 +2,7 @@ import com.activitystream.*;
 import com.activitystream.aspects.*;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.util.HashMap;
 
 import static com.activitystream.Predefined.ACTOR;
@@ -96,7 +97,6 @@ public class AspectsTest extends EventTestBase {
 
     @Test
     public void classification() {
-        EntityType POI = new EntityType("Poi");
         Event ev = new Event()
                 .type(new EventType("type"))
                 .aspects(classificationAsepct()
@@ -115,6 +115,26 @@ public class AspectsTest extends EventTestBase {
                 "                        ]\n" +
                 "                    }\n" +
                 "        }\n" +
+                "    }\n")));
+    }
+    @Test
+    public void timed() throws ParseException {
+        Event ev = new Event()
+                .type(new EventType("type"))
+                .aspects(timedAspect()
+                        .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
+                        .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
+                );
+        assertThat(ev.toJson(), equalTo(json("" +
+                "    {\n" +
+                "        \"event\": \"type\",\n" +
+                "        \"aspects\": {\n" +
+                "            \"timed\": {\n" +
+                "                \"begins\": \"2015-11-24T17:00:00.000Z\",\n" +
+                "                \"ends\": \"2015-11-24T20:00:00.000Z\",\n" +
+                "                \"type\": \"valid\"\n" +
+                "            }\n" +
+                "    }\n" +
                 "    }\n")));
     }
 
