@@ -66,6 +66,6 @@ public class Event {
         if (props != null) obj.put("properties", props);
         if (origin != null) obj.put("origin", origin);
         if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
-        return obj.toJSONString();
+        return obj.toJSONString().replace("\\/", "/");
     }
 }

@@ -9,7 +9,7 @@ public class EventTestBase {
         try {
             Object parsed = null;
             parsed = new JSONParser().parse(json);
-            return JSONValue.toJSONString(parsed);
+            return JSONValue.toJSONString(parsed).replace("\\/", "/");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
