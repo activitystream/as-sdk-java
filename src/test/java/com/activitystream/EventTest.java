@@ -58,9 +58,9 @@ public class EventTest extends EventTestBase {
                 "                        \"entity_ref\" : \"Person/Petar\",\n" +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "                        \"relations\" : [\n" +
-                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
-                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
-                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
+                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
                 "                        ]   \n" +
                 "                    }\n" +
                 "                }\n" +
