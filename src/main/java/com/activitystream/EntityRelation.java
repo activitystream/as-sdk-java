@@ -1,8 +1,7 @@
 package com.activitystream;
 
-import org.json.simple.JSONObject;
-
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntityRelation {
@@ -37,10 +36,10 @@ public class EntityRelation {
         return this;
     }
 
-    public JSONObject toJson() {
+    public Map toJson() {
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
-        JSONObject obj = new JSONObject();
+        Map obj = new HashMap();
 
         obj.put("type", linkType.toJson());
         if (weight != null) obj.put("weight", weight);

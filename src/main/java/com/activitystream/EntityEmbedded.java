@@ -1,9 +1,8 @@
 package com.activitystream;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EntityEmbedded implements Entity {
@@ -33,7 +32,7 @@ public class EntityEmbedded implements Entity {
         value.put("entity_ref", type.toJson() + "/" + id);
 
         if (relations.length > 0){
-            JSONArray inv = new JSONArray();
+            List inv = new ArrayList();
             for (int i = 0; i < relations.length; i++) {
                 inv.add(relations[i].toJson());
             }
