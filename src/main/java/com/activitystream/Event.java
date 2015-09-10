@@ -43,28 +43,7 @@ public class Event {
     }
 
     public String toJson() {
-        Map obj=new HashMap();
-        obj.put("action", event.id);
-
-        if (involved.length > 0){
-            List inv = new ArrayList();
-            for (int i = 0; i < involved.length; i++) {
-                inv.add(involved[i].toJson());
-            }
-            obj.put("involves", inv);
-        }
-
-        if (aspects.length > 0){
-            Map aspectsJson = new HashMap();
-            for (Aspect aspect : aspects){
-                aspect.addToObject(aspectsJson);
-            }
-            obj.put("aspects", aspectsJson);
-        }
-        if (props != null) obj.put("properties", props);
-        if (origin != null) obj.put("origin", origin);
-        if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
-        return JSONObject.toJSONString(obj).replace("\\/", "/");
+        return JSONObject.toJSONString(toMap()).replace("\\/", "/");
     }
     public Map toMap() {
         Map obj=new HashMap();
