@@ -1,7 +1,6 @@
 package com.activitystream;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import org.json.simple.JSONObject;
 
 public class Role {
     private final String involvement;
@@ -13,9 +12,9 @@ public class Role {
         this.ent = ent;
     }
 
-    public JsonObject toJson() {
-        JsonObject obj=new JsonObject();
-        obj.add("role", new JsonPrimitive(involvement));
+    public JSONObject toJson() {
+        JSONObject obj=new JSONObject();
+        obj.put("role", involvement);
         ent.addToObject(obj);
         return obj;
     }

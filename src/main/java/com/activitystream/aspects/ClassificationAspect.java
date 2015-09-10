@@ -1,9 +1,8 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.Collections;
 
@@ -23,14 +22,14 @@ public class ClassificationAspect implements Aspect {
         return this;
     }
     @Override
-    public void addToObject(JsonObject jsonObject) {
-        JsonObject classification = new JsonObject();
-        if (type != null) classification.add("action", new JsonPrimitive(type));
+    public void addToObject(JSONObject jsonObject) {
+        JSONObject classification = new JSONObject();
+        if (type != null) classification.put("action", type);
         if (categories != null) {
-            JsonArray jsonArray = new JsonArray();
-            for(String item : categories) jsonArray.add(new JsonPrimitive(item));
-            classification.add("categories", jsonArray);
+            JSONArray jsonArray = new JSONArray();
+            Collections.addAll(jsonArray, categories);
+            classification.put("categories", jsonArray);
         }
-        jsonObject.add("classification", classification);
+        jsonObject.put("classification", classification);
     }
 }

@@ -1,7 +1,6 @@
 package com.activitystream;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import org.json.simple.JSONObject;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class EntityRef implements Entity {
@@ -21,7 +20,7 @@ public class EntityRef implements Entity {
     }
 
     @Override
-    public void addToObject(JsonObject jsonObject) {
-        jsonObject.add("entity_ref", new JsonPrimitive(type.toJson() + "/" + id));
+    public void addToObject(JSONObject jsonObject) {
+        jsonObject.put("entity_ref", type.toJson() + "/" + id);
     }
 }

@@ -52,20 +52,20 @@ public class EventTest extends EventTestBase {
                                 )
                 ));
         assertThat(ev.toJson(), equalTo(json("{\n" +
-                "           \"action\": \"action\"," +
                 "            \"involves\" : [\n" +
                 "                { \"role\": \"ACTOR\", \"entity\" : \n" +
                 "                    {\n" +
                 "                        \"entity_ref\" : \"Person/Petar\",\n" +
+                "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "                        \"relations\" : [\n" +
-                "                            {\"action\": \"AKA\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\", \"entity_ref\" : \"Email/pshomov@gmail.com\"},\n" +
+                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
                 "                            {\"action\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
                 "                            {\"action\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
-                "                        ],   \n" +
-                "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"}\n" +
+                "                        ]   \n" +
                 "                    }\n" +
                 "                }\n" +
-                "            ]                \n" +
+                "            ],                \n" +
+                "           \"action\": \"action\"" +
                 "        }")));
     }
     @Test
@@ -80,8 +80,8 @@ public class EventTest extends EventTestBase {
         assertThat(ev.toJson(), equalTo(json("{\n" +
                 "           \"action\": \"action\"," +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
-                "           \"origin\":\"browserX\"," +
-                "           \"occurred_at\" : \"2014-12-01T10:00:00.000Z\"" +
+                "           \"occurred_at\" : \"2014-12-01T10:00:00.000Z\"," +
+                "           \"origin\":\"browserX\"" +
                 "        }")));
     }
     @Test
@@ -93,21 +93,21 @@ public class EventTest extends EventTestBase {
                 .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
-                "           \"action\": \"action\"," +
                 "            \"involves\" : [\n" +
                 "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
                 "                }\n" +
                 "            ], " +
+                "           \"action\": \"action\"," +
                 "            \"aspects\" : {" +
                 "               \"address\": {" +
                 "                    \"address\" : \"Laugavegur 26\"," +
                 "                   \"country_code\": \"IS\", " +
-                "                   \"city\" :\"Reykjavík\"," +
                 "                   \"address2\" : \"\"," +
+                "                   \"city\" :\"Reykjavík\"," +
                 "                    \"zip_code\" : \"2400\"" +
                 "               } " +
 
-                "            }   \n" +
+                "            },   \n" +
                 "        }")));
     }
 

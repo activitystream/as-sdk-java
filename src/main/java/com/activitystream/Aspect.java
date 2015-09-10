@@ -1,7 +1,7 @@
 package com.activitystream;
 
-import com.google.gson.JsonObject;
+import org.json.simple.JSONObject;
 
 public interface Aspect {
-    void addToObject(JsonObject jsonObject);
+    void addToObject(JSONObject jsonObject);
 }
