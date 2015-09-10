@@ -14,4 +14,5 @@ public class Sugar {
     public static ECommerceAspectItem item() {return new ECommerceAspectItem();}
     public static ClassificationAspect classificationAsepct() {return new ClassificationAspect();}
     public static TimedAspect timedAspect() {return new TimedAspect();}
+    public static Event event(String action) {return new Event(action);}
 }

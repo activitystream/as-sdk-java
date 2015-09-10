@@ -21,8 +21,7 @@ public class AspectsTest extends EventTestBase {
     public void client_ip() {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
 
@@ -44,8 +43,7 @@ public class AspectsTest extends EventTestBase {
     public void client_device() {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
 
@@ -65,8 +63,7 @@ public class AspectsTest extends EventTestBase {
     @Test
     public void ecommerce() {
         EntityType POI = new EntityType("Poi");
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .aspects(eCommerce(
                                 item()
                                         .involves(PURCHASED(entityRef(POI, "12344542352345345")))
@@ -107,8 +104,7 @@ public class AspectsTest extends EventTestBase {
 
     @Test
     public void classification() {
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .aspects(classificationAsepct()
                                 .categories(new String[]{"Nature", "Waterfalls"})
                                 .type("Poi")
@@ -128,8 +124,7 @@ public class AspectsTest extends EventTestBase {
     }
     @Test
     public void timed() throws ParseException {
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .aspects(timedAspect()
                         .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
                         .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))

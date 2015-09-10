@@ -20,7 +20,7 @@ public class EventTest extends EventTestBase {
 
     @Test
     public void should_create_an_event_with_id() {
-        Event ev = new Event().action(new EventType("as.xcommerce.purchase.completed"));
+        Event ev = event("as.xcommerce.purchase.completed");
         Map expected = obj(
                 "action", "as.xcommerce.purchase.completed"
         );
@@ -30,8 +30,7 @@ public class EventTest extends EventTestBase {
 
     @Test
     public void should_create_event_with_involved_actor_by_ref() {
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .involves(ACTOR(entityRef(EMPLOYEE, "Petar")));
         Map expected = obj(
                 "action", "action",
@@ -50,16 +49,15 @@ public class EventTest extends EventTestBase {
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
-        Event ev = new Event()
-                .action(new EventType("action"))
-                .involves(ACTOR(entityEmbedded(PERSON, "Petar")
-                                .properties(props)
-                                .relations(
-                                        rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
-                                        rel().link(AKA, entityRef(TWITTER, "pshomov")),
-                                        rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
-                                )
-                ));
+        Event ev = event("action")
+                        .involves(ACTOR(entityEmbedded(PERSON, "Petar")
+                                        .properties(props)
+                                        .relations(
+                                                rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
+                                                rel().link(AKA, entityRef(TWITTER, "pshomov")),
+                                                rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
+                                        )
+                        ));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
@@ -95,8 +93,7 @@ public class EventTest extends EventTestBase {
     public void should_create_event_with_all_attributes() throws ParseException {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
-        Event ev = new Event()
-                .action(new EventType("action"))
+        Event ev = event("action")
                 .origin("browserX")
                 .properties(props)
                 .occured(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
@@ -113,9 +110,7 @@ public class EventTest extends EventTestBase {
     }
     @Test
     public void should_create_event_with_aspects() {
-        Event ev = new Event()
-                .action(new EventType("action"))
-                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
+        Event ev = event("action")                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
 
         Map expected = obj(
@@ -144,13 +139,12 @@ public class EventTest extends EventTestBase {
 
     @Test
     public void should_not_allow_relationship_with_no_linked_entity() {
-        Event ev = new Event()
-                .action(new EventType("action"))
-                .involves(ACTOR(entityEmbedded(PERSON, "Petar")
-                                .relations(
-                                        rel()
-                                )
-                ));
+        Event ev = event("action")
+                        .involves(ACTOR(entityEmbedded(PERSON, "Petar")
+                        .relations(
+                                rel()
+                        )
+        ));
         try {
             ev.toJson();
             fail("that should not have been possible");

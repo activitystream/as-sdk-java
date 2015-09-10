@@ -12,6 +12,13 @@ public class Event {
     private String origin;
     private Map props;
 
+    public Event(String action) {
+        this.event = new EventType(action);
+    }
+    public Event() {
+    }
+
+    @Deprecated()
     public Event action(EventType type){
         this.event = type;
         return this;
