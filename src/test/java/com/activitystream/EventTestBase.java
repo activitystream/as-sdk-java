@@ -1,35 +1,23 @@
 package com.activitystream;
 
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ContainerFactory;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EventTestBase {
-    protected String json(String json) {
-        try {
-            ContainerFactory orderedKeyFactory = new ContainerFactory()
-            {
-                public Map createObjectContainer() {
-                    return new HashMap();
-                }
-
-                @Override
-                public List creatArrayContainer() {
-                    return new ArrayList();
-                }
-
-            };
-            JSONParser parser = new JSONParser();
-            Object parsed = parser.parse(json,orderedKeyFactory);
-            return JSONValue.toJSONString(parsed).replace("\\/", "/");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+    public static Map obj(Object... keyValueStriped) {
+        if (keyValueStriped.length % 2 != 0) throw new RuntimeException("This map does not look good");
+        Map result = new HashMap();
+        for (int i = 0; i < keyValueStriped.length; i += 2) {
+            String key = (String) keyValueStriped[i];
+            Object value = keyValueStriped[i+1];
+            result.put(key, value);
         }
+        return result;
     }
+
+    public static List arr(Object ... items){
+        ArrayList arrayList = new ArrayList();
+        Collections.addAll(arrayList, items);
+        return arrayList;
+    }
+
 }

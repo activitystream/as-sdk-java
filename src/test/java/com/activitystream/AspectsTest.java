@@ -1,10 +1,12 @@
 package com.activitystream;
 
-import com.activitystream.aspects.*;
+import com.activitystream.aspects.ClientDeviceAspect;
+import com.activitystream.aspects.ClientIPAddressAspect;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.activitystream.Predefined.ACTOR;
 import static com.activitystream.Predefined.PERSON;
@@ -23,16 +25,19 @@ public class AspectsTest extends EventTestBase {
                 .action(new EventType("action"))
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
-        assertThat(ev.toJson(), equalTo(json("{\n" +
-                "            \"involves\" : [\n" +
-                "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
-                "                }\n" +
-                "            ], " +
-                "           \"action\": \"action\"," +
-                "            \"aspects\" : {" +
-                "                   \"client_ip\": \"127.0.0.1\" " +
-                "               }" +
-                "        }")));
+
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                                "entity_ref", "Person/Petar",
+                                "role", "ACTOR"
+                        )
+                ),
+                "aspects", obj("client_ip", "127.0.0.1")
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
     @Test
@@ -43,16 +48,19 @@ public class AspectsTest extends EventTestBase {
                 .action(new EventType("action"))
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
-        assertThat(ev.toJson(), equalTo(json("{\n" +
-                "            \"involves\" : [\n" +
-                "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
-                "                }\n" +
-                "            ], " +
-                "           \"action\": \"action\"," +
-                "            \"aspects\" : {" +
-                "                   \"client_device\": \"iPhone\" " +
-                "               } " +
-                "        }")));
+
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                                "entity_ref", "Person/Petar",
+                                "role", "ACTOR"
+                        )
+                ),
+                "aspects", obj("client_device", "iPhone")
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
     @Test
     public void ecommerce() {
@@ -71,29 +79,30 @@ public class AspectsTest extends EventTestBase {
                                         .currency("ISK")
                         )
                 );
-        assertThat(json(ev.toJson()), equalTo(json("" +
-                "    {\n" +
-                "        \"aspects\": {\n" +
-                "            \"items\": [\n" +
-                "                {\n" +
-                "                    \"involves\": [\n" +
-                "                        {\n" +
-                "                            \"role\": \"PURCHASED\",\n" +
-                "                            \"entity_ref\": \"Poi/12344542352345345\"\n" +
-                "                        }\n" +
-                "                    ],\n" +
-                "                    \"item_count\": 2,\n" +
-                "                    \"item_price\": 15400.00,\n" +
-                "                    \"description\": \"desc\",\n" +
-                "                    \"variant\": \"variant\",\n" +
-                "                    \"price_category\": \"A\",\n" +
-                "                    \"currency\": \"ISK\",\n" +
-                "                    \"commission_fixed\": 1540.0\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        \"action\": \"action\"\n" +
-                "    }\n")));
+        Map expected = obj(
+            "action", "action",
+            "aspects", obj(
+                "items", arr(
+                    obj(
+                        "involves", arr(
+                            obj(
+                                "role", "PURCHASED",
+                                "entity_ref", "Poi/12344542352345345"
+                            )
+                        ),
+                        "item_count", 2,
+                        "item_price", 15400.0,
+                        "description", "desc",
+                        "variant", "variant",
+                        "price_category", "A",
+                        "currency", "ISK",
+                        "commission_fixed", 1540.0
+                    )
+                )
+            )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
     @Test
@@ -104,19 +113,18 @@ public class AspectsTest extends EventTestBase {
                                 .categories(new String[]{"Nature", "Waterfalls"})
                                 .type("Poi")
                 );
-        assertThat(ev.toJson(), equalTo(json("" +
-                "    {\n" +
-                "        \"action\": \"action\",\n" +
-                "        \"aspects\": {\n" +
-                "                    \"classification\": {\n" +
-                "                        \"action\": \"Poi\",\n" +
-                "                        \"categories\": [\n" +
-                "                                \"Nature\",\n" +
-                "                            \"Waterfalls\"\n" +
-                "                        ]\n" +
-                "                    }\n" +
-                "        }\n" +
-                "    }\n")));
+
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "classification", obj(
+                            "action", "Poi",
+                            "categories", arr("Nature", "Waterfalls")
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
     @Test
     public void timed() throws ParseException {
@@ -126,18 +134,18 @@ public class AspectsTest extends EventTestBase {
                         .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
                         .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
-        assertThat(ev.toJson(), equalTo(json("" +
-                "    {\n" +
-                "        \"action\": \"action\",\n" +
-                "        \"aspects\": {\n" +
-                "            \"timed\": {\n" +
-                "                \"begins\": \"2015-11-24T17:00:00.000Z\",\n" +
-                "                \"ends\": \"2015-11-24T20:00:00.000Z\",\n" +
-                "                \"action\": \"valid\"\n" +
-                "            }\n" +
-                "    }\n" +
-                "    }\n")));
+
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "timed", obj(
+                                "begins", "2015-11-24T17:00:00.000Z",
+                                "ends", "2015-11-24T20:00:00.000Z",
+                                "action", "valid"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
-
-
 }

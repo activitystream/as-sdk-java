@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.activitystream.Predefined.*;
 import static com.activitystream.Sugar.*;
@@ -15,13 +16,16 @@ import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.fail;
 
 public class EventTest extends EventTestBase {
-
     public static final EntityType BUILDING = new EntityType("Building");
 
     @Test
     public void should_create_an_event_with_id() {
         Event ev = new Event().action(new EventType("as.xcommerce.purchase.completed"));
-        assertThat(ev.toJson(), equalTo(json("{ \"action\" : \"as.xcommerce.purchase.completed\" }")));
+        Map expected = obj(
+                "action", "as.xcommerce.purchase.completed"
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
     @Test
@@ -29,12 +33,17 @@ public class EventTest extends EventTestBase {
         Event ev = new Event()
                 .action(new EventType("action"))
                 .involves(ACTOR(entityRef(EMPLOYEE, "Petar")));
-        assertThat(ev.toJson(), equalTo(json("{\n" +
-                " \"action\": \"action\"," +
-                "            \"involves\" : [\n" +
-                "                { \"role\" : \"ACTOR\", \"entity_ref\" : \"Employee/Petar\"}\n" +
-                "            ]                \n" +
-                "        }")));
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                                "entity_ref", "Employee/Petar",
+                                "role", "ACTOR"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
     @Test
@@ -51,22 +60,36 @@ public class EventTest extends EventTestBase {
                                         rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
                                 )
                 ));
-        assertThat(ev.toJson(), equalTo(json("{\n" +
-                "            \"involves\" : [\n" +
-                "                { \"role\": \"ACTOR\", \"entity\" : \n" +
-                "                    {\n" +
-                "                        \"entity_ref\" : \"Person/Petar\",\n" +
-                "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
-                "                        \"relations\" : [\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
-                "                        ]   \n" +
-                "                    }\n" +
-                "                }\n" +
-                "            ],                \n" +
-                "           \"action\": \"action\"" +
-                "        }")));
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                            "role", "ACTOR",
+                            "entity", obj(
+                                    "entity_ref", "Person/Petar",
+                                    "properties", obj("favourite_programming_language","javascript"),
+                                    "relations", arr(
+                                            obj(
+                                                "type", "AKA",
+                                                "entity_ref", "Email/pshomov@gmail.com",
+                                                "valid_from", "2014-12-01T10:00:00.000Z"
+                                            ),
+                                            obj(
+                                                "type", "AKA",
+                                                "entity_ref", "Twitter/pshomov"
+                                            ),
+                                            obj(
+                                                "type", "AKA",
+                                                "entity_ref", "Building/Laugavegur 26"
+                                            )
+                                    )
+                            )
+                        )
+                )
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
     @Test
     public void should_create_event_with_all_attributes() throws ParseException {
@@ -77,38 +100,46 @@ public class EventTest extends EventTestBase {
                 .origin("browserX")
                 .properties(props)
                 .occured(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
-        assertThat(ev.toJson(), equalTo(json("{\n" +
-                "           \"action\": \"action\"," +
-                "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
-                "           \"occurred_at\" : \"2014-12-01T10:00:00.000Z\"," +
-                "           \"origin\":\"browserX\"" +
-                "        }")));
+
+        Map expected = obj(
+                "action", "action",
+                "properties", obj("favourite_programming_language","javascript"),
+                "occurred_at", "2014-12-01T10:00:00.000Z",
+                "origin", "browserX"
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
     @Test
     public void should_create_event_with_aspects() {
-        HashMap props = new HashMap();
-        props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
                 .action(new EventType("action"))
                 .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
-        assertThat(ev.toJson(), equalTo(json("{\n" +
-                "            \"involves\" : [\n" +
-                "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
-                "                }\n" +
-                "            ], " +
-                "           \"action\": \"action\"," +
-                "            \"aspects\" : {" +
-                "               \"address\": {" +
-                "                    \"address\" : \"Laugavegur 26\"," +
-                "                   \"country_code\": \"IS\", " +
-                "                   \"address2\" : \"\"," +
-                "                   \"city\" :\"Reykjavík\"," +
-                "                    \"zip_code\" : \"2400\"" +
-                "               } " +
 
-                "            },   \n" +
-                "        }")));
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                            "role", "ACTOR",
+                            "entity_ref", "Person/Petar"
+                        )
+                ),
+                "aspects", obj(
+                    "address", obj(
+                        "address", "Laugavegur 26",
+                        "city", "Reykjavík",
+                        "zip_code", "2400",
+                        "address2", "",
+                        "country_code", "IS"
+                        )
+                )
+
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
     @Test
