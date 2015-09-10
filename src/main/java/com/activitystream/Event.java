@@ -1,7 +1,6 @@
 package com.activitystream;
 
 import com.google.gson.*;
-import jdk.nashorn.internal.parser.JSONParser;
 
 import java.util.Date;
 import java.util.Map;
