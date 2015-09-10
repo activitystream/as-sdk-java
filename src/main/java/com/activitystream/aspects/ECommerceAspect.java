@@ -1,12 +1,9 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import com.activitystream.EventType;
-import com.activitystream.Role;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import java.util.Date;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 public class ECommerceAspect implements Aspect{
 
@@ -18,13 +15,13 @@ public class ECommerceAspect implements Aspect{
     }
 
     @Override
-    public void addToObject(JSONObject jsonObject) {
+    public void addToObject(JsonObject jsonObject) {
         if (items.length > 0){
-            JSONArray inv = new JSONArray();
+            JsonArray inv = new JsonArray();
             for (ECommerceAspectItem item : items) {
                 inv.add(item.toJson());
             }
-            jsonObject.put("items", inv);
+            jsonObject.add("items", inv);
         }
 
     }

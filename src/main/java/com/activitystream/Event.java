@@ -1,7 +1,7 @@
 package com.activitystream;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.google.gson.*;
+import jdk.nashorn.internal.parser.JSONParser;
 
 import java.util.Date;
 import java.util.Map;
@@ -45,27 +45,29 @@ public class Event {
     }
 
     public String toJson() {
-        JSONObject obj=new JSONObject();
-        obj.put("action", event.id);
+        JsonObject obj=new JsonObject();
+        obj.add("action", new JsonPrimitive(event.id));
 
         if (involved.length > 0){
-            JSONArray inv = new JSONArray();
+            JsonArray inv = new JsonArray();
             for (int i = 0; i < involved.length; i++) {
                 inv.add(involved[i].toJson());
             }
-            obj.put("involves", inv);
+            obj.add("involves", inv);
         }
 
         if (aspects.length > 0){
-            JSONObject aspectsJson = new JSONObject();
+            JsonObject aspectsJson = new JsonObject();
             for (Aspect aspect : aspects){
                 aspect.addToObject(aspectsJson);
             }
-            obj.put("aspects", aspectsJson);
+            obj.add("aspects", aspectsJson);
         }
-        if (props != null) obj.put("properties", props);
-        if (origin != null) obj.put("origin", origin);
-        if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
-        return obj.toJSONString().replace("\\/", "/");
+        Gson gson = new Gson();
+        JsonParser parser = new JsonParser();
+        if (props != null) obj.add("properties", parser.parse(gson.toJson(props)));
+        if (origin != null) obj.add("origin", parser.parse(gson.toJson(origin)));
+        if (timestamp != null) obj.add("occurred_at", new JsonPrimitive(DateHelpers.isoDateFormatter.format(timestamp)));
+        return obj.toString();
     }
 }

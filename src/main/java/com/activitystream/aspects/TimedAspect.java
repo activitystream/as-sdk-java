@@ -2,8 +2,8 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 import com.activitystream.DateHelpers;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import java.util.Collections;
 import java.util.Date;
@@ -30,14 +30,14 @@ public class TimedAspect implements Aspect {
         return this;
     }
     @Override
-    public void addToObject(JSONObject jsonObject) {
-        JSONObject timed = new JSONObject();
+    public void addToObject(JsonObject jsonObject) {
+        JsonObject timed = new JsonObject();
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
         }
-        if (starts != null) timed.put("begins", DateHelpers.isoDateFormatter.format(starts));
-        if (ends != null) timed.put("ends", DateHelpers.isoDateFormatter.format(ends));
-        timed.put("action", type.toString());
-        jsonObject.put("timed", timed);
+        if (starts != null) timed.add("begins", new JsonPrimitive(DateHelpers.isoDateFormatter.format(starts)));
+        if (ends != null) timed.add("ends", new JsonPrimitive(DateHelpers.isoDateFormatter.format(ends)));
+        timed.add("action", new JsonPrimitive(type.toString()));
+        jsonObject.add("timed", timed);
     }
 }

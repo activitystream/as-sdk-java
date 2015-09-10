@@ -2,8 +2,9 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 import com.activitystream.Role;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import java.util.Date;
 
@@ -79,31 +80,31 @@ public class ECommerceAspectItem {
         return this;
     }
 
-    public JSONObject toJson() {
-        JSONObject obj=new JSONObject();
+    public JsonObject toJson() {
+        JsonObject obj=new JsonObject();
 
         if (involved.length > 0){
-            JSONArray inv = new JSONArray();
+            JsonArray inv = new JsonArray();
             for (int i = 0; i < involved.length; i++) {
                 inv.add(involved[i].toJson());
             }
-            obj.put("involves", inv);
+            obj.add("involves", inv);
         }
 
-        if (commissionFixed != null) obj.put("commission_fixed", commissionFixed);
-        if (currency != null) obj.put("currency", currency);
-        if (priceCategory != null) obj.put("price_category", priceCategory);
-        if (variant != null) obj.put("variant", variant);
-        if (description != null) obj.put("description", description);
-        if (itemPrice != null) obj.put("item_price", itemPrice);
-        if (itemCount != null) obj.put("item_count", itemCount);
+        if (commissionFixed != null) obj.add("commission_fixed", new JsonPrimitive(commissionFixed));
+        if (currency != null) obj.add("currency", new JsonPrimitive(currency));
+        if (priceCategory != null) obj.add("price_category", new JsonPrimitive(priceCategory));
+        if (variant != null) obj.add("variant", new JsonPrimitive(variant));
+        if (description != null) obj.add("description", new JsonPrimitive(description));
+        if (itemPrice != null) obj.add("item_price", new JsonPrimitive(itemPrice));
+        if (itemCount != null) obj.add("item_count", new JsonPrimitive(itemCount));
 
         if (aspects.length > 0){
-            JSONObject aspectsJson = new JSONObject();
+            JsonObject aspectsJson = new JsonObject();
             for (Aspect aspect : aspects){
                 aspect.addToObject(aspectsJson);
             }
-            obj.put("aspects", aspectsJson);
+            obj.add("aspects", aspectsJson);
         }
         return obj;
     }

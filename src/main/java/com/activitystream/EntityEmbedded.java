@@ -1,7 +1,6 @@
 package com.activitystream;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.google.gson.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,20 +27,22 @@ public class EntityEmbedded implements Entity {
     }
 
     @Override
-    public void addToObject(JSONObject jsonObject) {
-        JSONObject value = new JSONObject();
-        value.put("entity_ref", type.toJson() + "/" + id);
+    public void addToObject(JsonObject jsonObject) {
+        JsonObject value = new JsonObject();
+        value.add("entity_ref", new JsonPrimitive(type.toJson() + "/" + id));
 
         if (relations.length > 0){
-            JSONArray inv = new JSONArray();
+            JsonArray inv = new JsonArray();
             for (int i = 0; i < relations.length; i++) {
                 inv.add(relations[i].toJson());
             }
-            value.put("relations", inv);
+            value.add("relations", inv);
         }
         if (props.size() > 0){
-            value.put("properties", props);
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            value.add("properties", parser.parse(gson.toJson(props)));
         }
-        jsonObject.put("entity", value);
+        jsonObject.add("entity", value);
     }
 }

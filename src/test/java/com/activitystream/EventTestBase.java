@@ -1,17 +1,17 @@
 package com.activitystream;
 
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.Map;
 
 public class EventTestBase {
     protected String json(String json) {
-        try {
-            Object parsed = null;
-            parsed = new JSONParser().parse(json);
-            return JSONValue.toJSONString(parsed).replace("\\/", "/");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        JsonParser parser = new JsonParser();
+        JsonElement parsed = parser.parse(json);
+        return parsed.toString();
     }
 }

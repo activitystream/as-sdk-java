@@ -24,11 +24,11 @@ public class AspectsTest extends EventTestBase {
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
+                "           \"action\": \"action\"," +
                 "            \"involves\" : [\n" +
                 "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
                 "                }\n" +
                 "            ], " +
-                "           \"action\": \"action\"," +
                 "            \"aspects\" : {" +
                 "                   \"client_ip\": \"127.0.0.1\" " +
                 "               }" +
@@ -44,11 +44,11 @@ public class AspectsTest extends EventTestBase {
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
+                "           \"action\": \"action\"," +
                 "            \"involves\" : [\n" +
                 "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
                 "                }\n" +
                 "            ], " +
-                "           \"action\": \"action\"," +
                 "            \"aspects\" : {" +
                 "                   \"client_device\": \"iPhone\" " +
                 "               } " +
@@ -73,6 +73,7 @@ public class AspectsTest extends EventTestBase {
                 );
         assertThat(json(ev.toJson()), equalTo(json("" +
                 "    {\n" +
+                "        \"action\": \"action\",\n" +
                 "        \"aspects\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
@@ -82,17 +83,16 @@ public class AspectsTest extends EventTestBase {
                 "                            \"entity_ref\": \"Poi/12344542352345345\"\n" +
                 "                        }\n" +
                 "                    ],\n" +
-                "                    \"item_count\": 2,\n" +
-                "                    \"item_price\": 15400.00,\n" +
-                "                    \"description\": \"desc\",\n" +
-                "                    \"variant\": \"variant\",\n" +
-                "                    \"price_category\": \"A\",\n" +
+                "                    \"commission_fixed\": 1540.0,\n" +
                 "                    \"currency\": \"ISK\",\n" +
-                "                    \"commission_fixed\": 1540.0\n" +
+                "                    \"price_category\": \"A\",\n" +
+                "                    \"variant\": \"variant\",\n" +
+                "                    \"description\": \"desc\",\n" +
+                "                    \"item_price\": 15400.0,\n" +
+                "                    \"item_count\": 2\n" +
                 "                }\n" +
                 "            ]\n" +
-                "        },\n" +
-                "        \"action\": \"action\"\n" +
+                "        }\n" +
                 "    }\n")));
     }
 
@@ -126,7 +126,7 @@ public class AspectsTest extends EventTestBase {
                         .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
                         .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
-        assertThat(ev.toJson(), equalTo(json("" +
+        assertThat(json(ev.toJson()), equalTo(json("" +
                 "    {\n" +
                 "        \"action\": \"action\",\n" +
                 "        \"aspects\": {\n" +

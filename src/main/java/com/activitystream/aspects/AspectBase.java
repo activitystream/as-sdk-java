@@ -1,7 +1,9 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,22 +13,25 @@ public class AspectBase implements Aspect {
     protected Map<String, AspectProperty> aspectPropertyMap = new HashMap<>();
 
     @Override
-    public void addToObject(JSONObject aspectJson) {
+    public void addToObject(JsonObject aspectJson) {
         for (Map.Entry<String, AspectProperty> aspect : aspectPropertyMap.entrySet()) {
             if (aspect.getValue().required && aspect.getValue().value == null) throw new RuntimeException("Property "+aspect.getValue()+" is required ");
             String[] levels = aspect.getKey().split("\\.");
             String aspectPropertyKey = levels[levels.length-1];
             levels = Arrays.copyOf(levels, levels.length - 1);
-            JSONObject propertyParent = aspectJson;
+            JsonObject propertyParent = aspectJson;
             for(String level : levels){
-                JSONObject drill = (JSONObject) propertyParent.get(level);
+                JsonObject drill = (JsonObject) propertyParent.get(level);
                 if (drill == null) {
-                    drill = new JSONObject();
-                    propertyParent.put(level, drill);
+                    drill = new JsonObject();
+                    propertyParent.add(level, drill);
                 }
                 propertyParent = drill;
             }
-            propertyParent.put(aspectPropertyKey, aspect.getValue().value);
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+
+            propertyParent.add(aspectPropertyKey, parser.parse(gson.toJson(aspect.getValue().value)));
         }
     }
 
