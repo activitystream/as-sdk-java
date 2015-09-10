@@ -1,10 +1,13 @@
 
 import com.activitystream._
 import com.activitystream.aspects.ClientDeviceAspect
+import org.junit.runner.RunWith
 import org.specs2.matcher.JsonMatchers
 import org.specs2.mutable.Specification
+import org.specs2.runner.JUnitRunner
 
 
+@RunWith(classOf[JUnitRunner])
 class EventTest extends Specification with JsonMatchers {
 
   "Should create an event with id" should {
