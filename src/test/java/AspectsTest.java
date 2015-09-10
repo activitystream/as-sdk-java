@@ -9,7 +9,9 @@ import java.util.HashMap;
 
 import static com.activitystream.Predefined.ACTOR;
 import static com.activitystream.Predefined.PERSON;
+import static com.activitystream.Sugar.eCommerce;
 import static com.activitystream.Sugar.entityRef;
+import static com.activitystream.Sugar.item;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -60,15 +62,16 @@ public class AspectsTest extends EventTestBase {
         EntityType POI = new EntityType("Poi");
         Event ev = new Event()
                 .type(new EventType("type"))
-                .aspects(new ECommerceAspect().items(new ECommerceAspectItem()
-                                        .involves(PURCHASED(entityRef(POI, "12344542352345345")))
-                                        .commissionFixed(1540.0)
-                                        .itemCount(2)
-                                        .itemPrice(15400.0)
-                                        .description("desc")
-                                        .variant("variant")
-                                        .priceCategory("A")
-                                        .currency("ISK")
+                .aspects(eCommerce(
+                                item()
+                                    .involves(PURCHASED(entityRef(POI, "12344542352345345")))
+                                    .commissionFixed(1540.0)
+                                    .itemCount(2)
+                                    .itemPrice(15400.0)
+                                    .description("desc")
+                                    .variant("variant")
+                                    .priceCategory("A")
+                                    .currency("ISK")
                         )
                 );
         assertThat(json(ev.toJson()), equalTo(json("" +
