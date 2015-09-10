@@ -14,7 +14,7 @@ public class Event {
     private String origin;
     private Map props;
 
-    public Event type(EventType type){
+    public Event action(EventType type){
         this.event = type;
         return this;
     }
@@ -46,7 +46,7 @@ public class Event {
 
     public String toJson() {
         JSONObject obj=new JSONObject();
-        obj.put("event", event.id);
+        obj.put("action", event.id);
 
         if (involved.length > 0){
             JSONArray inv = new JSONArray();

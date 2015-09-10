@@ -20,17 +20,17 @@ public class EventTest extends EventTestBase {
 
     @Test
     public void should_create_an_event_with_id() {
-        Event ev = new Event().type(new EventType("as.xcommerce.purchase.completed"));
-        assertThat(ev.toJson(), equalTo(json("{ \"event\" : \"as.xcommerce.purchase.completed\" }")));
+        Event ev = new Event().action(new EventType("as.xcommerce.purchase.completed"));
+        assertThat(ev.toJson(), equalTo(json("{ \"action\" : \"as.xcommerce.purchase.completed\" }")));
     }
 
     @Test
     public void should_create_event_with_involved_actor_by_ref() {
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .involves(ACTOR(entityRef(EMPLOYEE, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
-                " \"event\" : \"type\"," +
+                " \"action\": \"action\"," +
                 "            \"involves\" : [\n" +
                 "                { \"role\" : \"ACTOR\", \"entity_ref\" : \"Employee/Petar\"}\n" +
                 "            ]                \n" +
@@ -42,7 +42,7 @@ public class EventTest extends EventTestBase {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
                                 .properties(props)
                                 .relations(
@@ -58,14 +58,14 @@ public class EventTest extends EventTestBase {
                 "                        \"entity_ref\" : \"Person/Petar\",\n" +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "                        \"relations\" : [\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
-                "                            {\"type\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
+                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Email/pshomov@gmail.com\", \"valid_from\" : \"2014-12-01T10:00:00.000Z\"},\n" +
+                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Twitter/pshomov\"},\n" +
+                "                            {\"action\": \"AKA\", \"entity_ref\" : \"Building/Laugavegur 26\"}\n" +
                 "                        ]   \n" +
                 "                    }\n" +
                 "                }\n" +
                 "            ],                \n" +
-                "           \"event\" : \"type\"" +
+                "           \"action\": \"action\"" +
                 "        }")));
     }
     @Test
@@ -73,15 +73,15 @@ public class EventTest extends EventTestBase {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .origin("browserX")
                 .properties(props)
                 .occured(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
         assertThat(ev.toJson(), equalTo(json("{\n" +
+                "           \"action\": \"action\"," +
                 "                        \"properties\" : {\"favourite_programming_language\" : \"javascript\"},\n" +
                 "           \"occurred_at\" : \"2014-12-01T10:00:00.000Z\"," +
-                "           \"origin\":\"browserX\"," +
-                "           \"event\" : \"type\"" +
+                "           \"origin\":\"browserX\"" +
                 "        }")));
     }
     @Test
@@ -89,7 +89,7 @@ public class EventTest extends EventTestBase {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
@@ -97,6 +97,7 @@ public class EventTest extends EventTestBase {
                 "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
                 "                }\n" +
                 "            ], " +
+                "           \"action\": \"action\"," +
                 "            \"aspects\" : {" +
                 "               \"address\": {" +
                 "                    \"address\" : \"Laugavegur 26\"," +
@@ -106,15 +107,14 @@ public class EventTest extends EventTestBase {
                 "                   \"country_code\": \"IS\" " +
                 "               } " +
 
-                "            }   \n" +
-                "           \"event\" : \"type\"" +
+                "            },   \n" +
                 "        }")));
     }
 
     @Test
     public void should_not_allow_relationship_with_no_linked_entity() {
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
                                 .relations(
                                         rel()

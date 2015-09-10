@@ -20,7 +20,7 @@ public class AspectsTest extends EventTestBase {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
@@ -28,10 +28,10 @@ public class AspectsTest extends EventTestBase {
                 "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
                 "                }\n" +
                 "            ], " +
+                "           \"action\": \"action\"," +
                 "            \"aspects\" : {" +
                 "                   \"client_ip\": \"127.0.0.1\" " +
-                "               }, " +
-                "           \"event\" : \"type\"" +
+                "               }" +
                 "        }")));
     }
 
@@ -40,7 +40,7 @@ public class AspectsTest extends EventTestBase {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
         assertThat(ev.toJson(), equalTo(json("{\n" +
@@ -48,17 +48,17 @@ public class AspectsTest extends EventTestBase {
                 "                { \"role\": \"ACTOR\", \"entity_ref\" : \"Person/Petar\"\n" +
                 "                }\n" +
                 "            ], " +
+                "           \"action\": \"action\"," +
                 "            \"aspects\" : {" +
                 "                   \"client_device\": \"iPhone\" " +
-                "               }, " +
-                "           \"event\" : \"type\"" +
+                "               } " +
                 "        }")));
     }
     @Test
     public void ecommerce() {
         EntityType POI = new EntityType("Poi");
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .aspects(eCommerce(
                                 item()
                                         .involves(PURCHASED(entityRef(POI, "12344542352345345")))
@@ -73,7 +73,6 @@ public class AspectsTest extends EventTestBase {
                 );
         assertThat(json(ev.toJson()), equalTo(json("" +
                 "    {\n" +
-                "        \"event\": \"type\",\n" +
                 "        \"aspects\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
@@ -92,24 +91,25 @@ public class AspectsTest extends EventTestBase {
                 "                    \"commission_fixed\": 1540.0\n" +
                 "                }\n" +
                 "            ]\n" +
-                "        }\n" +
+                "        },\n" +
+                "        \"action\": \"action\"\n" +
                 "    }\n")));
     }
 
     @Test
     public void classification() {
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .aspects(classificationAsepct()
                                 .categories(new String[]{"Nature", "Waterfalls"})
                                 .type("Poi")
                 );
         assertThat(ev.toJson(), equalTo(json("" +
                 "    {\n" +
-                "        \"event\": \"type\",\n" +
+                "        \"action\": \"action\",\n" +
                 "        \"aspects\": {\n" +
                 "                    \"classification\": {\n" +
-                "                        \"type\": \"Poi\",\n" +
+                "                        \"action\": \"Poi\",\n" +
                 "                        \"categories\": [\n" +
                 "                                \"Nature\",\n" +
                 "                            \"Waterfalls\"\n" +
@@ -121,19 +121,19 @@ public class AspectsTest extends EventTestBase {
     @Test
     public void timed() throws ParseException {
         Event ev = new Event()
-                .type(new EventType("type"))
+                .action(new EventType("action"))
                 .aspects(timedAspect()
                         .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
                         .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
         assertThat(ev.toJson(), equalTo(json("" +
                 "    {\n" +
-                "        \"event\": \"type\",\n" +
+                "        \"action\": \"action\",\n" +
                 "        \"aspects\": {\n" +
                 "            \"timed\": {\n" +
                 "                \"begins\": \"2015-11-24T17:00:00.000Z\",\n" +
                 "                \"ends\": \"2015-11-24T20:00:00.000Z\",\n" +
-                "                \"type\": \"valid\"\n" +
+                "                \"action\": \"valid\"\n" +
                 "            }\n" +
                 "    }\n" +
                 "    }\n")));

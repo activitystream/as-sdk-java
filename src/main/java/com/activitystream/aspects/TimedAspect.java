@@ -37,7 +37,7 @@ public class TimedAspect implements Aspect {
         }
         if (starts != null) timed.put("begins", DateHelpers.isoDateFormatter.format(starts));
         if (ends != null) timed.put("ends", DateHelpers.isoDateFormatter.format(ends));
-        timed.put("type", type.toString());
+        timed.put("action", type.toString());
         jsonObject.put("timed", timed);
     }
 }

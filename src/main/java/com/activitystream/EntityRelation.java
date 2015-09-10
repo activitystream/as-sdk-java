@@ -44,7 +44,7 @@ public class EntityRelation {
 
         JSONObject obj = new JSONObject();
 
-        obj.put("type", linkType.toJson());
+        obj.put("action", linkType.toJson());
         if (weight != null) obj.put("weight", weight);
         if (startDate != null) obj.put("valid_from", DateHelpers.isoDateFormatter.format(startDate));
         if (endDate != null) obj.put("active_until", endDate);

@@ -6,6 +6,6 @@ public enum TimedStatus {
     @Override
     public String toString() {
         if (this == VALID) return "valid";
-        throw new RuntimeException("unhandled type of timed type");
+        throw new RuntimeException("unhandled action of timed action");
     }
 }

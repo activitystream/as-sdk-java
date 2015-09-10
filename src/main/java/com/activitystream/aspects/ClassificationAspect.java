@@ -24,7 +24,7 @@ public class ClassificationAspect implements Aspect {
     @Override
     public void addToObject(JSONObject jsonObject) {
         JSONObject classification = new JSONObject();
-        if (type != null) classification.put("type", type);
+        if (type != null) classification.put("action", type);
         if (categories != null) {
             JSONArray jsonArray = new JSONArray();
             Collections.addAll(jsonArray, categories);
