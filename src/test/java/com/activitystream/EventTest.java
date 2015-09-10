@@ -50,38 +50,38 @@ public class EventTest extends EventTestBase {
         HashMap props = new HashMap();
         props.put("favourite_programming_language", "javascript");
         Event ev = event("action")
-                        .involves(ACTOR(entityEmbedded(PERSON, "Petar")
-                                        .properties(props)
-                                        .relations(
-                                                rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
-                                                rel().link(AKA, entityRef(TWITTER, "pshomov")),
-                                                rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
-                                        )
-                        ));
+                .involves(ACTOR(entityEmbedded(PERSON, "Petar")
+                                .properties(props)
+                                .relations(
+                                        rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
+                                        rel().link(AKA, entityRef(TWITTER, "pshomov")),
+                                        rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
+                                )
+                ));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
                         obj(
-                            "role", "ACTOR",
-                            "entity", obj(
-                                    "entity_ref", "Person/Petar",
-                                    "properties", obj("favourite_programming_language","javascript"),
-                                    "relations", arr(
-                                            obj(
-                                                "type", "AKA",
-                                                "entity_ref", "Email/pshomov@gmail.com",
-                                                "valid_from", "2014-12-01T10:00:00.000Z"
-                                            ),
-                                            obj(
-                                                "type", "AKA",
-                                                "entity_ref", "Twitter/pshomov"
-                                            ),
-                                            obj(
-                                                "type", "AKA",
-                                                "entity_ref", "Building/Laugavegur 26"
-                                            )
-                                    )
-                            )
+                                "role", "ACTOR",
+                                "entity", obj(
+                                        "entity_ref", "Person/Petar",
+                                        "properties", obj("favourite_programming_language", "javascript"),
+                                        "relations", arr(
+                                                obj(
+                                                        "type", "AKA",
+                                                        "entity_ref", "Email/pshomov@gmail.com",
+                                                        "valid_from", "2014-12-01T10:00:00.000Z"
+                                                ),
+                                                obj(
+                                                        "type", "AKA",
+                                                        "entity_ref", "Twitter/pshomov"
+                                                ),
+                                                obj(
+                                                        "type", "AKA",
+                                                        "entity_ref", "Building/Laugavegur 26"
+                                                )
+                                        )
+                                )
                         )
                 )
         );
@@ -89,6 +89,7 @@ public class EventTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
     @Test
     public void should_create_event_with_all_attributes() throws ParseException {
         HashMap props = new HashMap();
@@ -100,7 +101,7 @@ public class EventTest extends EventTestBase {
 
         Map expected = obj(
                 "action", "action",
-                "properties", obj("favourite_programming_language","javascript"),
+                "properties", obj("favourite_programming_language", "javascript"),
                 "occurred_at", "2014-12-01T10:00:00.000Z",
                 "origin", "browserX"
         );
@@ -108,26 +109,28 @@ public class EventTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
     @Test
     public void should_create_event_with_aspects() {
-        Event ev = event("action")                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
+        Event ev = event("action")
+                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
                         obj(
-                            "role", "ACTOR",
-                            "entity_ref", "Person/Petar"
+                                "role", "ACTOR",
+                                "entity_ref", "Person/Petar"
                         )
                 ),
                 "aspects", obj(
-                    "address", obj(
-                        "address", "Laugavegur 26",
-                        "city", "Reykjavík",
-                        "zip_code", "2400",
-                        "address2", "",
-                        "country_code", "IS"
+                        "address", obj(
+                                "address", "Laugavegur 26",
+                                "city", "Reykjavík",
+                                "zip_code", "2400",
+                                "address2", "",
+                                "country_code", "IS"
                         )
                 )
 
@@ -140,11 +143,11 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_not_allow_relationship_with_no_linked_entity() {
         Event ev = event("action")
-                        .involves(ACTOR(entityEmbedded(PERSON, "Petar")
-                        .relations(
-                                rel()
-                        )
-        ));
+                .involves(ACTOR(entityEmbedded(PERSON, "Petar")
+                                .relations(
+                                        rel()
+                                )
+                ));
         try {
             ev.toJson();
             fail("that should not have been possible");
