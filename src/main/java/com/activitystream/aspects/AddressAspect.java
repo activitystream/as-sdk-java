@@ -15,8 +15,17 @@ public class AddressAspect extends AspectBase {
         return this;
     }
 
+    /**
+     * @deprecated this was a bad name, replaced by {@link #secondAddressLine(String)}
+     */
+    @Deprecated()
     public AddressAspect line2(String line2) {
         aspectPropertyMap.get("address.address2").value = line2;
+        return this;
+    }
+
+    public AddressAspect secondAddressLine(String secondAddressLine) {
+        aspectPropertyMap.get("address.address2").value = secondAddressLine;
         return this;
     }
 

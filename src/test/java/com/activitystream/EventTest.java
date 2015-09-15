@@ -113,7 +113,7 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_create_event_with_aspects() {
         Event ev = event("action")
-                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").line2("").streetAndNumber("Laugavegur 26").zipCode("2400"))
+                .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").secondAddressLine("").streetAndNumber("Laugavegur 26").zipCode("2400"))
                 .involves(ACTOR(entityRef(PERSON, "Petar")));
 
         Map expected = obj(
