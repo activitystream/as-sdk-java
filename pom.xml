@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.activitystream</groupId>
     <artifactId>sdk</artifactId>
@@ -9,6 +8,13 @@
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
@@ -30,7 +36,7 @@
 
     </dependencies>
     <build>
-        <finalName>as-sdk-${version}</finalName>
+        <finalName>as-sdk-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -64,4 +70,10 @@
             </plugin>
         </plugins>
     </build>
+
+  <scm>
+    <connection>scm:git:git://github.com/activitystream/as-sdk-java</connection>
+    <developerConnection>scm:git:git://github.com/activitystream/as-sdk-java</developerConnection>
+    <url>https://github.com/activitystream/as-sdk-java</url>
+  </scm>
 </project>
