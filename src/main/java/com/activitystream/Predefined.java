@@ -48,6 +48,7 @@ public class Predefined {
     public static LinkType BELONGS_TO = new LinkType("BELONGS_TO");
     public static LinkType SUPPLIED_BY = new LinkType("SUPPLIED_BY");
     public static LinkType LOCATED_AT = new LinkType("LOCATED_AT");
+    public static LinkType FEATURED = new LinkType("FEATURED");
 
     public static EntityType EMAIL = new EntityType("Email");
     public static EntityType TWITTER = new EntityType("Twitter");

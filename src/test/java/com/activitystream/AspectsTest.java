@@ -2,14 +2,15 @@ package com.activitystream;
 
 import com.activitystream.aspects.ClientDeviceAspect;
 import com.activitystream.aspects.ClientIPAddressAspect;
+import com.activitystream.aspects.PageviewAspect;
+import com.activitystream.aspects.RequestMethod;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.activitystream.Predefined.ACTOR;
-import static com.activitystream.Predefined.PERSON;
+import static com.activitystream.Predefined.*;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -137,6 +138,40 @@ public class AspectsTest extends EventTestBase {
                                 "begins", "2015-11-24T17:00:00.000Z",
                                 "ends", "2015-11-24T20:00:00.000Z",
                                 "action", "valid"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void pageview() throws ParseException {
+        Event ev = event("action")
+                .aspects(new PageviewAspect()
+                        .path("/path")
+                        .pathProperties(null)
+                        .keywords("a", "b", "c")
+                        .method(RequestMethod.GET)
+                        .responseCode(200)
+                        .size(100)
+                        .protocol("HTTP")
+                        .pageContent(rel().link(FEATURED, entityRef(PERSON, "Jane Doe")))
+                );
+
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "pageview", obj(
+                                "path", "/path"
+                                ,"keywords", arr("a", "b", "c")
+                                ,"method", "GET"
+                                ,"response_code", 200
+                                ,"size", 100
+                                ,"protocol", "HTTP"
+                                ,"page_content", arr(
+                                        obj("type", "FEATURED", "entity_ref", "Person/Jane Doe")
+                                )
                         )
                 )
         );
