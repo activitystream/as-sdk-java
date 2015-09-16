@@ -147,12 +147,17 @@ public class AspectsTest extends EventTestBase {
 
     @Test
     public void pageview() throws ParseException {
+        Map referrerProps = new HashMap();
+        referrerProps.put("a", "b");
+        referrerProps.put("c", 22);
         Event ev = event("action")
                 .aspects(new PageviewAspect()
                         .path("/path")
                         .pathProperties(null)
                         .keywords("a", "b", "c")
                         .method(RequestMethod.GET)
+                        .referrer("http://localhost")
+                        .referrerProperties(referrerProps)
                         .responseCode(200)
                         .size(100)
                         .protocol("HTTP")
@@ -164,12 +169,14 @@ public class AspectsTest extends EventTestBase {
                 "aspects", obj(
                         "pageview", obj(
                                 "path", "/path"
-                                ,"keywords", arr("a", "b", "c")
-                                ,"method", "GET"
-                                ,"response_code", 200
-                                ,"size", 100
-                                ,"protocol", "HTTP"
-                                ,"page_content", arr(
+                                , "keywords", arr("a", "b", "c")
+                                , "referrer", "http://localhost"
+                                , "referrer_properties", obj("a", "b", "c", 22)
+                                , "method", "GET"
+                                , "response_code", 200
+                                , "size", 100
+                                , "protocol", "HTTP"
+                                , "page_content", arr(
                                         obj("type", "FEATURED", "entity_ref", "Person/Jane Doe")
                                 )
                         )

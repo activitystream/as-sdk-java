@@ -64,6 +64,20 @@ public class PageviewAspect implements Aspect {
         return this;
     }
 
+    private String referrer;
+
+    public PageviewAspect referrer(String referrer) {
+        this.referrer = referrer;
+        return this;
+    }
+
+    private Map referrerProperties;
+
+    public PageviewAspect referrerProperties(Map referrerProperties) {
+        this.referrerProperties = referrerProperties;
+        return this;
+    }
+
     @Override
     public void addToObject(Map jsonObject) {
         Map result = new HashMap();
@@ -74,6 +88,8 @@ public class PageviewAspect implements Aspect {
         if (responseCode != null) result.put("response_code", responseCode);
         if (size != null) result.put("size", size);
         if (protocol != null) result.put("protocol", protocol);
+        if (referrer != null) result.put("referrer", referrer);
+        if (referrerProperties != null) result.put("referrer_properties", referrerProperties);
         if (pageContent != null) {
             List pageContentItems = new ArrayList();
             for (EntityRelation entityRelation : pageContent) {
