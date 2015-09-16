@@ -153,7 +153,7 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(new PageviewAspect()
                         .path("/path")
-                        .pathProperties(null)
+                        .pathProperties(new HashMap())
                         .keywords("a", "b", "c")
                         .method(RequestMethod.GET)
                         .referrer("http://localhost")
