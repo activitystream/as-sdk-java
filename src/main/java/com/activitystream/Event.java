@@ -35,7 +35,15 @@ public class Event {
         return this;
     }
 
+    /**
+     * @deprecated typo in name, replaced by {@link #occurred(Date)}
+     */
     public Event occured(Date timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public Event occurred(Date timestamp) {
         this.timestamp = timestamp;
         return this;
     }
