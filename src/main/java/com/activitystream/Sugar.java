@@ -1,9 +1,6 @@
 package com.activitystream;
 
-import com.activitystream.aspects.ClassificationAspect;
-import com.activitystream.aspects.ECommerceAspect;
-import com.activitystream.aspects.ECommerceAspectItem;
-import com.activitystream.aspects.TimedAspect;
+import com.activitystream.aspects.*;
 import com.activitystream.helpers.MapCreator;
 
 public class Sugar {
@@ -46,6 +43,10 @@ public class Sugar {
     public static Event event(String action) {
         return new Event(action);
     }
+
+    public static ClientIPAddressAspect clientIp(String ip) {return new ClientIPAddressAspect().clientIp(ip);}
+
+    public static ClientDeviceAspect clientDevice(String agent) {return new ClientDeviceAspect().clientDevice(agent);}
 
     public static MapCreator<String, Object> m(){return new MapCreator<String,Object>();}
 
