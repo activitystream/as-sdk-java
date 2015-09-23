@@ -10,6 +10,7 @@ public class EntityEmbedded implements Entity {
     private String id;
     private EntityRelation[] relations = new EntityRelation[]{};
     private Map props = new HashMap();
+    private Aspect[] aspects;
 
     public EntityEmbedded id(EntityType type, String id) {
         this.type = type;
@@ -27,6 +28,11 @@ public class EntityEmbedded implements Entity {
         return this;
     }
 
+    public EntityEmbedded aspects(Aspect... aspects) {
+        this.aspects = aspects;
+        return this;
+    }
+
     @Override
     public void addToObject(Map jsonObject) {
         Map value = new HashMap();
@@ -41,6 +47,13 @@ public class EntityEmbedded implements Entity {
         }
         if (props.size() > 0) {
             value.put("properties", props);
+        }
+        if (aspects != null) {
+            Map aspectsJson = new HashMap();
+            for (Aspect aspect : aspects) {
+                aspect.addToObject(aspectsJson);
+            }
+            value.put("aspects", aspectsJson);
         }
         jsonObject.put("entity", value);
     }

@@ -52,6 +52,9 @@ public class EventTest extends EventTestBase {
         Event ev = event("action")
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
                                 .properties(props)
+                                .aspects(
+                                        classificationAsepct().type("type")
+                                )
                                 .relations(
                                         rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
                                         rel().link(AKA, entityRef(TWITTER, "pshomov")),
@@ -66,6 +69,12 @@ public class EventTest extends EventTestBase {
                                 "entity", obj(
                                         "entity_ref", "Person/Petar",
                                         "properties", obj("favourite_programming_language", "javascript"),
+                                        "aspects", obj(
+                                                "classification", obj(
+                                                        "action", "type"
+                                                )
+
+                                        ),
                                         "relations", arr(
                                                 obj(
                                                         "type", "AKA",
