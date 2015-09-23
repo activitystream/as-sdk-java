@@ -94,11 +94,13 @@ public class EventTest extends EventTestBase {
     public void should_create_event_with_all_attributes() throws ParseException {
         Event ev = event("action")
                 .origin("browserX")
+                .description("some text")
                 .properties(m().key("favourite_programming_language").value("javascript").map())
                 .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
 
         Map expected = obj(
                 "action", "action",
+                "description", "some text",
                 "properties", obj("favourite_programming_language", "javascript"),
                 "occurred_at", "2014-12-01T10:00:00.000Z",
                 "origin", "browserX"

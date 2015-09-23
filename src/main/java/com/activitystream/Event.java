@@ -11,6 +11,7 @@ public class Event {
     private Date timestamp;
     private String origin;
     private Map props;
+    private String description;
 
     public Event(String action) {
         this.event = new EventType(action);
@@ -58,6 +59,11 @@ public class Event {
         return this;
     }
 
+    public Event description(String description) {
+        this.description = description;
+        return this;
+    }
+
     public String toJson() {
         return JSONObject.toJSONString(toMap()).replace("\\/", "/");
     }
@@ -83,6 +89,7 @@ public class Event {
         }
         if (props != null) obj.put("properties", props);
         if (origin != null) obj.put("origin", origin);
+        if (description != null) obj.put("description", description);
         if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
         return obj;
     }
