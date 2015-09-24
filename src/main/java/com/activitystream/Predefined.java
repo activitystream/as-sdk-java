@@ -1,43 +1,43 @@
 package com.activitystream;
 
 public class Predefined {
-    public static Role ACTOR(Entity ent) {
+    public static Role ACTOR(EntityLike ent) {
         return new Role("ACTOR", ent);
     }
 
-    public static Role CREATES(Entity ent) {
+    public static Role CREATES(EntityLike ent) {
         return new Role("CREATES", ent);
     }
 
-    public static Role AFFECTS(Entity ent) {
+    public static Role AFFECTS(EntityLike ent) {
         return new Role("AFFECTS", ent);
     }
 
-    public static Role SOLD_TO(Entity ent) {
+    public static Role SOLD_TO(EntityLike ent) {
         return new Role("SOLD_TO", ent);
     }
 
-    public static Role SOLD_BY(Entity ent) {
+    public static Role SOLD_BY(EntityLike ent) {
         return new Role("SOLD_BY", ent);
     }
 
-    public static Role INVOLVES(Entity ent) {
+    public static Role INVOLVES(EntityLike ent) {
         return new Role("INVOLVES", ent);
     }
 
-    public static Role OBSERVED(Entity ent) {
+    public static Role OBSERVED(EntityLike ent) {
         return new Role("OBSERVED", ent);
     }
 
-    public static Role REFERENCES(Entity ent) {
+    public static Role REFERENCES(EntityLike ent) {
         return new Role("REFERENCES", ent);
     }
 
-    public static Role TRANSACTION(Entity ent) {
+    public static Role TRANSACTION(EntityLike ent) {
         return new Role("TRANSACTION", ent);
     }
 
-    public static Role PURCHASED(Entity ent) {
+    public static Role PURCHASED(EntityLike ent) {
         return new Role("PURCHASED", ent);
     }
 

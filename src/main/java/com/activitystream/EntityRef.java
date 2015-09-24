@@ -4,7 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Map;
 
-public class EntityRef implements Entity {
+public class EntityRef implements EntityLike {
     private EntityType type;
     private String id;
 

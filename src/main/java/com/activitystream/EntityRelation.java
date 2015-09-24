@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class EntityRelation {
     private LinkType linkType;
-    private Entity entity;
+    private EntityLike entity;
     private Map props;
     private Date startDate;
     private Date endDate;
     private Double weight;
 
 
-    public EntityRelation link(LinkType linkType, Entity entity) {
+    public EntityRelation link(LinkType linkType, EntityLike entity) {
         this.linkType = linkType;
         this.entity = entity;
         return this;

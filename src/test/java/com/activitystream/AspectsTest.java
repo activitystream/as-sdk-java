@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AspectsTest extends EventTestBase {
-    public static Role PURCHASED(Entity ent) { return new Role("PURCHASED", ent);}
+    public static Role PURCHASED(EntityLike ent) { return new Role("PURCHASED", ent);}
 
     @Test
     public void client_ip() {

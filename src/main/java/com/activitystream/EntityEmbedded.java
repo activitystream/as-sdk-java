@@ -4,7 +4,7 @@ import com.activitystream.helpers.MapCreator;
 
 import java.util.*;
 
-public class EntityEmbedded implements Entity {
+public class EntityEmbedded implements EntityLike {
     private EntityType type;
     private String id;
     private EntityRelation[] relations = new EntityRelation[]{};

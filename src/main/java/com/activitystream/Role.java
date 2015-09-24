@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Role {
     private final String involvement;
-    private final Entity ent;
+    private final EntityLike ent;
 
-    public Role(String involvement, Entity ent) {
+    public Role(String involvement, EntityLike ent) {
 
         this.involvement = involvement;
         this.ent = ent;
