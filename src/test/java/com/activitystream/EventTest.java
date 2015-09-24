@@ -30,13 +30,16 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_create_event_with_involved_actor_by_ref() {
         Event ev = event("action")
-                .involves(ACTOR(entity(EMPLOYEE, "Petar")));
+                .involves(ACTOR(entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
                         obj(
                                 "entity_ref", "Employee/Petar",
-                                "role", "ACTOR"
+                                "role", "ACTOR",
+                                "properties", obj(
+                                        "a", "b"
+                                )
                         )
                 )
         );
