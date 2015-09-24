@@ -30,7 +30,7 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_create_event_with_involved_actor_by_ref() {
         Event ev = event("action")
-                .involves(ACTOR(entityRef(EMPLOYEE, "Petar")));
+                .involves(ACTOR(entity(EMPLOYEE, "Petar")));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
@@ -47,15 +47,15 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
         Event ev = event("action")
-                .involves(ACTOR(entityEmbedded(PERSON, "Petar")
+                .involves(ACTOR(entity(PERSON, "Petar")
                                 .properties(m().key("favourite_programming_language").value("javascript"))
                                 .aspects(
                                         classificationAsepct().type("type")
                                 )
                                 .relations(
-                                        rel().link(AKA, entityRef(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
-                                        rel().link(AKA, entityRef(TWITTER, "pshomov")),
-                                        rel().link(AKA, entityRef(BUILDING, "Laugavegur 26"))
+                                        rel().link(AKA, entity(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
+                                        rel().link(AKA, entity(TWITTER, "pshomov")),
+                                        rel().link(AKA, entity(BUILDING, "Laugavegur 26"))
                                 )
                 ));
         Map expected = obj(
@@ -120,7 +120,7 @@ public class EventTest extends EventTestBase {
     public void should_create_event_with_aspects() {
         Event ev = event("action")
                 .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").secondAddressLine("").streetAndNumber("Laugavegur 26").zipCode("2400"))
-                .involves(ACTOR(entityRef(PERSON, "Petar")));
+                .involves(ACTOR(entity(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
@@ -149,7 +149,7 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_not_allow_relationship_with_no_linked_entity() {
         Event ev = event("action")
-                .involves(ACTOR(entityEmbedded(PERSON, "Petar")
+                .involves(ACTOR(entity(PERSON, "Petar")
                                 .relations(
                                         rel()
                                 )
@@ -200,9 +200,9 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_allow_adding_of_involved_roles_to_events() {
         Event ev = event("action")
-                .involves(ACTOR(entityRef(PERSON, "Petar")));
+                .involves(ACTOR(entity(PERSON, "Petar")));
 
-        ev.involves(ACTOR(entityRef(PERSON, "NotPetar")));
+        ev.involves(ACTOR(entity(PERSON, "NotPetar")));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(

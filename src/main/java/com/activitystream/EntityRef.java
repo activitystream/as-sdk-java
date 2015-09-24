@@ -4,6 +4,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Map;
 
+/**
+ * @deprecated Please use {@link Entity} instead
+ */
+@Deprecated
 public class EntityRef implements EntityLike {
     private EntityType type;
     private String id;

@@ -4,6 +4,10 @@ import com.activitystream.helpers.MapCreator;
 
 import java.util.*;
 
+/**
+ * @deprecated Please use {@link Entity} instead
+ */
+@Deprecated
 public class EntityEmbedded implements EntityLike {
     private EntityType type;
     private String id;
