@@ -1,5 +1,7 @@
 package com.activitystream;
 
+import com.activitystream.helpers.MapCreator;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +23,10 @@ public class EntityEmbedded implements Entity {
     public EntityEmbedded properties(Map props) {
         this.props = props;
         return this;
+    }
+
+    public EntityEmbedded properties(MapCreator props) {
+        return properties(props.map());
     }
 
     public EntityEmbedded relations(EntityRelation... relation) {

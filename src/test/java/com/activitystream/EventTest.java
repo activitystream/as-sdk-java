@@ -47,11 +47,9 @@ public class EventTest extends EventTestBase {
 
     @Test
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
-        HashMap props = new HashMap();
-        props.put("favourite_programming_language", "javascript");
         Event ev = event("action")
                 .involves(ACTOR(entityEmbedded(PERSON, "Petar")
-                                .properties(props)
+                                .properties(m().key("favourite_programming_language").value("javascript"))
                                 .aspects(
                                         classificationAsepct().type("type")
                                 )
@@ -104,7 +102,7 @@ public class EventTest extends EventTestBase {
         Event ev = event("action")
                 .origin("browserX")
                 .description("some text")
-                .properties(m().key("favourite_programming_language").value("javascript").map())
+                .properties(m().key("favourite_programming_language").value("javascript"))
                 .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
 
         Map expected = obj(

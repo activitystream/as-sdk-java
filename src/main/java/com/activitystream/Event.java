@@ -1,5 +1,6 @@
 package com.activitystream;
 
+import com.activitystream.helpers.MapCreator;
 import org.json.simple.JSONObject;
 
 import java.util.*;
@@ -57,6 +58,10 @@ public class Event {
     public Event properties(Map props) {
         this.props = props;
         return this;
+    }
+
+    public Event properties(MapCreator props) {
+        return properties(props.map());
     }
 
     public Event description(String description) {
