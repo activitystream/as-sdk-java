@@ -48,6 +48,8 @@ public class Sugar {
 
     public static ClientDeviceAspect clientDevice(String agent) {return new ClientDeviceAspect().clientDevice(agent);}
 
+    public static LocationAspect location(String latlong){return new LocationAspect(latlong);}
+
     public static MapCreator<String, Object> m(){return new MapCreator<String,Object>();}
 
 }
