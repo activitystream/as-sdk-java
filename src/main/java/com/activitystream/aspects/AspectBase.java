@@ -14,19 +14,21 @@ public class AspectBase implements Aspect {
         for (Map.Entry<String, AspectProperty> aspect : aspectPropertyMap.entrySet()) {
             if (aspect.getValue().required && aspect.getValue().value == null)
                 throw new RuntimeException("Property " + aspect.getValue() + " is required ");
-            String[] levels = aspect.getKey().split("\\.");
-            String aspectPropertyKey = levels[levels.length - 1];
-            levels = Arrays.copyOf(levels, levels.length - 1);
-            Map propertyParent = aspectJson;
-            for (String level : levels) {
-                Map drill = (Map) propertyParent.get(level);
-                if (drill == null) {
-                    drill = new HashMap();
-                    propertyParent.put(level, drill);
+            if (aspect.getValue().value != null){
+                String[] levels = aspect.getKey().split("\\.");
+                String aspectPropertyKey = levels[levels.length - 1];
+                levels = Arrays.copyOf(levels, levels.length - 1);
+                Map propertyParent = aspectJson;
+                for (String level : levels) {
+                    Map drill = (Map) propertyParent.get(level);
+                    if (drill == null) {
+                        drill = new HashMap();
+                        propertyParent.put(level, drill);
+                    }
+                    propertyParent = drill;
                 }
-                propertyParent = drill;
+                propertyParent.put(aspectPropertyKey, aspect.getValue().value);
             }
-            propertyParent.put(aspectPropertyKey, aspect.getValue().value);
         }
     }
 
