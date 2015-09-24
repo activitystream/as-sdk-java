@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Event {
     private EventType event;
-    private Role[] involved = new Role[]{};
+    private List<Role> involved = new ArrayList<>();
     private List<Aspect> aspects = new ArrayList<>();
     private Date timestamp;
     private String origin;
@@ -28,7 +28,7 @@ public class Event {
     }
 
     public Event involves(Role... role) {
-        this.involved = role;
+        this.involved.addAll(Arrays.asList(role));
         return this;
     }
 
@@ -77,10 +77,10 @@ public class Event {
         Map obj = new HashMap();
         obj.put("action", event.id);
 
-        if (involved.length > 0) {
+        if (involved.size() > 0) {
             List inv = new ArrayList();
-            for (int i = 0; i < involved.length; i++) {
-                inv.add(involved[i].toJson());
+            for (Role anInvolved : involved) {
+                inv.add(anInvolved.toJson());
             }
             obj.put("involves", inv);
         }

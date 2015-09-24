@@ -198,25 +198,21 @@ public class EventTest extends EventTestBase {
     }
 
     @Test
-    public void should_allow_adding_of_aspects_to_entities() {
-        final EntityEmbedded entity = entityEmbedded(PERSON, "Petar")
-                .aspects(clientIp("1"), clientIp("2"));
+    public void should_allow_adding_of_involved_roles_to_events() {
         Event ev = event("action")
-                .involves(ACTOR(entity));
+                .involves(ACTOR(entityRef(PERSON, "Petar")));
 
-        entity.aspects(clientDevice("browser"));
+        ev.involves(ACTOR(entityRef(PERSON, "NotPetar")));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
                         obj(
                                 "role", "ACTOR",
-                                "entity", obj(
-                                        "entity_ref", "Person/Petar",
-                                        "aspects", obj(
-                                                "client_ip", "2",
-                                                "client_device", "browser"
-                                        )
-                                )
+                                "entity_ref", "Person/Petar"
+                        ),
+                        obj(
+                                "role", "ACTOR",
+                                "entity_ref", "Person/NotPetar"
                         )
                 )
         );
