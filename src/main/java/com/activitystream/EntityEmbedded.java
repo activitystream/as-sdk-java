@@ -2,17 +2,14 @@ package com.activitystream;
 
 import com.activitystream.helpers.MapCreator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EntityEmbedded implements Entity {
     private EntityType type;
     private String id;
     private EntityRelation[] relations = new EntityRelation[]{};
     private Map props = new HashMap();
-    private Aspect[] aspects;
+    private List<Aspect> aspects = new ArrayList<>();
 
     public EntityEmbedded id(EntityType type, String id) {
         this.type = type;
@@ -35,7 +32,7 @@ public class EntityEmbedded implements Entity {
     }
 
     public EntityEmbedded aspects(Aspect... aspects) {
-        this.aspects = aspects;
+        this.aspects.addAll(Arrays.asList(aspects));
         return this;
     }
 
@@ -54,7 +51,7 @@ public class EntityEmbedded implements Entity {
         if (props.size() > 0) {
             value.put("properties", props);
         }
-        if (aspects != null) {
+        if (aspects.size() > 0) {
             Map aspectsJson = new HashMap();
             for (Aspect aspect : aspects) {
                 aspect.addToObject(aspectsJson);

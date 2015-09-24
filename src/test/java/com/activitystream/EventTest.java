@@ -179,7 +179,7 @@ public class EventTest extends EventTestBase {
     }
 
     @Test
-    public void should_allow_adding_of_aspects() {
+    public void should_allow_adding_of_aspects_to_events() {
         Event ev = event("action")
                 .aspects(clientIp("1"), clientIp("2"));
 
@@ -191,6 +191,34 @@ public class EventTest extends EventTestBase {
                         "client_device", "browser"
                 )
 
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void should_allow_adding_of_aspects_to_entities() {
+        final EntityEmbedded entity = entityEmbedded(PERSON, "Petar")
+                .aspects(clientIp("1"), clientIp("2"));
+        Event ev = event("action")
+                .involves(ACTOR(entity));
+
+        entity.aspects(clientDevice("browser"));
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                                "role", "ACTOR",
+                                "entity", obj(
+                                        "entity_ref", "Person/Petar",
+                                        "aspects", obj(
+                                                "client_ip", "2",
+                                                "client_device", "browser"
+                                        )
+                                )
+                        )
+                )
         );
 
         Map actual = ev.toMap();
