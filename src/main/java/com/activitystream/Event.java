@@ -8,7 +8,7 @@ import java.util.*;
 public class Event {
     private EventType event;
     private Role[] involved = new Role[]{};
-    private Aspect[] aspects = new Aspect[]{};
+    private List<Aspect> aspects = new ArrayList<>();
     private Date timestamp;
     private String origin;
     private Map props;
@@ -33,7 +33,7 @@ public class Event {
     }
 
     public Event aspects(Aspect... aspects) {
-        this.aspects = aspects;
+        this.aspects.addAll(Arrays.asList(aspects));
         return this;
     }
 
@@ -85,7 +85,7 @@ public class Event {
             obj.put("involves", inv);
         }
 
-        if (aspects.length > 0) {
+        if (aspects.size() > 0) {
             Map aspectsJson = new HashMap();
             for (Aspect aspect : aspects) {
                 aspect.addToObject(aspectsJson);

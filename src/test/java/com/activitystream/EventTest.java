@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.activitystream.Predefined.*;
@@ -161,6 +160,41 @@ public class EventTest extends EventTestBase {
         } catch (RuntimeException e) {
             assertThat(e.getMessage(), containsString("linked entity"));
         }
+    }
+
+    @Test
+    public void should_allow_overriding_of_aspects() {
+        Event ev = event("action")
+                .aspects(clientIp("1"), clientIp("2"));
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "client_ip", "2"
+                )
+
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void should_allow_adding_of_aspects() {
+        Event ev = event("action")
+                .aspects(clientIp("1"), clientIp("2"));
+
+        ev.aspects(clientDevice("browser"));
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "client_ip", "2",
+                        "client_device", "browser"
+                )
+
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
 }
