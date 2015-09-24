@@ -50,6 +50,8 @@ public class Sugar {
 
     public static LocationAspect location(String latlong){return new LocationAspect(latlong);}
 
+    public static PresentationAspect presentation(){return new PresentationAspect();}
+
     public static MapCreator<String, Object> m(){return new MapCreator<String,Object>();}
 
 }

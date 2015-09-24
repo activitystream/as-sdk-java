@@ -6,6 +6,8 @@ import com.activitystream.aspects.PageviewAspect;
 import com.activitystream.aspects.RequestMethod;
 import org.junit.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -199,6 +201,34 @@ public class AspectsTest extends EventTestBase {
                         "location", obj(
                                 "latlong", "32.790672,-96.81082",
                                 "type", "work"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void presentation_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        presentation()
+                                .label("label")
+                                .thumbnail(new URL("http://microsoft.com"))
+                                .description("desc")
+                                .detailsUrl(new URL("http://google.com"))
+                                .icon(new URL("http://apple.com"))
+                );
+
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "presentation", obj(
+                                "label", "label",
+                                "thumbnail", "http://microsoft.com",
+                                "details_url", "http://google.com",
+                                "icon", "http://apple.com",
+                                "description", "desc"
                         )
                 )
         );
