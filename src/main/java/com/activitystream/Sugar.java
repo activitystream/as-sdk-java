@@ -3,6 +3,8 @@ package com.activitystream;
 import com.activitystream.aspects.*;
 import com.activitystream.helpers.MapCreator;
 
+import java.util.Map;
+
 public class Sugar {
 
     public static EntityRef entityRef(EntityType type, String id) {
@@ -52,6 +54,12 @@ public class Sugar {
 
     public static PresentationAspect presentation(){return new PresentationAspect();}
 
+    public static DimensionsAspect dimensions(Map<String, String> dimensions){return new DimensionsAspect(dimensions);}
+
+    public static DimensionsAspect dimensions(MapCreator<String, String> dimensions){return dimensions(dimensions.map());}
+
     public static MapCreator<String, Object> m(){return new MapCreator<String,Object>();}
+
+    public static MapCreator<String, String> mstr(){return new MapCreator<String, String>();}
 
 }

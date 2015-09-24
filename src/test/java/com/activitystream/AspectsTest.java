@@ -235,5 +235,23 @@ public class AspectsTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+    @Test
+    public void dimensions_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        dimensions(mstr().key("key 1").value("val 1"))
+                );
+
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "dimensions", obj(
+                                "key 1", "val 1"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
 
 }
