@@ -30,12 +30,16 @@ public class AspectBase implements Aspect {
         }
     }
 
-    protected class AspectProperty {
+    public enum IsRequired {
+        True, False
+    }
+
+    protected static class AspectProperty {
         public Object value;
         public boolean required;
 
-        public AspectProperty(boolean required) {
-            this.required = required;
+        public AspectProperty(IsRequired required) {
+            this.required = required == IsRequired.True;
         }
     }
 }

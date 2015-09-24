@@ -3,11 +3,11 @@ package com.activitystream.aspects;
 public class AddressAspect extends AspectBase {
 
     public AddressAspect() {
-        aspectPropertyMap.put("address.address", new AspectProperty(true));
-        aspectPropertyMap.put("address.address2", new AspectProperty(false));
-        aspectPropertyMap.put("address.city", new AspectProperty(false));
-        aspectPropertyMap.put("address.country_code", new AspectProperty(false));
-        aspectPropertyMap.put("address.zip_code", new AspectProperty(false));
+        aspectPropertyMap.put("address.address", new AspectProperty(IsRequired.True));
+        aspectPropertyMap.put("address.address2", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("address.city", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("address.country_code", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("address.zip_code", new AspectProperty(IsRequired.False));
     }
 
     public AddressAspect streetAndNumber(String addr) {

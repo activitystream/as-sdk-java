@@ -115,8 +115,8 @@ public class AspectsTest extends EventTestBase {
                 "action", "action",
                 "aspects", obj(
                         "classification", obj(
-                            "action", "Poi",
-                            "categories", arr("Nature", "Waterfalls")
+                                "action", "Poi",
+                                "categories", arr("Nature", "Waterfalls")
                         )
                 )
         );
@@ -185,4 +185,25 @@ public class AspectsTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
+    @Test
+    public void location_aspect() {
+        Event ev = event("action")
+                .aspects(
+                        location("32.790672,-96.81082").type("work")
+                );
+
+        Map expected = obj(
+                "action", "action",
+                "aspects", obj(
+                        "location", obj(
+                                "latlong", "32.790672,-96.81082",
+                                "type", "work"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }
