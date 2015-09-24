@@ -1,29 +1,19 @@
 package com.activitystream.aspects;
 
-import com.activitystream.Aspect;
+public class LocationAspect extends AspectBase{
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class LocationAspect implements Aspect{
-
-    private String type;
-    private String latlong;
+    public static final String LOCATION_LATLONG = "location.latlong";
+    public static final String LOCATION_TYPE = "location.type";
 
     public LocationAspect(String latlong) {
-        this.latlong = latlong;
+        aspectPropertyMap.put(LOCATION_LATLONG, new AspectProperty(IsRequired.True));
+        aspectPropertyMap.put(LOCATION_TYPE, new AspectProperty(IsRequired.False));
+        aspectPropertyMap.get(LOCATION_LATLONG).value = latlong;
     }
 
     public LocationAspect type(String type) {
-        this.type = type;
+        aspectPropertyMap.get(LOCATION_TYPE).value = type;
         return this;
     }
 
-    @Override
-    public void addToObject(Map jsonObject) {
-        Map result = new HashMap();
-        if (latlong != null) result.put("latlong", latlong);
-        if (type != null) result.put("type", type);
-        jsonObject.put("location", result);
-    }
 }
