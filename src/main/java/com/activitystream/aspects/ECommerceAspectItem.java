@@ -41,6 +41,12 @@ public class ECommerceAspectItem {
         return this;
     }
 
+    private Double taxPercentage;
+
+    public ECommerceAspectItem taxPercentage(Double taxPercentage) {
+        this.taxPercentage = taxPercentage;
+        return this;
+    }
 
     private Integer itemCount;
 
@@ -84,6 +90,20 @@ public class ECommerceAspectItem {
         return this;
     }
 
+    private Double totalInStock;
+
+    public ECommerceAspectItem totalInStock(Double totalInStock) {
+        this.totalInStock = totalInStock;
+        return this;
+    }
+
+    private Double totalForSale;
+
+    public ECommerceAspectItem totalForSale(Double totalForSale) {
+        this.totalForSale = totalForSale;
+        return this;
+    }
+
     private List<EntityLike> serialNumbers = new ArrayList<>();
 
     public ECommerceAspectItem serialNumbers(EntityLike... serialNumbers) {
@@ -113,6 +133,9 @@ public class ECommerceAspectItem {
         if (commissionFixed != null) obj.put("commission_fixed", commissionFixed);
         if (commissionPercentage != null) obj.put("commission_percentage", commissionPercentage);
         if (discountPercentage != null) obj.put("discount_percentage", discountPercentage);
+        if (taxPercentage != null) obj.put("tax_percentage", taxPercentage);
+        if (totalInStock != null) obj.put("total_in_stock", totalInStock);
+        if (totalForSale != null) obj.put("total_for_sale", totalForSale);
         if (currency != null) obj.put("currency", currency);
         if (priceCategory != null) obj.put("price_category", priceCategory);
         if (variant != null) obj.put("variant", variant);

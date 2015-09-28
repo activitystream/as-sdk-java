@@ -70,7 +70,10 @@ public class AspectsTest extends EventTestBase {
                                         .commissionFixed(1540.0)
                                         .commissionPercentage(150D)
                                         .discountPercentage(15D)
+                                        .taxPercentage(1.0)
                                         .itemCount(2)
+                                        .totalInStock(2.5)
+                                        .totalForSale(3.5)
                                         .itemPrice(15400.0)
                                         .serialNumbers(entity(Serial, "1234"), entity(Serial, "4567"))
                                         .description("desc")
@@ -99,6 +102,9 @@ public class AspectsTest extends EventTestBase {
                         "currency", "ISK",
                         "commission_fixed", 1540.0,
                         "commission_percentage", 150.0,
+                        "tax_percentage", 1.0,
+                        "total_in_stock", 2.5,
+                        "total_for_sale", 3.5,
                         "discount_percentage", 15.0
 
                     )
