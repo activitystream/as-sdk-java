@@ -126,6 +126,13 @@ public class ECommerceAspectItem {
         return this;
     }
 
+    private String accountingKey;
+
+    public ECommerceAspectItem accountingKey(String accountingKey) {
+        this.accountingKey = accountingKey;
+        return this;
+    }
+
     public ECommerceAspectItem occured(Date timestamp) {
         return this;
     }
@@ -145,6 +152,7 @@ public class ECommerceAspectItem {
             obj.put("involves", inv);
         }
 
+        if (accountingKey != null) obj.put("accounting_key", accountingKey);
         if (commissionFixed != null) obj.put("commission_fixed", commissionFixed);
         if (commissionPercentage != null) obj.put("commission_percentage", commissionPercentage);
         if (discountPercentage != null) obj.put("discount_percentage", discountPercentage);

@@ -82,6 +82,7 @@ public class AspectsTest extends EventTestBase {
                                         .variant("variant")
                                         .priceCategory("A")
                                         .currency("ISK")
+                                        .accountingKey("KEY")
                         )
                 );
         Map expected = obj(
@@ -109,6 +110,7 @@ public class AspectsTest extends EventTestBase {
                         "total_for_sale", 3.5,
                         "valid_from", "2015-11-24T17:00:00.000Z",
                         "valid_until", "2015-11-24T18:00:00.000Z",
+                        "accounting_key", "KEY",
                         "discount_percentage", 15.0
 
                     )
