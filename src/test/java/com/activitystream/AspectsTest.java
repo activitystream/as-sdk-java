@@ -22,11 +22,9 @@ public class AspectsTest extends EventTestBase {
 
     @Test
     public void client_ip() {
-        HashMap props = new HashMap();
-        props.put("favourite_programming_language", "javascript");
         Event ev = event("action")
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
-                .involves(ACTOR(entityRef(PERSON, "Petar")));
+                .involves(ACTOR(entity(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
@@ -44,11 +42,9 @@ public class AspectsTest extends EventTestBase {
 
     @Test
     public void client_device() {
-        HashMap props = new HashMap();
-        props.put("favourite_programming_language", "javascript");
         Event ev = event("action")
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
-                .involves(ACTOR(entityRef(PERSON, "Petar")));
+                .involves(ACTOR(entity(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
@@ -69,7 +65,7 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(eCommerce(
                                 item()
-                                        .involves(PURCHASED(entityRef(POI, "12344542352345345")))
+                                        .involves(PURCHASED(entity(POI, "12344542352345345")))
                                         .commissionFixed(1540.0)
                                         .itemCount(2)
                                         .itemPrice(15400.0)
@@ -163,7 +159,7 @@ public class AspectsTest extends EventTestBase {
                         .responseCode(200)
                         .size(100)
                         .protocol("HTTP")
-                        .pageContent(rel().link(FEATURED, entityRef(PERSON, "Jane Doe")))
+                        .pageContent(rel().link(FEATURED, entity(PERSON, "Jane Doe")))
                 );
 
         Map expected = obj(
