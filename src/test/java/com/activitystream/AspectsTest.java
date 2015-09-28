@@ -60,7 +60,7 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
     @Test
-    public void ecommerce() {
+    public void ecommerce() throws ParseException {
         EntityType POI = new EntityType("Poi");
         EntityType Serial = new EntityType("Serial");
         Event ev = event("action")
@@ -76,6 +76,8 @@ public class AspectsTest extends EventTestBase {
                                         .totalForSale(3.5)
                                         .itemPrice(15400.0)
                                         .serialNumbers(entity(Serial, "1234"), entity(Serial, "4567"))
+                                        .validFrom(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
+                                        .validUntil(DateHelpers.isoDateFormatter.parse("2015-11-24T18:00:00.000Z"))
                                         .description("desc")
                                         .variant("variant")
                                         .priceCategory("A")
@@ -105,6 +107,8 @@ public class AspectsTest extends EventTestBase {
                         "tax_percentage", 1.0,
                         "total_in_stock", 2.5,
                         "total_for_sale", 3.5,
+                        "valid_from", "2015-11-24T17:00:00.000Z",
+                        "valid_until", "2015-11-24T18:00:00.000Z",
                         "discount_percentage", 15.0
 
                     )

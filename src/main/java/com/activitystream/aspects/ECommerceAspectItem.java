@@ -1,6 +1,7 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
+import com.activitystream.DateHelpers;
 import com.activitystream.EntityLike;
 import com.activitystream.Role;
 
@@ -111,6 +112,20 @@ public class ECommerceAspectItem {
         return this;
     }
 
+    private Date validFrom;
+
+    public ECommerceAspectItem validFrom(Date validFrom) {
+        this.validFrom = validFrom;
+        return this;
+    }
+
+    private Date validUntil;
+
+    public ECommerceAspectItem validUntil(Date validUntil) {
+        this.validUntil = validUntil;
+        return this;
+    }
+
     public ECommerceAspectItem occured(Date timestamp) {
         return this;
     }
@@ -137,6 +152,8 @@ public class ECommerceAspectItem {
         if (totalInStock != null) obj.put("total_in_stock", totalInStock);
         if (totalForSale != null) obj.put("total_for_sale", totalForSale);
         if (currency != null) obj.put("currency", currency);
+        if (validFrom != null) obj.put("valid_from", DateHelpers.isoDateFormatter.format(validFrom));
+        if (validUntil != null) obj.put("valid_until", DateHelpers.isoDateFormatter.format(validUntil));
         if (priceCategory != null) obj.put("price_category", priceCategory);
         if (variant != null) obj.put("variant", variant);
         if (description != null) obj.put("description", description);
