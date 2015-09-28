@@ -3,6 +3,8 @@ package com.activitystream;
 import com.activitystream.helpers.MapCreator;
 import org.json.simple.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public class Event {
@@ -96,6 +98,16 @@ public class Event {
         if (origin != null) obj.put("origin", origin);
         if (description != null) obj.put("description", description);
         if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
+        try {
+            Properties prop = new Properties();
+            InputStream in = getClass().getResourceAsStream("/info.properties");
+            prop.load(in);
+            in.close();
+            String version = prop.getProperty("version");
+//            if (version != null) obj.put("sdk", "java-"+ version);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return obj;
     }
 }
