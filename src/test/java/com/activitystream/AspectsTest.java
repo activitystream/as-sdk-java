@@ -62,13 +62,17 @@ public class AspectsTest extends EventTestBase {
     @Test
     public void ecommerce() {
         EntityType POI = new EntityType("Poi");
+        EntityType Serial = new EntityType("Serial");
         Event ev = event("action")
                 .aspects(eCommerce(
                                 item()
                                         .involves(PURCHASED(entity(POI, "12344542352345345")))
                                         .commissionFixed(1540.0)
+                                        .commissionPercentage(150D)
+                                        .discountPercentage(15D)
                                         .itemCount(2)
                                         .itemPrice(15400.0)
+                                        .serialNumbers(entity(Serial, "1234"), entity(Serial, "4567"))
                                         .description("desc")
                                         .variant("variant")
                                         .priceCategory("A")
@@ -88,11 +92,15 @@ public class AspectsTest extends EventTestBase {
                         ),
                         "item_count", 2,
                         "item_price", 15400.0,
+                        "serial_numbers", arr(obj("entity_ref", "Serial/1234"), obj("entity_ref", "Serial/4567")),
                         "description", "desc",
                         "variant", "variant",
                         "price_category", "A",
                         "currency", "ISK",
-                        "commission_fixed", 1540.0
+                        "commission_fixed", 1540.0,
+                        "commission_percentage", 150.0,
+                        "discount_percentage", 15.0
+
                     )
                 )
             )
@@ -125,8 +133,8 @@ public class AspectsTest extends EventTestBase {
     public void timed() throws ParseException {
         Event ev = event("action")
                 .aspects(timedAspect()
-                        .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
-                        .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
+                                .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
+                                .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
 
         Map expected = obj(
@@ -150,16 +158,16 @@ public class AspectsTest extends EventTestBase {
         referrerProps.put("c", 22);
         Event ev = event("action")
                 .aspects(new PageviewAspect()
-                        .path("/path")
-                        .pathProperties(new HashMap())
-                        .keywords("a", "b", "c")
-                        .method(RequestMethod.GET)
-                        .referrer("http://localhost")
-                        .referrerProperties(referrerProps)
-                        .responseCode(200)
-                        .size(100)
-                        .protocol("HTTP")
-                        .pageContent(rel().link(FEATURED, entity(PERSON, "Jane Doe")))
+                                .path("/path")
+                                .pathProperties(new HashMap())
+                                .keywords("a", "b", "c")
+                                .method(RequestMethod.GET)
+                                .referrer("http://localhost")
+                                .referrerProperties(referrerProps)
+                                .responseCode(200)
+                                .size(100)
+                                .protocol("HTTP")
+                                .pageContent(rel().link(FEATURED, entity(PERSON, "Jane Doe")))
                 );
 
         Map expected = obj(

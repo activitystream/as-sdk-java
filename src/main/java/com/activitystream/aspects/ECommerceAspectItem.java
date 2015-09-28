@@ -1,6 +1,7 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
+import com.activitystream.EntityLike;
 import com.activitystream.Role;
 
 import java.util.*;
@@ -25,6 +26,21 @@ public class ECommerceAspectItem {
         this.commissionFixed = commissionFixed;
         return this;
     }
+
+    private Double commissionPercentage;
+
+    public ECommerceAspectItem commissionPercentage(Double commissionPercentage) {
+        this.commissionPercentage = commissionPercentage;
+        return this;
+    }
+
+    private Double discountPercentage;
+
+    public ECommerceAspectItem discountPercentage(Double discountPercentage) {
+        this.discountPercentage = discountPercentage;
+        return this;
+    }
+
 
     private Integer itemCount;
 
@@ -68,6 +84,12 @@ public class ECommerceAspectItem {
         return this;
     }
 
+    private List<EntityLike> serialNumbers = new ArrayList<>();
+
+    public ECommerceAspectItem serialNumbers(EntityLike... serialNumbers) {
+        this.serialNumbers.addAll(Arrays.asList(serialNumbers));
+        return this;
+    }
 
     public ECommerceAspectItem occured(Date timestamp) {
         return this;
@@ -89,6 +111,8 @@ public class ECommerceAspectItem {
         }
 
         if (commissionFixed != null) obj.put("commission_fixed", commissionFixed);
+        if (commissionPercentage != null) obj.put("commission_percentage", commissionPercentage);
+        if (discountPercentage != null) obj.put("discount_percentage", discountPercentage);
         if (currency != null) obj.put("currency", currency);
         if (priceCategory != null) obj.put("price_category", priceCategory);
         if (variant != null) obj.put("variant", variant);
@@ -96,6 +120,15 @@ public class ECommerceAspectItem {
         if (itemPrice != null) obj.put("item_price", itemPrice);
         if (itemCount != null) obj.put("item_count", itemCount);
 
+        if (serialNumbers.size() > 0) {
+            List serials = new ArrayList();
+            for (EntityLike serialNumber : serialNumbers) {
+                Map n = new HashMap();
+                serialNumber.addToObject(n);
+                serials.add(n);
+            }
+            obj.put("serial_numbers", serials);
+        }
         if (aspects.length > 0) {
             Map aspectsJson = new HashMap();
             for (Aspect aspect : aspects) {
