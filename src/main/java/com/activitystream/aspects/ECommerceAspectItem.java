@@ -1,7 +1,7 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
-import com.activitystream.DateHelpers;
+import com.activitystream.helpers.DateHelpers;
 import com.activitystream.EntityLike;
 import com.activitystream.Role;
 

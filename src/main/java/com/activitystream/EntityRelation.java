@@ -1,5 +1,7 @@
 package com.activitystream;
 
+import com.activitystream.helpers.DateHelpers;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

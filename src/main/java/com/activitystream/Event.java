@@ -1,5 +1,6 @@
 package com.activitystream;
 
+import com.activitystream.helpers.DateHelpers;
 import com.activitystream.helpers.MapCreator;
 import org.json.simple.JSONObject;
 

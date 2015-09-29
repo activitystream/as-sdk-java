@@ -1,4 +1,4 @@
-package com.activitystream;
+package com.activitystream.helpers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -4,6 +4,7 @@ import com.activitystream.aspects.ClientDeviceAspect;
 import com.activitystream.aspects.ClientIPAddressAspect;
 import com.activitystream.aspects.PageviewAspect;
 import com.activitystream.aspects.RequestMethod;
+import com.activitystream.helpers.DateHelpers;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
