@@ -56,4 +56,7 @@ public class Sugar {
 
     public static MapCreator<String, String> mstr(){return new MapCreator<String, String>();}
 
+    public static EntityRole role(EntityRoleType role, Entity entity){
+        return new EntityRole(role, entity);
+    }
 }

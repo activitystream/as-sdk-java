@@ -2,9 +2,10 @@ package com.activitystream;
 
 public class Predefined {
     public static EntityRoleType ACTOR = EntityRoleType.ACTOR;
-    public static EntityRole role(EntityRoleType role, Entity entity){
-        return new EntityRole(role, entity);
-    }
+    public static EntityRoleType AFFECTS = EntityRoleType.AFFECTS;
+    public static EntityRoleType INVOLVES = EntityRoleType.INVOLVES;
+    public static EntityRoleType OBSERVED = EntityRoleType.OBSERVED;
+    public static EntityRoleType REFERENCES = EntityRoleType.REFERENCES;
 
     public static EntityRelationType AKA = new EntityRelationType("AKA");
     public static EntityRelationType MEMBER_OF = new EntityRelationType("MEMBER_OF");
@@ -14,4 +15,6 @@ public class Predefined {
     public static EntityRelationType SUPPLIED_BY = new EntityRelationType("SUPPLIED_BY");
     public static EntityRelationType LOCATED_AT = new EntityRelationType("LOCATED_AT");
     public static EntityRelationType FEATURED = new EntityRelationType("FEATURED");
+    public static EntityRelationType HOSTED_AT = new EntityRelationType("HOSTED_AT");
+    public static EntityRelationType MANUFACTURED_BY = new EntityRelationType("MANUFACTURED_BY");
 }
