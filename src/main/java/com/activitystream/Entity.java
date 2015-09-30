@@ -7,7 +7,7 @@ import java.util.*;
 public class Entity implements EntityLike {
     private EntityType type;
     private String id;
-    private EntityRelation[] relations = new EntityRelation[]{};
+    private List<EntityRelation> relations = new ArrayList<>();
     private Map props = new HashMap();
     private List<Aspect> aspects = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class Entity implements EntityLike {
     }
 
     public Entity relations(EntityRelation... relation) {
-        this.relations = relation;
+        this.relations.addAll(Arrays.asList(relation));
         return this;
     }
 
@@ -38,16 +38,16 @@ public class Entity implements EntityLike {
 
     @Override
     public void addToObject(Map jsonObject) {
-        if (relations.length == 0 && props.size() == 0 && aspects.size() == 0){
+        if (relations.size() == 0 && props.size() == 0 && aspects.size() == 0){
             jsonObject.put("entity_ref", type.toJson() + "/" + id);
         } else {
             Map value = new HashMap();
             value.put("entity_ref", type.toJson() + "/" + id);
 
-            if (relations.length > 0) {
+            if (relations.size() > 0) {
                 List inv = new ArrayList();
-                for (int i = 0; i < relations.length; i++) {
-                    inv.add(relations[i].toJson());
+                for (EntityRelation relation : relations) {
+                    inv.add(relation.toJson());
                 }
                 value.put("relations", inv);
             }
