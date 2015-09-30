@@ -1,24 +1,17 @@
 package com.activitystream;
 
 public class Predefined {
-    public static RoleType ACTOR = RoleType.ACTOR;
-    public static Role role(RoleType role, EntityLike entity){
-        return new Role(role, entity);
+    public static EntityRoleType ACTOR = EntityRoleType.ACTOR;
+    public static EntityRole role(EntityRoleType role, Entity entity){
+        return new EntityRole(role, entity);
     }
 
-    public static LinkType AKA = new LinkType("AKA");
-    public static LinkType MEMBER_OF = new LinkType("MEMBER_OF");
-    public static LinkType PART_OF = new LinkType("PART_OF");
-    public static LinkType PROXY_FOR = new LinkType("PROXY_FOR");
-    public static LinkType BELONGS_TO = new LinkType("BELONGS_TO");
-    public static LinkType SUPPLIED_BY = new LinkType("SUPPLIED_BY");
-    public static LinkType LOCATED_AT = new LinkType("LOCATED_AT");
-    public static LinkType FEATURED = new LinkType("FEATURED");
-
-    public static EntityType EMAIL = new EntityType("Email");
-    public static EntityType TWITTER = new EntityType("Twitter");
-    public static EntityType PERSON = new EntityType("Person");
-    public static EntityType EMPLOYEE = new EntityType("Employee");
-
-
+    public static EntityRelationType AKA = new EntityRelationType("AKA");
+    public static EntityRelationType MEMBER_OF = new EntityRelationType("MEMBER_OF");
+    public static EntityRelationType PART_OF = new EntityRelationType("PART_OF");
+    public static EntityRelationType PROXY_FOR = new EntityRelationType("PROXY_FOR");
+    public static EntityRelationType BELONGS_TO = new EntityRelationType("BELONGS_TO");
+    public static EntityRelationType SUPPLIED_BY = new EntityRelationType("SUPPLIED_BY");
+    public static EntityRelationType LOCATED_AT = new EntityRelationType("LOCATED_AT");
+    public static EntityRelationType FEATURED = new EntityRelationType("FEATURED");
 }

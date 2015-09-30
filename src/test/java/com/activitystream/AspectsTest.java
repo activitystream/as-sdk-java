@@ -14,13 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.activitystream.Predefined.*;
-import static com.activitystream.RoleType.ACTOR;
+import static com.activitystream.EntityRoleType.ACTOR;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AspectsTest extends EventTestBase {
-    public static RoleType PURCHASED = RoleType.AFFECTS.extend("PURCHASED");
+    public static EntityRoleType PURCHASED = EntityRoleType.AFFECTS.extend("PURCHASED");
 
     @Test
     public void client_ip() {

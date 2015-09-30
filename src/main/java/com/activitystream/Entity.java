@@ -4,7 +4,7 @@ import com.activitystream.helpers.MapCreator;
 
 import java.util.*;
 
-public class Entity implements EntityLike {
+public class Entity {
     private EntityType type;
     private String id;
     private List<EntityRelation> relations = new ArrayList<>();
@@ -36,7 +36,6 @@ public class Entity implements EntityLike {
         return this;
     }
 
-    @Override
     public void addToObject(Map jsonObject) {
         if (relations.size() == 0 && props.size() == 0 && aspects.size() == 0){
             jsonObject.put("entity_ref", type.toJson() + "/" + id);

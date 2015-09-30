@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Event {
     private EventType event;
-    private List<Role> involved = new ArrayList<>();
+    private List<EntityRole> involved = new ArrayList<>();
     private List<Aspect> aspects = new ArrayList<>();
     private Date timestamp;
     private String origin;
@@ -30,7 +30,7 @@ public class Event {
         return this;
     }
 
-    public Event involves(Role... role) {
+    public Event involves(EntityRole... role) {
         this.involved.addAll(Arrays.asList(role));
         return this;
     }
@@ -82,7 +82,7 @@ public class Event {
 
         if (involved.size() > 0) {
             List inv = new ArrayList();
-            for (Role anInvolved : involved) {
+            for (EntityRole anInvolved : involved) {
                 inv.add(anInvolved.toJson());
             }
             obj.put("involves", inv);

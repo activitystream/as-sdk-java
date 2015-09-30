@@ -3,6 +3,12 @@ package com.activitystream;
 import java.util.*;
 
 public class EventTestBase {
+    public static EntityType EMAIL = new EntityType("Email");
+    public static EntityType TWITTER = new EntityType("Twitter");
+    public static EntityType PERSON = new EntityType("Person");
+    public static EntityType EMPLOYEE = new EntityType("Employee");
+
+
     public static Map obj(Object... keyValueStriped) {
         if (keyValueStriped.length % 2 != 0) throw new RuntimeException("This map does not look good");
         Map result = new HashMap();

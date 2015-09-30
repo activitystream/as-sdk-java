@@ -7,29 +7,6 @@ import java.util.Map;
 
 public class Sugar {
 
-    /**
-     * @deprecated replaced by {@link #entity(EntityType, String)}
-     */
-    @Deprecated
-    public static EntityRef entityRef(EntityType type, String id) {
-        return new EntityRef(type, id);
-    }
-    /**
-     * @deprecated replaced by {@link #entity(String, String)}
-     */
-    @Deprecated
-    public static EntityRef entityRef(String type, String id) {
-        return new EntityRef(new EntityType(type), id);
-    }
-
-    /**
-     * @deprecated replaced by {@link #entity(EntityType, String)}
-     */
-    @Deprecated
-    public static EntityEmbedded entityEmbedded(EntityType type, String id) {
-        return new EntityEmbedded().id(type, id);
-    }
-
     public static Entity entity(EntityType type, String id) {
         return new Entity().id(type, id);
     }
@@ -38,13 +15,6 @@ public class Sugar {
         return entity(new EntityType(type), id);
     }
 
-    /**
-     * @deprecated replaced by {@link #entity(String, String)}
-     */
-    @Deprecated
-    public static EntityEmbedded entityEmbedded(String type, String id) {
-        return new EntityEmbedded().id(new EntityType(type), id);
-    }
 
     public static EntityRelation rel() {
         return new EntityRelation();

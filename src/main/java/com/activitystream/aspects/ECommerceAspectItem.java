@@ -1,17 +1,17 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
+import com.activitystream.Entity;
+import com.activitystream.EntityRole;
 import com.activitystream.helpers.DateHelpers;
-import com.activitystream.EntityLike;
-import com.activitystream.Role;
 
 import java.util.*;
 
 public class ECommerceAspectItem {
-    private Role[] involved = new Role[]{};
+    private EntityRole[] involved = new EntityRole[]{};
     private Aspect[] aspects = new Aspect[]{};
 
-    public ECommerceAspectItem involves(Role... role) {
+    public ECommerceAspectItem involves(EntityRole... role) {
         this.involved = role;
         return this;
     }
@@ -105,9 +105,9 @@ public class ECommerceAspectItem {
         return this;
     }
 
-    private List<EntityLike> serialNumbers = new ArrayList<>();
+    private List<Entity> serialNumbers = new ArrayList<>();
 
-    public ECommerceAspectItem serialNumbers(EntityLike... serialNumbers) {
+    public ECommerceAspectItem serialNumbers(Entity... serialNumbers) {
         this.serialNumbers.addAll(Arrays.asList(serialNumbers));
         return this;
     }
@@ -170,7 +170,7 @@ public class ECommerceAspectItem {
 
         if (serialNumbers.size() > 0) {
             List serials = new ArrayList();
-            for (EntityLike serialNumber : serialNumbers) {
+            for (Entity serialNumber : serialNumbers) {
                 Map n = new HashMap();
                 serialNumber.addToObject(n);
                 serials.add(n);

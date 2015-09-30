@@ -6,16 +6,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The relation of a specific type between two entities
+ */
 public class EntityRelation {
-    private LinkType linkType;
-    private EntityLike entity;
+    private EntityRelationType linkType;
+    private Entity entity;
     private Map props;
     private Date startDate;
     private Date endDate;
     private Double weight;
 
 
-    public EntityRelation link(LinkType linkType, EntityLike entity) {
+    public EntityRelation link(EntityRelationType linkType, Entity entity) {
         this.linkType = linkType;
         this.entity = entity;
         return this;

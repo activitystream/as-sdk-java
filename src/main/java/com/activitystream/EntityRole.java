@@ -5,22 +5,25 @@ import com.activitystream.helpers.MapCreator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Role {
+/**
+ * A role of a certain type of a given entity in an event
+ */
+public class EntityRole {
     private final String involvement;
-    private final EntityLike ent;
+    private final Entity ent;
     private Map props;
 
-    public Role(RoleType involvment, EntityLike ent) {
+    public EntityRole(EntityRoleType involvment, Entity ent) {
         this.involvement = involvment.value();
         this.ent = ent;
     }
 
-    public Role properties(Map props) {
+    public EntityRole properties(Map props) {
         this.props = props;
         return this;
     }
 
-    public Role properties(MapCreator props) {
+    public EntityRole properties(MapCreator props) {
         return properties(props.map());
     }
 
