@@ -10,9 +10,8 @@ public class Role {
     private final EntityLike ent;
     private Map props;
 
-    public Role(String involvement, EntityLike ent) {
-
-        this.involvement = involvement;
+    public Role(RoleType involvment, EntityLike ent) {
+        this.involvement = involvment.value();
         this.ent = ent;
     }
 

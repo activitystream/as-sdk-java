@@ -14,18 +14,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.activitystream.Predefined.*;
+import static com.activitystream.RoleType.ACTOR;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AspectsTest extends EventTestBase {
-    public static Role PURCHASED(EntityLike ent) { return new Role("PURCHASED", ent);}
+    public static RoleType PURCHASED = RoleType.AFFECTS.extend("PURCHASED");
 
     @Test
     public void client_ip() {
         Event ev = event("action")
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
-                .involves(ACTOR(entity(PERSON, "Petar")));
+                .involves(role(ACTOR, entity(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
@@ -45,7 +46,7 @@ public class AspectsTest extends EventTestBase {
     public void client_device() {
         Event ev = event("action")
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
-                .involves(ACTOR(entity(PERSON, "Petar")));
+                .involves(role(ACTOR, entity(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
@@ -67,7 +68,7 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(eCommerce(
                                 item()
-                                        .involves(PURCHASED(entity(POI, "12344542352345345")))
+                                        .involves(role(PURCHASED,entity(POI, "12344542352345345")))
                                         .commissionFixed(1540.0)
                                         .commissionPercentage(150D)
                                         .discountPercentage(15D)
@@ -93,7 +94,7 @@ public class AspectsTest extends EventTestBase {
                     obj(
                         "involves", arr(
                             obj(
-                                "role", "PURCHASED",
+                                "role", "AFFECTS:PURCHASED",
                                 "entity_ref", "Poi/12344542352345345"
                             )
                         ),

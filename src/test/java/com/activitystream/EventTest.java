@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import static com.activitystream.Predefined.*;
+import static com.activitystream.RoleType.ACTOR;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +31,27 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_create_event_with_involved_actor_by_ref() {
         Event ev = event("action")
-                .involves(ACTOR(entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
+                .involves(role(ACTOR,entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
+        Map expected = obj(
+                "action", "action",
+                "involves", arr(
+                        obj(
+                                "entity_ref", "Employee/Petar",
+                                "role", "ACTOR",
+                                "properties", obj(
+                                        "a", "b"
+                                )
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void should_create_event_with_involved_actor_by_ref2() {
+        Event ev = event("action")
+                .involves(role(ACTOR,entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
@@ -50,7 +71,7 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
         Event ev = event("action")
-                .involves(ACTOR(entity(PERSON, "Petar")
+                .involves(role(ACTOR,entity(PERSON, "Petar")
                                 .properties(m().key("favourite_programming_language").value("javascript"))
                                 .aspects(
                                         classificationAsepct().type("type")
@@ -123,7 +144,7 @@ public class EventTest extends EventTestBase {
     public void should_create_event_with_aspects() {
         Event ev = event("action")
                 .aspects(new AddressAspect().city("Reykjavík").countryCode("IS").secondAddressLine("").streetAndNumber("Laugavegur 26").zipCode("2400"))
-                .involves(ACTOR(entity(PERSON, "Petar")));
+                .involves(role(ACTOR,entity(PERSON, "Petar")));
 
         Map expected = obj(
                 "action", "action",
@@ -152,7 +173,7 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_not_allow_relationship_with_no_linked_entity() {
         Event ev = event("action")
-                .involves(ACTOR(entity(PERSON, "Petar")
+                .involves(role(ACTOR,entity(PERSON, "Petar")
                                 .relations(
                                         rel()
                                 )
@@ -203,9 +224,9 @@ public class EventTest extends EventTestBase {
     @Test
     public void should_allow_adding_of_involved_roles_to_events() {
         Event ev = event("action")
-                .involves(ACTOR(entity(PERSON, "Petar")));
+                .involves(role(ACTOR,entity(PERSON, "Petar")));
 
-        ev.involves(ACTOR(entity(PERSON, "NotPetar")));
+        ev.involves(role(ACTOR,entity(PERSON, "NotPetar")));
         Map expected = obj(
                 "action", "action",
                 "involves", arr(
