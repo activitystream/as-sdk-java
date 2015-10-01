@@ -1,9 +1,9 @@
 package com.activitystream;
 
 import com.activitystream.aspects.AspectBase;
+import com.activitystream.underware.Factories;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.activitystream.EventTestBase.obj;
@@ -23,7 +23,7 @@ public class AspectBasicTest {
             }
         }
 
-        Map actual = new HashMap();
+        Map actual = Factories.getMap();
         new DeepAspect().addToObject(actual);
 
         Map expected = obj(
@@ -48,7 +48,7 @@ public class AspectBasicTest {
             }
         }
 
-        Map actual = new HashMap();
+        Map actual = Factories.getMap();
         new DeepAspect().addToObject(actual);
 
         Map expected = obj(

@@ -5,16 +5,16 @@ import com.activitystream.aspects.ClientIPAddressAspect;
 import com.activitystream.aspects.PageviewAspect;
 import com.activitystream.aspects.RequestMethod;
 import com.activitystream.helpers.DateHelpers;
+import com.activitystream.underware.Factories;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Map;
 
-import static com.activitystream.Predefined.*;
 import static com.activitystream.EntityRoleType.ACTOR;
+import static com.activitystream.Predefined.FEATURED;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -167,13 +167,13 @@ public class AspectsTest extends EventTestBase {
 
     @Test
     public void pageview() throws ParseException {
-        Map referrerProps = new HashMap();
+        Map referrerProps = Factories.getMap();
         referrerProps.put("a", "b");
         referrerProps.put("c", 22);
         Event ev = event("action")
                 .aspects(new PageviewAspect()
                                 .path("/path")
-                                .pathProperties(new HashMap())
+                                .pathProperties(Factories.getMap())
                                 .keywords("a", "b", "c")
                                 .method(RequestMethod.GET)
                                 .referrer("http://localhost")

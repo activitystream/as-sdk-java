@@ -1,8 +1,12 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
+import com.activitystream.underware.Factories;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class ClassificationAspect implements Aspect {
 
@@ -22,7 +26,7 @@ public class ClassificationAspect implements Aspect {
 
     @Override
     public void addToObject(Map jsonObject) {
-        Map classification = new HashMap();
+        Map classification = Factories.getMap();
         if (type != null) classification.put("action", type);
         if (categories != null) {
             List jsonArray = new ArrayList();

@@ -1,10 +1,12 @@
 package com.activitystream.helpers;
 
+import com.activitystream.underware.Factories;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class MapCreator<K,V> {
-    Map<K,V> backend = new HashMap<>();
+    Map<K,V> backend = Factories.getMap();
     public class KVPair {
         private K key;
         private MapCreator<K,V> owner;

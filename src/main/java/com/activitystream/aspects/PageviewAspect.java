@@ -2,8 +2,12 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 import com.activitystream.EntityRelation;
+import com.activitystream.underware.Factories;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class PageviewAspect implements Aspect {
     private String path;
@@ -80,7 +84,7 @@ public class PageviewAspect implements Aspect {
 
     @Override
     public void addToObject(Map jsonObject) {
-        Map result = new HashMap();
+        Map result = Factories.getMap();
         if (path != null) result.put("path", path);
         if (pathProps != null && pathProps.size() > 0) result.put("path_properties", pathProps);
         if (keywords != null) result.put("keywords", keywords);

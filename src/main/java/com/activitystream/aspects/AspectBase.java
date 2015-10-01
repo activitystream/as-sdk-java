@@ -1,13 +1,14 @@
 package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
+import com.activitystream.underware.Factories;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AspectBase implements Aspect {
-    protected Map<String, AspectProperty> aspectPropertyMap = new HashMap<>();
+    protected Map<String, AspectProperty> aspectPropertyMap = Factories.getMap();
 
     @Override
     public void addToObject(Map aspectJson) {
@@ -22,7 +23,7 @@ public class AspectBase implements Aspect {
                 for (String level : levels) {
                     Map drill = (Map) propertyParent.get(level);
                     if (drill == null) {
-                        drill = new HashMap();
+                        drill = Factories.getMap();
                         propertyParent.put(level, drill);
                     }
                     propertyParent = drill;

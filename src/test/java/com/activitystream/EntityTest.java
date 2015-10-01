@@ -1,8 +1,8 @@
 package com.activitystream;
 
+import com.activitystream.underware.Factories;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.activitystream.EventTestBase.obj;
@@ -19,7 +19,7 @@ public class EntityTest {
                 "entity_ref", "Person/id"
         );
 
-        Map actual = new HashMap();
+        Map actual = Factories.getMap();
         entity.addToObject(actual);
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
 
@@ -35,7 +35,7 @@ public class EntityTest {
                 )
         );
 
-        Map actual = new HashMap();
+        Map actual = Factories.getMap();
         entity.addToObject(actual);
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
 

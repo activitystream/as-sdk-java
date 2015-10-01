@@ -1,8 +1,8 @@
 package com.activitystream;
 
 import com.activitystream.helpers.MapCreator;
+import com.activitystream.underware.Factories;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,7 +29,7 @@ public class EntityRole {
 
 
     public Map toJson() {
-        Map obj = new HashMap();
+        Map obj = Factories.getMap();
         obj.put("role", involvement);
         if (props != null) obj.put("properties", props);
         ent.addToObject(obj);

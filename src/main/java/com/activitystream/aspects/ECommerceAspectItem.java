@@ -4,6 +4,7 @@ import com.activitystream.Aspect;
 import com.activitystream.Entity;
 import com.activitystream.EntityRole;
 import com.activitystream.helpers.DateHelpers;
+import com.activitystream.underware.Factories;
 
 import java.util.*;
 
@@ -142,7 +143,7 @@ public class ECommerceAspectItem {
     }
 
     public Map toJson() {
-        Map obj = new HashMap();
+        Map obj = Factories.getMap();
 
         if (involved.length > 0) {
             List inv = new ArrayList();
@@ -171,14 +172,14 @@ public class ECommerceAspectItem {
         if (serialNumbers.size() > 0) {
             List serials = new ArrayList();
             for (Entity serialNumber : serialNumbers) {
-                Map n = new HashMap();
+                Map n = Factories.getMap();
                 serialNumber.addToObject(n);
                 serials.add(n);
             }
             obj.put("serial_numbers", serials);
         }
         if (aspects.length > 0) {
-            Map aspectsJson = new HashMap();
+            Map aspectsJson = Factories.getMap();
             for (Aspect aspect : aspects) {
                 aspect.addToObject(aspectsJson);
             }

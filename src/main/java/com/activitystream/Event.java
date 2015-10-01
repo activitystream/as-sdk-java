@@ -2,6 +2,7 @@ package com.activitystream;
 
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.helpers.MapCreator;
+import com.activitystream.underware.Factories;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class Event {
     }
 
     public Map toMap() {
-        Map obj = new HashMap();
+        Map obj = Factories.getMap();
         obj.put("type", event.id);
 
         if (involved.size() > 0) {
@@ -73,7 +74,7 @@ public class Event {
         }
 
         if (aspects.size() > 0) {
-            Map aspectsJson = new HashMap();
+            Map aspectsJson = Factories.getMap();
             for (Aspect aspect : aspects) {
                 aspect.addToObject(aspectsJson);
             }

@@ -7,8 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-import static com.activitystream.Predefined.*;
 import static com.activitystream.EntityRoleType.ACTOR;
+import static com.activitystream.Predefined.AKA;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

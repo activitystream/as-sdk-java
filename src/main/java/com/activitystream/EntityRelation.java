@@ -1,9 +1,9 @@
 package com.activitystream;
 
 import com.activitystream.helpers.DateHelpers;
+import com.activitystream.underware.Factories;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -47,7 +47,7 @@ public class EntityRelation {
     public Map toJson() {
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
-        Map obj = new HashMap();
+        Map obj = Factories.getMap();
 
         obj.put("type", linkType.toJson());
         if (weight != null) obj.put("weight", weight);

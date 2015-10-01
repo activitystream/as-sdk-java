@@ -2,9 +2,9 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 import com.activitystream.helpers.DateHelpers;
+import com.activitystream.underware.Factories;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class TimedAspect implements Aspect {
@@ -31,7 +31,7 @@ public class TimedAspect implements Aspect {
 
     @Override
     public void addToObject(Map jsonObject) {
-        Map timed = new HashMap();
+        Map timed = Factories.getMap();
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
         }
