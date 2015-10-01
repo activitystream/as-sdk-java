@@ -52,9 +52,15 @@ public class Sugar {
 
     public static DimensionsAspect dimensions(MapCreator<String, String> dimensions){return dimensions(dimensions.map());}
 
+    public static MetricsAspect metrics(Map<String, Double> metrics) { return new MetricsAspect(metrics); }
+
+    public static MetricsAspect metrics(MapCreator<String, Double> metrics) { return metrics(metrics.map()); }
+
     public static MapCreator<String, Object> m(){return new MapCreator<String,Object>();}
 
     public static MapCreator<String, String> mstr(){return new MapCreator<String, String>();}
+
+    public static MapCreator<String, Double> mdbl() { return new MapCreator<String, Double>();}
 
     public static EntityRole role(EntityRoleType role, Entity entity){
         return new EntityRole(role, entity);
