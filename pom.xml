@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.activitystream</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.1.4</version>
+    <version>0.2.0</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>For a description please see https://github.com/activitystream/as-sdk-java</description>
     <url>https://github.com/activitystream/as-sdk-java</url>
@@ -54,14 +54,8 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.specs2</groupId>
-            <artifactId>specs2_2.10</artifactId>
-            <version>2.3.7</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
+
     <build>
         <finalName>as-sdk-${project.version}</finalName>
         <resources>
