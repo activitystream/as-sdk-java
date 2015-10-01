@@ -17,17 +17,9 @@ public class Event {
     private Map props;
     private String description;
 
-    public Event(String action) {
-        this.event = new EventType(action);
-    }
-
-    public Event() {
-    }
-
-    @Deprecated()
-    public Event action(EventType type) {
+    public Event(String type) { this.event = new EventType(type); }
+    public Event(EventType type) {
         this.event = type;
-        return this;
     }
 
     public Event involves(EntityRole... role) {
@@ -37,14 +29,6 @@ public class Event {
 
     public Event aspects(Aspect... aspects) {
         this.aspects.addAll(Arrays.asList(aspects));
-        return this;
-    }
-
-    /**
-     * @deprecated typo in name, replaced by {@link #occurred(Date)}
-     */
-    public Event occured(Date timestamp) {
-        this.timestamp = timestamp;
         return this;
     }
 
@@ -78,7 +62,7 @@ public class Event {
 
     public Map toMap() {
         Map obj = new HashMap();
-        obj.put("action", event.id);
+        obj.put("type", event.id);
 
         if (involved.size() > 0) {
             List inv = new ArrayList();

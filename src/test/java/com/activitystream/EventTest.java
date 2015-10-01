@@ -22,7 +22,7 @@ public class EventTest extends EventTestBase {
     public void should_create_an_event_with_id() {
         Event ev = event("as.xcommerce.purchase.completed");
         Map expected = obj(
-                "action", "as.xcommerce.purchase.completed"
+                "type", "as.xcommerce.purchase.completed"
         );
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
@@ -33,7 +33,7 @@ public class EventTest extends EventTestBase {
         Event ev = event("action")
                 .involves(role(ACTOR,entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "entity_ref", "Employee/Petar",
@@ -53,7 +53,7 @@ public class EventTest extends EventTestBase {
         Event ev = event("action")
                 .involves(role(ACTOR,entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "entity_ref", "Employee/Petar",
@@ -83,7 +83,7 @@ public class EventTest extends EventTestBase {
                                 )
                 ));
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "role", "ACTOR",
@@ -129,7 +129,7 @@ public class EventTest extends EventTestBase {
                 .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "description", "some text",
                 "properties", obj("favourite_programming_language", "javascript"),
                 "occurred_at", "2014-12-01T10:00:00.000Z",
@@ -147,7 +147,7 @@ public class EventTest extends EventTestBase {
                 .involves(role(ACTOR, entity(PERSON, "Petar")));
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "role", "ACTOR",
@@ -191,7 +191,7 @@ public class EventTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(clientIp("1"), clientIp("2"));
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "client_ip", "2"
                 )
@@ -209,7 +209,7 @@ public class EventTest extends EventTestBase {
 
         ev.aspects(clientDevice("browser"));
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "client_ip", "2",
                         "client_device", "browser"
@@ -228,7 +228,7 @@ public class EventTest extends EventTestBase {
 
         ev.involves(role(ACTOR, entity(PERSON, "NotPetar")));
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "role", "ACTOR",

@@ -17,7 +17,9 @@ public class Sugar {
 
     public static EntityRole role(EntityRoleType role, Entity entity) { return new EntityRole(role, entity); }
 
-    public static Event event(String action) { return new Event(action); }
+    public static Event event(String type) { return new Event(type); }
+
+    public static Event event(EventType type) { return new Event(type); }
 
     // Aspects
 

@@ -29,7 +29,7 @@ public class AspectsTest extends EventTestBase {
                 .involves(role(ACTOR, entity(PERSON, "Petar")));
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "entity_ref", "Person/Petar",
@@ -49,7 +49,7 @@ public class AspectsTest extends EventTestBase {
                 .involves(role(ACTOR, entity(PERSON, "Petar")));
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "involves", arr(
                         obj(
                                 "entity_ref", "Person/Petar",
@@ -88,7 +88,7 @@ public class AspectsTest extends EventTestBase {
                         )
                 );
         Map expected = obj(
-            "action", "action",
+            "type", "action",
             "aspects", obj(
                 "items", arr(
                     obj(
@@ -132,7 +132,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "classification", obj(
                                 "action", "Poi",
@@ -152,7 +152,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "timed", obj(
                                 "begins", "2015-11-24T17:00:00.000Z",
@@ -185,7 +185,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "pageview", obj(
                                 "path", "/path"
@@ -214,7 +214,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "location", obj(
                                 "latlong", "32.790672,-96.81082",
@@ -239,7 +239,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "presentation", obj(
                                 "label", "label",
@@ -261,7 +261,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "dimensions", obj(
                                 "key 1", "val 1"
@@ -280,7 +280,7 @@ public class AspectsTest extends EventTestBase {
                 );
 
         Map expected = obj(
-                "action", "action",
+                "type", "action",
                 "aspects", obj(
                         "metrics", obj(
                                 "key 1", 1.0
