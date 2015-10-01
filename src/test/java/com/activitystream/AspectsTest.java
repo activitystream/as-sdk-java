@@ -216,7 +216,7 @@ public class AspectsTest extends EventTestBase {
         Map expected = obj(
                 "type", "action",
                 "aspects", obj(
-                        "location", obj(
+                        "geo_location", obj(
                                 "latlong", "32.790672,-96.81082",
                                 "type", "work"
                         )

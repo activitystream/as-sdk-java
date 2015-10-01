@@ -2,8 +2,8 @@ package com.activitystream.aspects;
 
 public class LocationAspect extends AspectBase{
 
-    public static final String LOCATION_LATLONG = "location.latlong";
-    public static final String LOCATION_TYPE = "location.type";
+    public static final String LOCATION_LATLONG = "geo_location.latlong";
+    public static final String LOCATION_TYPE = "geo_location.type";
 
     public LocationAspect(String latlong) {
         aspectPropertyMap.put(LOCATION_LATLONG, new AspectProperty(IsRequired.True));
