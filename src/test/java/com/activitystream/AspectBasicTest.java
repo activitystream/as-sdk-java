@@ -10,7 +10,7 @@ import static com.activitystream.EventTestBase.obj;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AspectBaseTest {
+public class AspectBasicTest {
     @Test
     public void should_create_tree_of_hashes() {
         class DeepAspect extends AspectBase {

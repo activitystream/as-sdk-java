@@ -74,7 +74,7 @@ public class EventTest extends EventTestBase {
                 .involves(role(ACTOR, entity(PERSON, "Petar")
                                 .properties(m().key("favourite_programming_language").value("javascript"))
                                 .aspects(
-                                        classificationAsepct().type("type")
+                                        classification().type("type")
                                 )
                                 .relations(
                                         rel().link(AKA, entity(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),

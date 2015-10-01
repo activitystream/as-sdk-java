@@ -124,9 +124,9 @@ public class AspectsTest extends EventTestBase {
     }
 
     @Test
-    public void classification() {
+    public void classification_aspect() {
         Event ev = event("action")
-                .aspects(classificationAsepct()
+                .aspects(classification()
                                 .categories(new String[]{"Nature", "Waterfalls"})
                                 .type("Poi")
                 );
@@ -144,9 +144,9 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
     @Test
-    public void timed() throws ParseException {
+    public void timed_aspect() throws ParseException {
         Event ev = event("action")
-                .aspects(timedAspect()
+                .aspects(timed()
                                 .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
                                 .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
