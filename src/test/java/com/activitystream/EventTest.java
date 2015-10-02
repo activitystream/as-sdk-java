@@ -48,25 +48,6 @@ public class EventTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
-    @Test
-    public void should_create_event_with_involved_actor_by_ref2() {
-        Event ev = event("action")
-                .involves(role(ACTOR,entity(EMPLOYEE, "Petar")).properties(m().key("a").value("b")));
-        Map expected = obj(
-                "type", "action",
-                "involves", arr(
-                        obj(
-                                "entity_ref", "Employee/Petar",
-                                "role", "ACTOR",
-                                "properties", obj(
-                                        "a", "b"
-                                )
-                        )
-                )
-        );
-        Map actual = ev.toMap();
-        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
-    }
 
     @Test
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
