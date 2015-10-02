@@ -28,15 +28,15 @@ public class AspectsTest extends EventTestBase {
                 .aspects(new ClientIPAddressAspect().clientIp("127.0.0.1"))
                 .involves(role(ACTOR, entity(PERSON, "Petar")));
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "involves", arr(
-                        obj(
+                "involves", list(
+                        map(
                                 "entity_ref", "Person/Petar",
                                 "role", "ACTOR"
                         )
                 ),
-                "aspects", obj("client_ip", "127.0.0.1")
+                "aspects", map("client_ip", "127.0.0.1")
         );
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
@@ -48,15 +48,15 @@ public class AspectsTest extends EventTestBase {
                 .aspects(new ClientDeviceAspect().clientDevice("iPhone"))
                 .involves(role(ACTOR, entity(PERSON, "Petar")));
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "involves", arr(
-                        obj(
+                "involves", list(
+                        map(
                                 "entity_ref", "Person/Petar",
                                 "role", "ACTOR"
                         )
                 ),
-                "aspects", obj("client_device", "iPhone")
+                "aspects", map("client_device", "iPhone")
         );
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
@@ -87,37 +87,37 @@ public class AspectsTest extends EventTestBase {
                                         .accountingKey("KEY")
                         )
                 );
-        Map expected = obj(
-            "type", "action",
-            "aspects", obj(
-                "items", arr(
-                    obj(
-                        "involves", arr(
-                            obj(
-                                "role", "AFFECTS:PURCHASED",
-                                "entity_ref", "Poi/12344542352345345"
-                            )
-                        ),
-                        "item_count", 2,
-                        "item_price", 15400.0,
-                        "serial_numbers", arr(obj("entity_ref", "Serial/1234"), obj("entity_ref", "Serial/4567")),
-                        "description", "desc",
-                        "variant", "variant",
-                        "price_category", "A",
-                        "currency", "ISK",
-                        "commission_fixed", 1540.0,
-                        "commission_percentage", 150.0,
-                        "tax_percentage", 1.0,
-                        "total_in_stock", 2.5,
-                        "total_for_sale", 3.5,
-                        "valid_from", "2015-11-24T17:00:00.000Z",
-                        "valid_until", "2015-11-24T18:00:00.000Z",
-                        "accounting_key", "KEY",
-                        "discount_percentage", 15.0
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "items", list(
+                                map(
+                                        "involves", list(
+                                                map(
+                                                        "role", "AFFECTS:PURCHASED",
+                                                        "entity_ref", "Poi/12344542352345345"
+                                                )
+                                        ),
+                                        "item_count", 2,
+                                        "item_price", 15400.0,
+                                        "serial_numbers", list(map("entity_ref", "Serial/1234"), map("entity_ref", "Serial/4567")),
+                                        "description", "desc",
+                                        "variant", "variant",
+                                        "price_category", "A",
+                                        "currency", "ISK",
+                                        "commission_fixed", 1540.0,
+                                        "commission_percentage", 150.0,
+                                        "tax_percentage", 1.0,
+                                        "total_in_stock", 2.5,
+                                        "total_for_sale", 3.5,
+                                        "valid_from", "2015-11-24T17:00:00.000Z",
+                                        "valid_until", "2015-11-24T18:00:00.000Z",
+                                        "accounting_key", "KEY",
+                                        "discount_percentage", 15.0
 
-                    )
+                                )
+                        )
                 )
-            )
         );
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
@@ -131,12 +131,12 @@ public class AspectsTest extends EventTestBase {
                                 .type("Poi")
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "classification", obj(
+                "aspects", map(
+                        "classification", map(
                                 "action", "Poi",
-                                "categories", arr("Nature", "Waterfalls")
+                                "categories", list("Nature", "Waterfalls")
                         )
                 )
         );
@@ -151,10 +151,10 @@ public class AspectsTest extends EventTestBase {
                                 .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "timed", obj(
+                "aspects", map(
+                        "timed", map(
                                 "begins", "2015-11-24T17:00:00.000Z",
                                 "ends", "2015-11-24T20:00:00.000Z",
                                 "action", "valid"
@@ -184,20 +184,20 @@ public class AspectsTest extends EventTestBase {
                                 .pageContent(rel().link(FEATURED, entity(PERSON, "Jane Doe")))
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "pageview", obj(
+                "aspects", map(
+                        "pageview", map(
                                 "path", "/path"
-                                , "keywords", arr("a", "b", "c")
+                                , "keywords", list("a", "b", "c")
                                 , "referrer", "http://localhost"
-                                , "referrer_properties", obj("a", "b", "c", 22)
+                                , "referrer_properties", map("a", "b", "c", 22)
                                 , "method", "GET"
                                 , "response_code", 200
                                 , "size", 100
                                 , "protocol", "HTTP"
-                                , "page_content", arr(
-                                        obj("type", "FEATURED", "entity_ref", "Person/Jane Doe")
+                                , "page_content", list(
+                                        map("type", "FEATURED", "entity_ref", "Person/Jane Doe")
                                 )
                         )
                 )
@@ -213,10 +213,10 @@ public class AspectsTest extends EventTestBase {
                         location("32.790672,-96.81082").type("work")
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "geo_location", obj(
+                "aspects", map(
+                        "geo_location", map(
                                 "latlong", "32.790672,-96.81082",
                                 "type", "work"
                         )
@@ -238,10 +238,10 @@ public class AspectsTest extends EventTestBase {
                                 .icon(new URL("http://apple.com"))
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "presentation", obj(
+                "aspects", map(
+                        "presentation", map(
                                 "label", "label",
                                 "thumbnail", "http://microsoft.com",
                                 "details_url", "http://google.com",
@@ -260,10 +260,10 @@ public class AspectsTest extends EventTestBase {
                         dimensions(mstr().key("key 1").value("val 1"))
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "dimensions", obj(
+                "aspects", map(
+                        "dimensions", map(
                                 "key 1", "val 1"
                         )
                 )
@@ -279,10 +279,10 @@ public class AspectsTest extends EventTestBase {
                         metrics(mdbl().key("key 1").value(1D))
                 );
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "action",
-                "aspects", obj(
-                        "metrics", obj(
+                "aspects", map(
+                        "metrics", map(
                                 "key 1", 1.0
                         )
                 )

@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.activitystream.EventTestBase.arr;
-import static com.activitystream.EventTestBase.obj;
+import static com.activitystream.EventTestBase.list;
+import static com.activitystream.EventTestBase.map;
 import static com.activitystream.Predefined.*;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -19,7 +19,7 @@ public class EntityTest {
     @Test
     public void should_render_as_ref_entity_when_only_id_is_present() {
         Entity entity = entity("Person", "id");
-        Map expected = obj(
+        Map expected = map(
                 "entity_ref", "Person/id"
         );
 
@@ -32,10 +32,10 @@ public class EntityTest {
     @Test
     public void should_render_as_embedded_entity_when_any_propery_besides_id_is_present() {
         Entity entity = entity("Person", "id").properties(m().key("a").value("b"));
-        Map expected = obj(
-                "entity", obj(
+        Map expected = map(
+                "entity", map(
                         "entity_ref", "Person/id",
-                        "properties", obj("a", "b")
+                        "properties", map("a", "b")
                 )
         );
 
@@ -54,26 +54,26 @@ public class EntityTest {
                         item().involves(role(ACTOR, entity))
                 ));
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "test",
-                "involves", arr(
-                        obj(
+                "involves", list(
+                        map(
                                 "role", "ACTOR",
-                                "entity", obj(
+                                "entity", map(
                                         "entity_ref", "Person/Petar",
-                                        "properties", obj("a", "b")
+                                        "properties", map("a", "b")
                                 )
                         ),
-                        obj(
+                        map(
                                 "role", "INVOLVES",
                                 "entity_ref", "Person/Petar"
                         )
                 ),
-                "aspects", obj(
-                        "items", arr(
-                                obj(
-                                        "involves", arr(
-                                                obj(
+                "aspects", map(
+                        "items", list(
+                                map(
+                                        "involves", list(
+                                                map(
                                                         "role", "ACTOR",
                                                         "entity_ref", "Person/Petar"
                                                 )
@@ -93,22 +93,22 @@ public class EntityTest {
         Event ev = event("test")
                 .involves(role(ACTOR, entity1), role(INVOLVES, entity2));
 
-        Map expected = obj(
+        Map expected = map(
                 "type", "test",
-                "involves", arr(
-                        obj(
+                "involves", list(
+                        map(
                                 "role", "ACTOR",
-                                "entity", obj(
+                                "entity", map(
                                         "entity_ref", "Person/Petar",
-                                        "properties", obj("a", "b")
+                                        "properties", map("a", "b")
                                 )
                         ),
-                        obj(
+                        map(
                                 "role", "INVOLVES",
-                                "entity", obj(
+                                "entity", map(
                                         "entity_ref", "Person/Petar",
-                                        "aspects", obj(
-                                            "client_ip", "1.1.1.1"
+                                        "aspects", map(
+                                                "client_ip", "1.1.1.1"
                                         )
                                 )
                         )

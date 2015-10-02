@@ -14,7 +14,7 @@ public class EventTestBase {
     public static EntityType EMPLOYEE = new EntityType("Employee");
 
 
-    public static Map obj(Object... keyValueStriped) {
+    public static Map map(Object... keyValueStriped) {
         if (keyValueStriped.length % 2 != 0) throw new RuntimeException("This map does not look good");
         Map result = Factories.getMap();
         for (int i = 0; i < keyValueStriped.length; i += 2) {
@@ -25,7 +25,7 @@ public class EventTestBase {
         return result;
     }
 
-    public static List arr(Object ... items){
+    public static List list(Object... items){
         ArrayList arrayList = new ArrayList();
         Collections.addAll(arrayList, items);
         return arrayList;

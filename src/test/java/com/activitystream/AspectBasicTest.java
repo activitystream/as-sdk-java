@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.activitystream.EventTestBase.obj;
+import static com.activitystream.EventTestBase.map;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -29,11 +29,11 @@ public class AspectBasicTest {
         Map actual = Factories.getMap();
         new DeepAspect().addToObject(actual, processed);
 
-        Map expected = obj(
-                "a", obj(
-                    "b", obj(
-                            "c", "1",
-                            "d", "2"
+        Map expected = map(
+                "a", map(
+                        "b", map(
+                                "c", "1",
+                                "d", "2"
                         )
                 ));
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
@@ -54,10 +54,10 @@ public class AspectBasicTest {
         Map actual = Factories.getMap();
         new DeepAspect().addToObject(actual, processed);
 
-        Map expected = obj(
-                "a", obj(
-                    "b", obj(
-                            "c", "1"
+        Map expected = map(
+                "a", map(
+                        "b", map(
+                                "c", "1"
                         )
                 ));
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
