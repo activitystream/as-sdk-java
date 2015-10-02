@@ -78,6 +78,9 @@ public class Event {
     public Map toMap() {
         Map obj = Factories.getMap();
         obj.put("type", event.id);
+        if (origin != null) obj.put("origin", origin);
+        if (description != null) obj.put("description", description);
+        if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
 
         if (involved.size() > 0) {
             List inv = new ArrayList();
@@ -95,10 +98,7 @@ public class Event {
             obj.put("aspects", aspectsJson);
         }
         if (props != null) obj.put("properties", props);
-        if (origin != null) obj.put("origin", origin);
-        if (description != null) obj.put("description", description);
         if (sdkVersion != null) obj.put("sdk", sdkVersion);
-        if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
         return obj;
     }
 }
