@@ -23,6 +23,20 @@ public class Event {
         this.event = type;
     }
 
+    private static String sdkVersion;
+
+    static {
+        try {
+            Properties prop = new Properties();
+            InputStream in = Event.class.getResourceAsStream("/info.properties");
+            prop.load(in);
+            in.close();
+            String version = prop.getProperty("version");
+            if (!version.contains("$")) sdkVersion = "java-"+version; else sdkVersion = null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public Event involves(EntityRole... role) {
         this.involved.addAll(Arrays.asList(role));
         return this;
@@ -83,17 +97,8 @@ public class Event {
         if (props != null) obj.put("properties", props);
         if (origin != null) obj.put("origin", origin);
         if (description != null) obj.put("description", description);
+        if (sdkVersion != null) obj.put("sdk", sdkVersion);
         if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
-        try {
-            Properties prop = new Properties();
-            InputStream in = getClass().getResourceAsStream("/info.properties");
-            prop.load(in);
-            in.close();
-            String version = prop.getProperty("version");
-//            if (version != null) obj.put("sdk", "java-"+ version);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         return obj;
     }
 }
