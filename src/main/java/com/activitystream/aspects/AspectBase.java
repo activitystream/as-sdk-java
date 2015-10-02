@@ -4,14 +4,14 @@ import com.activitystream.Aspect;
 import com.activitystream.underware.Factories;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AspectBase implements Aspect {
     protected Map<String, AspectProperty> aspectPropertyMap = Factories.getMap();
 
     @Override
-    public void addToObject(Map aspectJson) {
+    public void addToObject(Map aspectJson, Set<String> processed) {
         for (Map.Entry<String, AspectProperty> aspect : aspectPropertyMap.entrySet()) {
             if (aspect.getValue().required && aspect.getValue().value == null)
                 throw new RuntimeException("Property " + aspect.getValue() + " is required ");

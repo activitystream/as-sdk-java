@@ -3,15 +3,19 @@ package com.activitystream;
 import com.activitystream.underware.Factories;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import static com.activitystream.EventTestBase.arr;
 import static com.activitystream.EventTestBase.obj;
-import static com.activitystream.Sugar.entity;
-import static com.activitystream.Sugar.m;
+import static com.activitystream.Predefined.*;
+import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class EntityTest {
+    Set<String> processed = new HashSet<>();
     @Test
     public void should_render_as_ref_entity_when_only_id_is_present() {
         Entity entity = entity("Person", "id");
@@ -20,7 +24,7 @@ public class EntityTest {
         );
 
         Map actual = Factories.getMap();
-        entity.addToObject(actual);
+        entity.addToObject(actual, processed);
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
 
     }
@@ -36,8 +40,49 @@ public class EntityTest {
         );
 
         Map actual = Factories.getMap();
-        entity.addToObject(actual);
+        entity.addToObject(actual, processed);
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
 
+    }
+
+    @Test
+    public void should_render_embedded_entities_only_once_and_the_rest_as_references() {
+        Entity entity = entity("Person", "Petar").properties(m().key("a").value("b"));
+        Event ev = event("test")
+                .involves(role(ACTOR, entity), role(INVOLVES, entity))
+                .aspects(eCommerce(
+                        item().involves(role(ACTOR, entity))
+                ));
+
+        Map expected = obj(
+                "type", "test",
+                "involves", arr(
+                        obj(
+                                "role", "ACTOR",
+                                "entity", obj(
+                                        "entity_ref", "Person/Petar",
+                                        "properties", obj("a", "b")
+                                )
+                        ),
+                        obj(
+                                "role", "INVOLVES",
+                                "entity_ref", "Person/Petar"
+                        )
+                ),
+                "aspects", obj(
+                        "items", arr(
+                                obj(
+                                        "involves", arr(
+                                                obj(
+                                                        "role", "ACTOR",
+                                                        "entity_ref", "Person/Petar"
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+
+        assertThat(ev.toMap().entrySet(), equalTo(expected.entrySet()));
     }
 }

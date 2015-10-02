@@ -4,10 +4,7 @@ import com.activitystream.Aspect;
 import com.activitystream.EntityRelation;
 import com.activitystream.underware.Factories;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PageviewAspect implements Aspect {
     private String path;
@@ -83,7 +80,7 @@ public class PageviewAspect implements Aspect {
     }
 
     @Override
-    public void addToObject(Map jsonObject) {
+    public void addToObject(Map jsonObject, Set<String> processed) {
         Map result = Factories.getMap();
         if (path != null) result.put("path", path);
         if (pathProps != null && pathProps.size() > 0) result.put("path_properties", pathProps);
@@ -97,7 +94,7 @@ public class PageviewAspect implements Aspect {
         if (pageContent != null) {
             List pageContentItems = new ArrayList();
             for (EntityRelation entityRelation : pageContent) {
-                pageContentItems.add(entityRelation.toJson());
+                pageContentItems.add(entityRelation.toJson(processed));
             }
             result.put("page_content", pageContentItems);
         }

@@ -5,6 +5,7 @@ import com.activitystream.underware.Factories;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The relation of a specific type between two entities
@@ -44,7 +45,7 @@ public class EntityRelation {
         return this;
     }
 
-    public Map toJson() {
+    public Map toJson(Set<String> processed) {
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
         Map obj = Factories.getMap();
@@ -54,7 +55,7 @@ public class EntityRelation {
         if (startDate != null) obj.put("valid_from", DateHelpers.isoDateFormatter.format(startDate));
         if (endDate != null) obj.put("active_until", DateHelpers.isoDateFormatter.format(endDate));
         if (props != null) obj.put("properties", props);
-        entity.addToObject(obj);
+        entity.addToObject(obj, processed);
 
         return obj;
     }

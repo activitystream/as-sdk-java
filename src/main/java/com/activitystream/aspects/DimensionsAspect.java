@@ -3,6 +3,7 @@ package com.activitystream.aspects;
 import com.activitystream.Aspect;
 
 import java.util.Map;
+import java.util.Set;
 
 public class DimensionsAspect implements Aspect{
 
@@ -13,7 +14,7 @@ public class DimensionsAspect implements Aspect{
     }
 
     @Override
-    public void addToObject(Map jsonObject) {
+    public void addToObject(Map jsonObject, Set<String> processed) {
         if (dimensions != null) {
             jsonObject.put("dimensions", dimensions);
         }

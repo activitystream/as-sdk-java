@@ -142,13 +142,13 @@ public class ECommerceAspectItem {
         return this;
     }
 
-    public Map toJson() {
+    public Map toJson(Set<String> processed) {
         Map obj = Factories.getMap();
 
         if (involved.length > 0) {
             List inv = new ArrayList();
             for (int i = 0; i < involved.length; i++) {
-                inv.add(involved[i].toJson());
+                inv.add(involved[i].toJson(processed));
             }
             obj.put("involves", inv);
         }
@@ -173,7 +173,7 @@ public class ECommerceAspectItem {
             List serials = new ArrayList();
             for (Entity serialNumber : serialNumbers) {
                 Map n = Factories.getMap();
-                serialNumber.addToObject(n);
+                serialNumber.addToObject(n, processed);
                 serials.add(n);
             }
             obj.put("serial_numbers", serials);
@@ -181,7 +181,7 @@ public class ECommerceAspectItem {
         if (aspects.length > 0) {
             Map aspectsJson = Factories.getMap();
             for (Aspect aspect : aspects) {
-                aspect.addToObject(aspectsJson);
+                aspect.addToObject(aspectsJson, processed);
             }
             obj.put("aspects", aspectsJson);
         }

@@ -3,10 +3,7 @@ package com.activitystream;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Entity {
     private EntityType type;
@@ -40,17 +37,19 @@ public class Entity {
         return this;
     }
 
-    public void addToObject(Map jsonObject) {
-        if (relations.size() == 0 && props.size() == 0 && aspects.size() == 0){
-            jsonObject.put("entity_ref", type.toJson() + "/" + id);
+    public void addToObject(Map jsonObject, Set<String> processed) {
+        String entityId = type.toJson() + "/" + id;
+        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(entityId)){
+            jsonObject.put("entity_ref", entityId);
         } else {
+            processed.add(entityId);
             Map value = Factories.getMap();
-            value.put("entity_ref", type.toJson() + "/" + id);
+            value.put("entity_ref", entityId);
 
             if (relations.size() > 0) {
                 List inv = new ArrayList();
                 for (EntityRelation relation : relations) {
-                    inv.add(relation.toJson());
+                    inv.add(relation.toJson(processed));
                 }
                 value.put("relations", inv);
             }
@@ -60,7 +59,7 @@ public class Entity {
             if (aspects.size() > 0) {
                 Map aspectsJson = Factories.getMap();
                 for (Aspect aspect : aspects) {
-                    aspect.addToObject(aspectsJson);
+                    aspect.addToObject(aspectsJson, processed);
                 }
                 value.put("aspects", aspectsJson);
             }

@@ -4,13 +4,16 @@ import com.activitystream.aspects.AspectBase;
 import com.activitystream.underware.Factories;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static com.activitystream.EventTestBase.obj;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AspectBasicTest {
+    Set<String> processed = new HashSet<>();
     @Test
     public void should_create_tree_of_hashes() {
         class DeepAspect extends AspectBase {
@@ -24,7 +27,7 @@ public class AspectBasicTest {
         }
 
         Map actual = Factories.getMap();
-        new DeepAspect().addToObject(actual);
+        new DeepAspect().addToObject(actual, processed);
 
         Map expected = obj(
                 "a", obj(
@@ -49,7 +52,7 @@ public class AspectBasicTest {
         }
 
         Map actual = Factories.getMap();
-        new DeepAspect().addToObject(actual);
+        new DeepAspect().addToObject(actual, processed);
 
         Map expected = obj(
                 "a", obj(

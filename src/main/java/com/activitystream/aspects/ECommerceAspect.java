@@ -5,6 +5,7 @@ import com.activitystream.Aspect;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ECommerceAspect implements Aspect {
 
@@ -16,11 +17,11 @@ public class ECommerceAspect implements Aspect {
     }
 
     @Override
-    public void addToObject(Map jsonObject) {
+    public void addToObject(Map jsonObject, Set<String> processed) {
         if (items.length > 0) {
             List inv = new ArrayList();
             for (ECommerceAspectItem item : items) {
-                inv.add(item.toJson());
+                inv.add(item.toJson(processed));
             }
             jsonObject.put("items", inv);
         }

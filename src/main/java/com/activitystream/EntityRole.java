@@ -4,6 +4,7 @@ import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A role of a certain type of a given entity in an event
@@ -28,11 +29,11 @@ public class EntityRole {
     }
 
 
-    public Map toJson() {
+    public Map toJson(Set<String> processed) {
         Map obj = Factories.getMap();
         obj.put("role", involvement);
         if (props != null) obj.put("properties", props);
-        ent.addToObject(obj);
+        ent.addToObject(obj, processed);
         return obj;
     }
 }

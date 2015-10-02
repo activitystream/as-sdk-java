@@ -77,6 +77,7 @@ public class Event {
 
     public Map toMap() {
         Map obj = Factories.getMap();
+        Set<String> processed = new HashSet<>();
         obj.put("type", event.id);
         if (origin != null) obj.put("origin", origin);
         if (description != null) obj.put("description", description);
@@ -85,7 +86,7 @@ public class Event {
         if (involved.size() > 0) {
             List inv = new ArrayList();
             for (EntityRole anInvolved : involved) {
-                inv.add(anInvolved.toJson());
+                inv.add(anInvolved.toJson(processed));
             }
             obj.put("involves", inv);
         }
@@ -93,7 +94,7 @@ public class Event {
         if (aspects.size() > 0) {
             Map aspectsJson = Factories.getMap();
             for (Aspect aspect : aspects) {
-                aspect.addToObject(aspectsJson);
+                aspect.addToObject(aspectsJson, processed);
             }
             obj.put("aspects", aspectsJson);
         }

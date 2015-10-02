@@ -6,6 +6,7 @@ import com.activitystream.underware.Factories;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 public class TimedAspect implements Aspect {
     private Date starts;
@@ -30,7 +31,7 @@ public class TimedAspect implements Aspect {
     }
 
     @Override
-    public void addToObject(Map jsonObject) {
+    public void addToObject(Map jsonObject, Set<String> processed) {
         Map timed = Factories.getMap();
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
