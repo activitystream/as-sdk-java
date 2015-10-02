@@ -85,4 +85,36 @@ public class EntityTest {
 
         assertThat(ev.toMap().entrySet(), equalTo(expected.entrySet()));
     }
+
+    @Test
+    public void should_render_embedded_entities_only_once_but_allow_rerendering_of_two_instances_of_the_same_entity() {
+        Entity entity1 = entity("Person", "Petar").properties(m().key("a").value("b"));
+        Entity entity2 = entity("Person", "Petar").aspects(clientIp("1.1.1.1"));
+        Event ev = event("test")
+                .involves(role(ACTOR, entity1), role(INVOLVES, entity2));
+
+        Map expected = obj(
+                "type", "test",
+                "involves", arr(
+                        obj(
+                                "role", "ACTOR",
+                                "entity", obj(
+                                        "entity_ref", "Person/Petar",
+                                        "properties", obj("a", "b")
+                                )
+                        ),
+                        obj(
+                                "role", "INVOLVES",
+                                "entity", obj(
+                                        "entity_ref", "Person/Petar",
+                                        "aspects", obj(
+                                            "client_ip", "1.1.1.1"
+                                        )
+                                )
+                        )
+                )
+        );
+
+        assertThat(ev.toMap().entrySet(), equalTo(expected.entrySet()));
+    }
 }

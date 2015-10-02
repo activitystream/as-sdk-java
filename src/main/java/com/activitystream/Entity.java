@@ -39,10 +39,10 @@ public class Entity {
 
     public void addToObject(Map jsonObject, Set<String> processed) {
         String entityId = type.toJson() + "/" + id;
-        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(entityId)){
+        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())){
             jsonObject.put("entity_ref", entityId);
         } else {
-            processed.add(entityId);
+            processed.add(this.toString());
             Map value = Factories.getMap();
             value.put("entity_ref", entityId);
 
