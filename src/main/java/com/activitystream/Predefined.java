@@ -6,6 +6,11 @@ public class Predefined {
     public static EntityRoleType INVOLVES = EntityRoleType.INVOLVES;
     public static EntityRoleType OBSERVED = EntityRoleType.OBSERVED;
     public static EntityRoleType REFERENCES = EntityRoleType.REFERENCES;
+    public static EntityRoleType TRADE = EntityRoleType.TRADE;
+    public static EntityRoleType CARTED = EntityRoleType.CARTED;
+    public static EntityRoleType UNCARTED = EntityRoleType.UNCARTED;
+    public static EntityRoleType PURCHASED = EntityRoleType.PURCHASED;
+    public static EntityRoleType CANCELLED = EntityRoleType.CANCELLED;
 
     public static EntityRelationType AKA = new EntityRelationType("AKA");
     public static EntityRelationType MEMBER_OF = new EntityRelationType("MEMBER_OF");

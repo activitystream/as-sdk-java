@@ -20,4 +20,9 @@ public class EntityRoleType {
     public static EntityRoleType INVOLVES = new EntityRoleType("INVOLVES");
     public static EntityRoleType OBSERVED = new EntityRoleType("OBSERVED");
     public static EntityRoleType REFERENCES = new EntityRoleType("REFERENCES");
+    public static final EntityRoleType TRADE = new EntityRoleType("TRADE");
+    public static final EntityRoleType CARTED = TRADE.extend("CARTED");
+    public static final EntityRoleType UNCARTED = TRADE.extend("UNCARTED");
+    public static final EntityRoleType PURCHASED = TRADE.extend("PURCHASED");
+    public static final EntityRoleType CANCELLED = TRADE.extend("CANCELLED");
 }
