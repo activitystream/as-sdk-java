@@ -47,6 +47,8 @@ public class Sugar {
 
     public static MetricsAspect metrics(MapCreator<String, Double> metrics) { return metrics(metrics.map()); }
 
+    public static TagsAspect tags(String ... tags) { return new TagsAspect(tags); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }
