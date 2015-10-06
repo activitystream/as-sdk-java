@@ -99,7 +99,7 @@ public class Event {
             obj.put("aspects", aspectsJson);
         }
         if (props != null) obj.put("properties", props);
-        if (sdkVersion != null) obj.put("sdk", sdkVersion);
+        if (sdkVersion != null) obj.put("_v", sdkVersion);
         return obj;
     }
 }
