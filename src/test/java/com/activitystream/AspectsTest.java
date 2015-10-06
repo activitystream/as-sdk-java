@@ -66,7 +66,7 @@ public class AspectsTest extends EventTestBase {
         EntityType POI = new EntityType("Poi");
         EntityType Serial = new EntityType("Serial");
         Event ev = event("action")
-                .aspects(eCommerce(
+                .aspects(commerce(
                                 item()
                                         .involves(role(PURCHASED,entity(POI, "12344542352345345")))
                                         .commissionFixed(1540.0)
@@ -166,13 +166,12 @@ public class AspectsTest extends EventTestBase {
     }
 
     @Test
-    public void pageview() throws ParseException {
+    public void pageview_aspect() throws ParseException {
         Map referrerProps = Factories.getMap();
         referrerProps.put("a", "b");
         referrerProps.put("c", 22);
         Event ev = event("action")
-                .aspects(new PageviewAspect()
-                                .path("/path")
+                .aspects(pageview("/path")
                                 .pathProperties(Factories.getMap())
                                 .keywords("a", "b", "c")
                                 .method(RequestMethod.GET)

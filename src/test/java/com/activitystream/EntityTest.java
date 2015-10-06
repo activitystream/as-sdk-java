@@ -50,7 +50,7 @@ public class EntityTest {
         Entity entity = entity("Person", "Petar").properties(m().key("a").value("b"));
         Event ev = event("test")
                 .involves(role(ACTOR, entity), role(INVOLVES, entity))
-                .aspects(eCommerce(
+                .aspects(commerce(
                         item().involves(role(ACTOR, entity))
                 ));
 
