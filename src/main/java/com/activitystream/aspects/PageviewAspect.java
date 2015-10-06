@@ -8,71 +8,61 @@ import java.util.*;
 
 public class PageviewAspect implements Aspect {
     private String path;
+    private Map pathProps = Factories.getMap();
+    private List keywords;
+    private RequestMethod method;
+    private Integer responseCode;
+    private Integer size;
+    private String protocol;
+    private List<EntityRelation> pageContent;
+    private String referrer;
+    private Map referrerProperties;
 
-    public PageviewAspect path(String path) {
-        this.path = path;
-        return this;
+    public PageviewAspect(String url) {
+        path = url;
     }
-
-    private Map pathProps;
 
     public PageviewAspect pathProperties(Map pathProps) {
         this.pathProps = pathProps;
         return this;
     }
 
-    private List keywords;
-
-    public PageviewAspect keywords(String ... keywords) {
+    public PageviewAspect keywords(String... keywords) {
         this.keywords = new ArrayList();
         Collections.addAll(this.keywords, keywords);
         return this;
     }
-
-    private RequestMethod method;
 
     public PageviewAspect method(RequestMethod method) {
         this.method = method;
         return this;
     }
 
-    private Integer responseCode;
-
     public PageviewAspect responseCode(Integer responseCode) {
         this.responseCode = responseCode;
         return this;
     }
-
-    private Integer size;
 
     public PageviewAspect size(Integer size) {
         this.size = size;
         return this;
     }
 
-    private String protocol;
-
     public PageviewAspect protocol(String protocol) {
         this.protocol = protocol;
         return this;
     }
 
-    private List<EntityRelation> pageContent;
-
-    public PageviewAspect pageContent(EntityRelation ... pageContent) {
+    public PageviewAspect pageContent(EntityRelation... pageContent) {
         this.pageContent = new ArrayList<>();
         Collections.addAll(this.pageContent, pageContent);
         return this;
     }
 
-    private String referrer;
-
     public PageviewAspect referrer(String referrer) {
         this.referrer = referrer;
         return this;
     }
-
-    private Map referrerProperties;
 
     public PageviewAspect referrerProperties(Map referrerProperties) {
         this.referrerProperties = referrerProperties;
@@ -90,7 +80,8 @@ public class PageviewAspect implements Aspect {
         if (size != null) result.put("size", size);
         if (protocol != null) result.put("protocol", protocol);
         if (referrer != null) result.put("referrer", referrer);
-        if (referrerProperties != null && referrerProperties.size() > 0) result.put("referrer_properties", referrerProperties);
+        if (referrerProperties != null && referrerProperties.size() > 0)
+            result.put("referrer_properties", referrerProperties);
         if (pageContent != null) {
             List pageContentItems = new ArrayList();
             for (EntityRelation entityRelation : pageContent) {

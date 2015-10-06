@@ -56,6 +56,8 @@ public class Sugar {
 
     public static TagsAspect tags(String ... tags) { return new TagsAspect(tags); }
 
+    public static PageviewAspect pageview(String url) { return new PageviewAspect(url); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }
