@@ -8,137 +8,137 @@ import com.activitystream.underware.Factories;
 
 import java.util.*;
 
-public class ECommerceAspectItem {
+public class CommerceAspectItem {
     private EntityRole[] involved = new EntityRole[]{};
     private Aspect[] aspects = new Aspect[]{};
 
-    public ECommerceAspectItem involves(EntityRole... role) {
+    public CommerceAspectItem involves(EntityRole... role) {
         this.involved = role;
         return this;
     }
 
-    public ECommerceAspectItem aspects(Aspect... aspects) {
+    public CommerceAspectItem aspects(Aspect... aspects) {
         this.aspects = aspects;
         return this;
     }
 
     private Double commissionFixed;
 
-    public ECommerceAspectItem commissionFixed(Double commissionFixed) {
+    public CommerceAspectItem commissionFixed(Double commissionFixed) {
         this.commissionFixed = commissionFixed;
         return this;
     }
 
     private Double commissionPercentage;
 
-    public ECommerceAspectItem commissionPercentage(Double commissionPercentage) {
+    public CommerceAspectItem commissionPercentage(Double commissionPercentage) {
         this.commissionPercentage = commissionPercentage;
         return this;
     }
 
     private Double discountPercentage;
 
-    public ECommerceAspectItem discountPercentage(Double discountPercentage) {
+    public CommerceAspectItem discountPercentage(Double discountPercentage) {
         this.discountPercentage = discountPercentage;
         return this;
     }
 
     private Double taxPercentage;
 
-    public ECommerceAspectItem taxPercentage(Double taxPercentage) {
+    public CommerceAspectItem taxPercentage(Double taxPercentage) {
         this.taxPercentage = taxPercentage;
         return this;
     }
 
     private Integer itemCount;
 
-    public ECommerceAspectItem itemCount(Integer itemCount) {
+    public CommerceAspectItem itemCount(Integer itemCount) {
         this.itemCount = itemCount;
         return this;
     }
 
     private Double itemPrice;
 
-    public ECommerceAspectItem itemPrice(Double itemPrice) {
+    public CommerceAspectItem itemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
         return this;
     }
 
     private String description;
 
-    public ECommerceAspectItem description(String description) {
+    public CommerceAspectItem description(String description) {
         this.description = description;
         return this;
     }
 
     private String variant;
 
-    public ECommerceAspectItem variant(String variant) {
+    public CommerceAspectItem variant(String variant) {
         this.variant = variant;
         return this;
     }
 
     private String priceCategory;
 
-    public ECommerceAspectItem priceCategory(String priceCategory) {
+    public CommerceAspectItem priceCategory(String priceCategory) {
         this.priceCategory = priceCategory;
         return this;
     }
 
     private String currency;
 
-    public ECommerceAspectItem currency(String currency) {
+    public CommerceAspectItem currency(String currency) {
         this.currency = currency;
         return this;
     }
 
     private Double totalInStock;
 
-    public ECommerceAspectItem totalInStock(Double totalInStock) {
+    public CommerceAspectItem totalInStock(Double totalInStock) {
         this.totalInStock = totalInStock;
         return this;
     }
 
     private Double totalForSale;
 
-    public ECommerceAspectItem totalForSale(Double totalForSale) {
+    public CommerceAspectItem totalForSale(Double totalForSale) {
         this.totalForSale = totalForSale;
         return this;
     }
 
     private List<Entity> serialNumbers = new ArrayList<>();
 
-    public ECommerceAspectItem serialNumbers(Entity... serialNumbers) {
+    public CommerceAspectItem serialNumbers(Entity... serialNumbers) {
         this.serialNumbers.addAll(Arrays.asList(serialNumbers));
         return this;
     }
 
     private Date validFrom;
 
-    public ECommerceAspectItem validFrom(Date validFrom) {
+    public CommerceAspectItem validFrom(Date validFrom) {
         this.validFrom = validFrom;
         return this;
     }
 
     private Date validUntil;
 
-    public ECommerceAspectItem validUntil(Date validUntil) {
+    public CommerceAspectItem validUntil(Date validUntil) {
         this.validUntil = validUntil;
         return this;
     }
 
     private String accountingKey;
 
-    public ECommerceAspectItem accountingKey(String accountingKey) {
+    public CommerceAspectItem accountingKey(String accountingKey) {
         this.accountingKey = accountingKey;
         return this;
     }
 
-    public ECommerceAspectItem occured(Date timestamp) {
+    public CommerceAspectItem occured(Date timestamp) {
         return this;
     }
 
-    public ECommerceAspectItem properties() {
+    public CommerceAspectItem properties() {
         return this;
     }
 

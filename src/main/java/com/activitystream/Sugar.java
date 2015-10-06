@@ -23,9 +23,16 @@ public class Sugar {
 
     // Aspects
 
-    public static ECommerceAspect eCommerce(ECommerceAspectItem... items) { return new ECommerceAspect().items(items); }
+    /**
+     * @deprecated please use {@link #commerce(CommerceAspectItem...)} instead
+     * @param items
+     * @return
+     */
+    public static CommerceAspect eCommerce(CommerceAspectItem... items) { return new CommerceAspect().items(items); }
 
-    public static ECommerceAspectItem item() { return new ECommerceAspectItem(); }
+    public static CommerceAspect commerce(CommerceAspectItem... items) { return new CommerceAspect().items(items); }
+
+    public static CommerceAspectItem item() { return new CommerceAspectItem(); }
 
     public static ClassificationAspect classification() { return new ClassificationAspect(); }
 

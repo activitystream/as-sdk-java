@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ECommerceAspect implements Aspect {
+public class CommerceAspect implements Aspect {
 
-    private ECommerceAspectItem[] items = new ECommerceAspectItem[]{};
+    private CommerceAspectItem[] items = new CommerceAspectItem[]{};
 
-    public ECommerceAspect items(ECommerceAspectItem... items) {
+    public CommerceAspect items(CommerceAspectItem... items) {
         this.items = items;
         return this;
     }
@@ -20,7 +20,7 @@ public class ECommerceAspect implements Aspect {
     public void addToObject(Map jsonObject, Set<String> processed) {
         if (items.length > 0) {
             List inv = new ArrayList();
-            for (ECommerceAspectItem item : items) {
+            for (CommerceAspectItem item : items) {
                 inv.add(item.toJson(processed));
             }
             jsonObject.put("items", inv);
