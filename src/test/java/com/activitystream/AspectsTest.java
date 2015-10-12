@@ -148,7 +148,7 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(timed()
                                 .begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"), TimeZone.getTimeZone("GMT+1"))
-                                .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"), TimeZone.getTimeZone("UTC"))
+                                .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"), TimeZone.getTimeZone("GMT+2"))
                 );
 
         Map expected = map(
@@ -156,7 +156,7 @@ public class AspectsTest extends EventTestBase {
                 "aspects", map(
                         "timed", map(
                                 "begins", "2015-11-24T18:00:00.000+01",
-                                "ends", "2015-11-24T20:00:00.000Z",
+                                "ends", "2015-11-24T22:00:00.000+02",
                                 "action", "valid"
                         )
                 )
