@@ -1,19 +1,19 @@
 package com.activitystream;
 
-import com.activitystream.helpers.DateHelpers;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Event {
     private EventType event;
     private List<EntityRole> involved = new ArrayList<>();
     private List<Aspect> aspects = new ArrayList<>();
-    private Date timestamp;
+    private String timestamp;
     private String origin;
     private Map props;
     private String description;
@@ -47,8 +47,11 @@ public class Event {
         return this;
     }
 
-    public Event occurred(Date timestamp) {
-        this.timestamp = timestamp;
+    public Event occurred(Date timestamp, TimeZone timeZone) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        formatter.setTimeZone(timeZone);
+
+        this.timestamp =  formatter.format(timestamp);
         return this;
     }
 
@@ -81,7 +84,7 @@ public class Event {
         obj.put("type", event.id);
         if (origin != null) obj.put("origin", origin);
         if (description != null) obj.put("description", description);
-        if (timestamp != null) obj.put("occurred_at", DateHelpers.isoDateFormatter.format(timestamp));
+        if (timestamp != null) obj.put("occurred_at", timestamp);
 
         if (involved.size() > 0) {
             List inv = new ArrayList();

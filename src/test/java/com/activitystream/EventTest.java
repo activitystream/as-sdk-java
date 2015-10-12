@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.TimeZone;
 
 import static com.activitystream.EntityRoleType.ACTOR;
 import static com.activitystream.Predefined.AKA;
@@ -107,13 +108,13 @@ public class EventTest extends EventTestBase {
                 .origin("browserX")
                 .description("some text")
                 .properties(m().key("favourite_programming_language").value("javascript"))
-                .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"));
+                .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"), TimeZone.getTimeZone("GMT+01"));
 
         Map expected = map(
                 "type", "action",
                 "description", "some text",
                 "properties", map("favourite_programming_language", "javascript"),
-                "occurred_at", "2014-12-01T10:00:00.000Z",
+                "occurred_at", "2014-12-01T11:00:00.000+01",
                 "origin", "browserX"
         );
 
