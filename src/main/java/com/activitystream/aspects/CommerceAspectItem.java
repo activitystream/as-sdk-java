@@ -161,8 +161,8 @@ public class CommerceAspectItem {
         if (totalInStock != null) obj.put("total_in_stock", totalInStock);
         if (totalForSale != null) obj.put("total_for_sale", totalForSale);
         if (currency != null) obj.put("currency", currency);
-        if (validFrom != null) obj.put("valid_from", DateHelpers.isoDateFormatter.format(validFrom));
-        if (validUntil != null) obj.put("valid_until", DateHelpers.isoDateFormatter.format(validUntil));
+        if (validFrom != null) obj.put("valid_from", DateHelpers.dateFormatter.format(validFrom));
+        if (validUntil != null) obj.put("valid_until", DateHelpers.dateFormatter.format(validUntil));
         if (priceCategory != null) obj.put("price_category", priceCategory);
         if (variant != null) obj.put("variant", variant);
         if (description != null) obj.put("description", description);

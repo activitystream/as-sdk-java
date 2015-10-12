@@ -9,17 +9,17 @@ import java.util.Map;
 import java.util.Set;
 
 public class TimedAspect implements Aspect {
-    private Date starts;
+    private String starts;
 
     public TimedAspect begins(Date starts) {
-        this.starts = starts;
+        this.starts = DateHelpers.dateFormatter.format(starts);
         return this;
     }
 
-    private Date ends;
+    private String ends;
 
     public TimedAspect ends(Date ends) {
-        this.ends = ends;
+        this.ends = DateHelpers.dateFormatter.format(ends);
         return this;
     }
 
@@ -36,8 +36,8 @@ public class TimedAspect implements Aspect {
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
         }
-        if (starts != null) timed.put("begins", DateHelpers.isoDateFormatter.format(starts));
-        if (ends != null) timed.put("ends", DateHelpers.isoDateFormatter.format(ends));
+        if (starts != null) timed.put("begins", starts);
+        if (ends != null) timed.put("ends", ends);
         timed.put("action", type.toString());
         jsonObject.put("timed", timed);
     }

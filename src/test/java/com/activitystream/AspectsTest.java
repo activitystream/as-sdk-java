@@ -2,7 +2,6 @@ package com.activitystream;
 
 import com.activitystream.aspects.ClientDeviceAspect;
 import com.activitystream.aspects.ClientIPAddressAspect;
-import com.activitystream.aspects.PageviewAspect;
 import com.activitystream.aspects.RequestMethod;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
@@ -68,7 +67,7 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(commerce(
                                 item()
-                                        .involves(role(PURCHASED,entity(POI, "12344542352345345")))
+                                        .involves(role(PURCHASED, entity(POI, "12344542352345345")))
                                         .commissionFixed(1540.0)
                                         .commissionPercentage(150D)
                                         .discountPercentage(15D)
@@ -78,8 +77,8 @@ public class AspectsTest extends EventTestBase {
                                         .totalForSale(3.5)
                                         .itemPrice(15400.0)
                                         .serialNumbers(entity(Serial, "1234"), entity(Serial, "4567"))
-                                        .validFrom(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
-                                        .validUntil(DateHelpers.isoDateFormatter.parse("2015-11-24T18:00:00.000Z"))
+                                        .validFrom(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"))
+                                        .validUntil(DateHelpers.dateFormatter.parse("2015-11-24T18:00:00.000Z"))
                                         .description("desc")
                                         .variant("variant")
                                         .priceCategory("A")
@@ -147,8 +146,8 @@ public class AspectsTest extends EventTestBase {
     public void timed_aspect() throws ParseException {
         Event ev = event("action")
                 .aspects(timed()
-                                .begins(DateHelpers.isoDateFormatter.parse("2015-11-24T17:00:00.000Z"))
-                                .ends(DateHelpers.isoDateFormatter.parse("2015-11-24T20:00:00.000Z"))
+                                .begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"))
+                                .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"))
                 );
 
         Map expected = map(

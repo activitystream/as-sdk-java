@@ -52,8 +52,8 @@ public class EntityRelation {
 
         obj.put("type", linkType.toJson());
         if (weight != null) obj.put("weight", weight);
-        if (startDate != null) obj.put("valid_from", DateHelpers.isoDateFormatter.format(startDate));
-        if (endDate != null) obj.put("active_until", DateHelpers.isoDateFormatter.format(endDate));
+        if (startDate != null) obj.put("valid_from", DateHelpers.dateFormatter.format(startDate));
+        if (endDate != null) obj.put("active_until", DateHelpers.dateFormatter.format(endDate));
         if (props != null) obj.put("properties", props);
         entity.addToObject(obj, processed);
 
