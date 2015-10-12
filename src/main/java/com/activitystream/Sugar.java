@@ -9,7 +9,7 @@ public class Sugar {
 
     // Core concepts
 
-    public static Entity entity(EntityType type, String id) { return new Entity().id(type, id); }
+    public static Entity entity(EntityType type, String id) { return new Entity(type, id); }
 
     public static Entity entity(String type, String id) { return entity(new EntityType(type), id); }
 

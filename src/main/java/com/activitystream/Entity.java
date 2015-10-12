@@ -2,6 +2,7 @@ package com.activitystream;
 
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
+import org.json.simple.JSONObject;
 
 import java.util.*;
 
@@ -12,10 +13,9 @@ public class Entity {
     private Map props = Factories.getMap();
     private List<Aspect> aspects = new ArrayList<>();
 
-    public Entity id(EntityType type, String id) {
+    public Entity(EntityType type, String id) {
         this.type = type;
         this.id = id;
-        return this;
     }
 
     public Entity properties(Map props) {
@@ -65,5 +65,15 @@ public class Entity {
             }
             jsonObject.put("entity", value);
         }
+    }
+
+    public String toJson() {
+        return JSONObject.toJSONString(toMap()).replace("\\/", "/");
+    }
+
+    public Map toMap() {
+        Map result = Factories.getMap();
+        addToObject(result, new HashSet<String>());
+        return result;
     }
 }

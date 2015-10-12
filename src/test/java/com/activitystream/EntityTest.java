@@ -23,8 +23,7 @@ public class EntityTest {
                 "entity_ref", "Person/id"
         );
 
-        Map actual = Factories.getMap();
-        entity.addToObject(actual, processed);
+        Map actual = entity.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
 
     }
@@ -39,8 +38,7 @@ public class EntityTest {
                 )
         );
 
-        Map actual = Factories.getMap();
-        entity.addToObject(actual, processed);
+        Map actual = entity.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
 
     }
