@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.Map;
+import java.util.TimeZone;
 
 import static com.activitystream.EntityRoleType.ACTOR;
 import static com.activitystream.Predefined.FEATURED;
@@ -77,8 +78,8 @@ public class AspectsTest extends EventTestBase {
                                         .totalForSale(3.5)
                                         .itemPrice(15400.0)
                                         .serialNumbers(entity(Serial, "1234"), entity(Serial, "4567"))
-                                        .validFrom(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"))
-                                        .validUntil(DateHelpers.dateFormatter.parse("2015-11-24T18:00:00.000Z"))
+                                        .validFrom(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"), TimeZone.getTimeZone("UTC"))
+                                        .validUntil(DateHelpers.dateFormatter.parse("2015-11-24T18:00:00.000Z"), TimeZone.getTimeZone("GMT+10"))
                                         .description("desc")
                                         .variant("variant")
                                         .priceCategory("A")
@@ -110,7 +111,7 @@ public class AspectsTest extends EventTestBase {
                                         "total_in_stock", 2.5,
                                         "total_for_sale", 3.5,
                                         "valid_from", "2015-11-24T17:00:00.000Z",
-                                        "valid_until", "2015-11-24T18:00:00.000Z",
+                                        "valid_until", "2015-11-25T04:00:00.000+10",
                                         "accounting_key", "KEY",
                                         "discount_percentage", 15.0
 
@@ -146,15 +147,15 @@ public class AspectsTest extends EventTestBase {
     public void timed_aspect() throws ParseException {
         Event ev = event("action")
                 .aspects(timed()
-                                .begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"))
-                                .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"))
+                                .begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"), TimeZone.getTimeZone("GMT+1"))
+                                .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"), TimeZone.getTimeZone("UTC"))
                 );
 
         Map expected = map(
                 "type", "action",
                 "aspects", map(
                         "timed", map(
-                                "begins", "2015-11-24T17:00:00.000Z",
+                                "begins", "2015-11-24T18:00:00.000+01",
                                 "ends", "2015-11-24T20:00:00.000Z",
                                 "action", "valid"
                         )

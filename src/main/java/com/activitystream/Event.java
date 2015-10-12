@@ -1,5 +1,6 @@
 package com.activitystream;
 
+import com.activitystream.helpers.DateHelpers;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 import org.json.simple.JSONObject;
@@ -48,7 +49,7 @@ public class Event {
     }
 
     public Event occurred(Date timestamp, TimeZone timeZone) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
 
         this.timestamp =  formatter.format(timestamp);

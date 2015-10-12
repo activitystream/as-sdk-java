@@ -4,22 +4,30 @@ import com.activitystream.Aspect;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 public class TimedAspect implements Aspect {
     private String starts;
 
-    public TimedAspect begins(Date starts) {
-        this.starts = DateHelpers.dateFormatter.format(starts);
+    public TimedAspect begins(Date starts, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
+
+        this.starts = formatter.format(starts);
         return this;
     }
 
     private String ends;
 
-    public TimedAspect ends(Date ends) {
-        this.ends = DateHelpers.dateFormatter.format(ends);
+    public TimedAspect ends(Date ends, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
+
+        this.ends = formatter.format(ends);
         return this;
     }
 

@@ -3,9 +3,11 @@ package com.activitystream;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * The relation of a specific type between two entities
@@ -14,8 +16,8 @@ public class EntityRelation {
     private EntityRelationType linkType;
     private Entity entity;
     private Map props;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private Double weight;
 
 
@@ -30,13 +32,19 @@ public class EntityRelation {
         return this;
     }
 
-    public EntityRelation validFrom(Date startDate) {
-        this.startDate = startDate;
+    public EntityRelation validFrom(Date startDate, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
+
+        this.startDate = formatter.format(startDate);
         return this;
     }
 
-    public EntityRelation activeUntil(Date endDate) {
-        this.endDate = endDate;
+    public EntityRelation activeUntil(Date endDate, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
+
+        this.endDate = formatter.format(endDate);
         return this;
     }
 
@@ -52,8 +60,8 @@ public class EntityRelation {
 
         obj.put("type", linkType.toJson());
         if (weight != null) obj.put("weight", weight);
-        if (startDate != null) obj.put("valid_from", DateHelpers.dateFormatter.format(startDate));
-        if (endDate != null) obj.put("active_until", DateHelpers.dateFormatter.format(endDate));
+        if (startDate != null) obj.put("valid_from", startDate);
+        if (endDate != null) obj.put("active_until", endDate);
         if (props != null) obj.put("properties", props);
         entity.addToObject(obj, processed);
 

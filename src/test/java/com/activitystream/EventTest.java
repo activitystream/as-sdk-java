@@ -59,7 +59,7 @@ public class EventTest extends EventTestBase {
                                         classification().type("type")
                                 )
                                 .relations(
-                                        rel().link(AKA, entity(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00")),
+                                        rel().link(AKA, entity(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"), TimeZone.getTimeZone("GMT+08")),
                                         rel().link(AKA, entity(TWITTER, "pshomov")),
                                         rel().link(AKA, entity(BUILDING, "Laugavegur 26"))
                                 )
@@ -82,7 +82,7 @@ public class EventTest extends EventTestBase {
                                                 map(
                                                         "type", "AKA",
                                                         "entity_ref", "Email/pshomov@gmail.com",
-                                                        "valid_from", "2014-12-01T10:00:00.000Z"
+                                                        "valid_from", "2014-12-01T18:00:00.000+08"
                                                 ),
                                                 map(
                                                         "type", "AKA",

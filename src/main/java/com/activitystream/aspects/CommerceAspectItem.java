@@ -6,6 +6,7 @@ import com.activitystream.EntityRole;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CommerceAspectItem {
@@ -113,17 +114,23 @@ public class CommerceAspectItem {
         return this;
     }
 
-    private Date validFrom;
+    private String validFrom;
 
-    public CommerceAspectItem validFrom(Date validFrom) {
-        this.validFrom = validFrom;
+    public CommerceAspectItem validFrom(Date validFrom, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
+
+        this.validFrom = formatter.format(validFrom);
         return this;
     }
 
-    private Date validUntil;
+    private String validUntil;
 
-    public CommerceAspectItem validUntil(Date validUntil) {
-        this.validUntil = validUntil;
+    public CommerceAspectItem validUntil(Date validUntil, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
+
+        this.validUntil = formatter.format(validUntil);
         return this;
     }
 
@@ -131,10 +138,6 @@ public class CommerceAspectItem {
 
     public CommerceAspectItem accountingKey(String accountingKey) {
         this.accountingKey = accountingKey;
-        return this;
-    }
-
-    public CommerceAspectItem occured(Date timestamp) {
         return this;
     }
 
@@ -161,8 +164,8 @@ public class CommerceAspectItem {
         if (totalInStock != null) obj.put("total_in_stock", totalInStock);
         if (totalForSale != null) obj.put("total_for_sale", totalForSale);
         if (currency != null) obj.put("currency", currency);
-        if (validFrom != null) obj.put("valid_from", DateHelpers.dateFormatter.format(validFrom));
-        if (validUntil != null) obj.put("valid_until", DateHelpers.dateFormatter.format(validUntil));
+        if (validFrom != null) obj.put("valid_from", validFrom);
+        if (validUntil != null) obj.put("valid_until", validUntil);
         if (priceCategory != null) obj.put("price_category", priceCategory);
         if (variant != null) obj.put("variant", variant);
         if (description != null) obj.put("description", description);
