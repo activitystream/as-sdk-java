@@ -60,6 +60,8 @@ public class Sugar {
 
     public static LocaleAspect locale() { return new LocaleAspect(); }
 
+    public static InventoryAspect inventory() { return new InventoryAspect(); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }

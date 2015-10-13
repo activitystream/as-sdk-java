@@ -332,4 +332,26 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void inventory_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        inventory()
+                        .itemsForSale(10D)
+                        .itemsInStock(100D)
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "inventory", map(
+                                "items_for_sale", 10D,
+                                "items_in_stock", 100D
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }
