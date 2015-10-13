@@ -4,6 +4,8 @@ import com.activitystream.Aspect;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 
+import javax.swing.text.html.HTMLDocument;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -21,6 +23,16 @@ public class TimedAspect implements Aspect {
         return this;
     }
 
+    public TimedAspect begins(String starts) {
+        try {
+            DateHelpers.dateFormatter.parse(starts);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        this.starts = starts;
+        return this;
+    }
+
     private String ends;
 
     public TimedAspect ends(Date ends, TimeZone timeZone) {
@@ -28,6 +40,17 @@ public class TimedAspect implements Aspect {
         formatter.setTimeZone(timeZone);
 
         this.ends = formatter.format(ends);
+        return this;
+    }
+
+    public TimedAspect ends(String timestamp) {
+        try {
+            DateHelpers.dateFormatter.parse(timestamp);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        this.ends = timestamp;
         return this;
     }
 

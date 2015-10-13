@@ -57,8 +57,12 @@ public class Event {
         return this;
     }
 
-    public Event occurred(String timestamp) throws ParseException {
-        DateHelpers.dateFormatter.parse(timestamp);
+    public Event occurred(String timestamp) {
+        try {
+            DateHelpers.dateFormatter.parse(timestamp);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         this.timestamp = timestamp;
         return this;
     }
