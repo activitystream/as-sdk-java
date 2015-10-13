@@ -1,6 +1,5 @@
 package com.activitystream;
 
-import com.activitystream.underware.Factories;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -9,7 +8,8 @@ import java.util.Set;
 
 import static com.activitystream.EventTestBase.list;
 import static com.activitystream.EventTestBase.map;
-import static com.activitystream.Predefined.*;
+import static com.activitystream.Predefined.ACTOR;
+import static com.activitystream.Predefined.INVOLVES;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -32,10 +32,8 @@ public class EntityTest {
     public void should_render_as_embedded_entity_when_any_propery_besides_id_is_present() {
         Entity entity = entity("Person", "id").properties(m().key("a").value("b"));
         Map expected = map(
-                "entity", map(
-                        "entity_ref", "Person/id",
-                        "properties", map("a", "b")
-                )
+                "entity_ref", "Person/id",
+                "properties", map("a", "b")
         );
 
         Map actual = entity.toMap();

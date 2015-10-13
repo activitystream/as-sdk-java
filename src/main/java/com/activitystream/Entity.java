@@ -66,14 +66,43 @@ public class Entity {
             jsonObject.put("entity", value);
         }
     }
+    public Map addToObject(Set<String> processed) {
+        Map jsonObject = Factories.getMap();
+        String entityId = type.toJson() + "/" + id;
+        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())){
+            jsonObject.put("entity_ref", entityId);
+        } else {
+            processed.add(this.toString());
+            Map value = Factories.getMap();
+            value.put("entity_ref", entityId);
+
+            if (relations.size() > 0) {
+                List inv = new ArrayList();
+                for (EntityRelation relation : relations) {
+                    inv.add(relation.toJson(processed));
+                }
+                value.put("relations", inv);
+            }
+            if (props.size() > 0) {
+                value.put("properties", props);
+            }
+            if (aspects.size() > 0) {
+                Map aspectsJson = Factories.getMap();
+                for (Aspect aspect : aspects) {
+                    aspect.addToObject(aspectsJson, processed);
+                }
+                value.put("aspects", aspectsJson);
+            }
+            return value;
+        }
+        return jsonObject;
+    }
 
     public String toJson() {
         return JSONObject.toJSONString(toMap()).replace("\\/", "/");
     }
 
     public Map toMap() {
-        Map result = Factories.getMap();
-        addToObject(result, new HashSet<String>());
-        return result;
+        return addToObject(new HashSet<String>());
     }
 }
