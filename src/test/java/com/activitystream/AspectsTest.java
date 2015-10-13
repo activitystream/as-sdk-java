@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.Map;
 import java.util.TimeZone;
@@ -301,6 +302,30 @@ public class AspectsTest extends EventTestBase {
                 "type", "action",
                 "aspects", map(
                         "tags", list("a", "b", "c")
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void locale_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        locale()
+                            .locale("en-GB")
+                            .currency("USD")
+                            .timezone(TimeZone.getTimeZone("GMT+01"))
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "locale", map(
+                                "locale", "en-GB",
+                                "currency", "USD",
+                                "timezone", "GMT+01:00"
+                        )
                 )
         );
         Map actual = ev.toMap();

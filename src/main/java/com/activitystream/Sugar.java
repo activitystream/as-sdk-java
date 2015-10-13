@@ -58,6 +58,8 @@ public class Sugar {
 
     public static PageviewAspect pageview(String url) { return new PageviewAspect(url); }
 
+    public static LocaleAspect locale() { return new LocaleAspect(); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }
