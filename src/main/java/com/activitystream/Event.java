@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -53,6 +54,12 @@ public class Event {
         formatter.setTimeZone(timeZone);
 
         this.timestamp =  formatter.format(timestamp);
+        return this;
+    }
+
+    public Event occurred(String timestamp) throws ParseException {
+        DateHelpers.dateFormatter.parse(timestamp);
+        this.timestamp = timestamp;
         return this;
     }
 
