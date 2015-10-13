@@ -20,6 +20,7 @@ public class EntityTest {
     public void should_render_as_ref_entity_when_only_id_is_present() {
         Entity entity = entity("Person", "id");
         Map expected = map(
+                "type", "as.api.entity",
                 "entity_ref", "Person/id"
         );
 
@@ -32,6 +33,7 @@ public class EntityTest {
     public void should_render_as_embedded_entity_when_any_propery_besides_id_is_present() {
         Entity entity = entity("Person", "id").properties(m().key("a").value("b"));
         Map expected = map(
+                "type", "as.api.entity",
                 "entity_ref", "Person/id",
                 "properties", map("a", "b")
         );

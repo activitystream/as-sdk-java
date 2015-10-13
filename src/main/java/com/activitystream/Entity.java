@@ -103,6 +103,8 @@ public class Entity {
     }
 
     public Map toMap() {
-        return addToObject(new HashSet<String>());
+        Map map = addToObject(new HashSet<String>());
+        map.put("type", "as.api.entity");
+        return map;
     }
 }
