@@ -23,13 +23,6 @@ public class Sugar {
 
     // Aspects
 
-    /**
-     * @param items
-     * @return
-     * @deprecated please use {@link #commerce(CommerceAspectItem...)} instead
-     */
-    public static CommerceAspect eCommerce(CommerceAspectItem... items) { return new CommerceAspect().items(items); }
-
     public static CommerceAspect commerce(CommerceAspectItem... items) { return new CommerceAspect().items(items); }
 
     public static CommerceAspectItem item() { return new CommerceAspectItem(); }
