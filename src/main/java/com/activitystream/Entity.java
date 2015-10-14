@@ -39,7 +39,7 @@ public class Entity {
 
     public void addToObject(Map jsonObject, Set<String> processed) {
         String entityId = type.toJson() + "/" + id;
-        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())){
+        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())) {
             jsonObject.put("entity_ref", entityId);
         } else {
             processed.add(this.toString());
@@ -66,10 +66,11 @@ public class Entity {
             jsonObject.put("entity", value);
         }
     }
+
     public Map addToObject(Set<String> processed) {
         Map jsonObject = Factories.getMap();
         String entityId = type.toJson() + "/" + id;
-        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())){
+        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())) {
             jsonObject.put("entity_ref", entityId);
         } else {
             processed.add(this.toString());

@@ -4,8 +4,6 @@ import com.activitystream.Aspect;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 
-import javax.swing.text.html.HTMLDocument;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -14,6 +12,8 @@ import java.util.TimeZone;
 
 public class TimedAspect implements Aspect {
     private String starts;
+    private String ends;
+    private TimedStatus type = TimedStatus.VALID;
 
     public TimedAspect begins(Date starts, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
@@ -28,8 +28,6 @@ public class TimedAspect implements Aspect {
         return this;
     }
 
-    private String ends;
-
     public TimedAspect ends(Date ends, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
@@ -42,8 +40,6 @@ public class TimedAspect implements Aspect {
         this.ends = timestamp;
         return this;
     }
-
-    private TimedStatus type = TimedStatus.VALID;
 
     public TimedAspect type(TimedStatus type) {
         this.type = type;

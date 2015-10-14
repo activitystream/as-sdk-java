@@ -12,6 +12,22 @@ import java.util.*;
 public class CommerceAspectItem {
     private EntityRole[] involved = new EntityRole[]{};
     private Aspect[] aspects = new Aspect[]{};
+    private Double commissionFixed;
+    private Double commissionPercentage;
+    private Double discountPercentage;
+    private Double taxPercentage;
+    private Integer itemCount;
+    private Double itemPrice;
+    private String description;
+    private String variant;
+    private String priceCategory;
+    private String currency;
+    private Double totalInStock;
+    private Double totalForSale;
+    private List<Entity> serialNumbers = new ArrayList<>();
+    private String validFrom;
+    private String validUntil;
+    private String accountingKey;
 
     public CommerceAspectItem involves(EntityRole... role) {
         this.involved = role;
@@ -23,98 +39,70 @@ public class CommerceAspectItem {
         return this;
     }
 
-    private Double commissionFixed;
-
     public CommerceAspectItem commissionFixed(Double commissionFixed) {
         this.commissionFixed = commissionFixed;
         return this;
     }
-
-    private Double commissionPercentage;
 
     public CommerceAspectItem commissionPercentage(Double commissionPercentage) {
         this.commissionPercentage = commissionPercentage;
         return this;
     }
 
-    private Double discountPercentage;
-
     public CommerceAspectItem discountPercentage(Double discountPercentage) {
         this.discountPercentage = discountPercentage;
         return this;
     }
-
-    private Double taxPercentage;
 
     public CommerceAspectItem taxPercentage(Double taxPercentage) {
         this.taxPercentage = taxPercentage;
         return this;
     }
 
-    private Integer itemCount;
-
     public CommerceAspectItem itemCount(Integer itemCount) {
         this.itemCount = itemCount;
         return this;
     }
-
-    private Double itemPrice;
 
     public CommerceAspectItem itemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
         return this;
     }
 
-    private String description;
-
     public CommerceAspectItem description(String description) {
         this.description = description;
         return this;
     }
-
-    private String variant;
 
     public CommerceAspectItem variant(String variant) {
         this.variant = variant;
         return this;
     }
 
-    private String priceCategory;
-
     public CommerceAspectItem priceCategory(String priceCategory) {
         this.priceCategory = priceCategory;
         return this;
     }
-
-    private String currency;
 
     public CommerceAspectItem currency(String currency) {
         this.currency = currency;
         return this;
     }
 
-    private Double totalInStock;
-
     public CommerceAspectItem totalInStock(Double totalInStock) {
         this.totalInStock = totalInStock;
         return this;
     }
-
-    private Double totalForSale;
 
     public CommerceAspectItem totalForSale(Double totalForSale) {
         this.totalForSale = totalForSale;
         return this;
     }
 
-    private List<Entity> serialNumbers = new ArrayList<>();
-
     public CommerceAspectItem serialNumbers(Entity... serialNumbers) {
         this.serialNumbers.addAll(Arrays.asList(serialNumbers));
         return this;
     }
-
-    private String validFrom;
 
     public CommerceAspectItem validFrom(Date validFrom, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
@@ -123,13 +111,12 @@ public class CommerceAspectItem {
         this.validFrom = formatter.format(validFrom);
         return this;
     }
+
     public CommerceAspectItem validFrom(String timestamp) {
         DateHelpers.validateDateString(timestamp);
         this.validFrom = timestamp;
         return this;
     }
-
-    private String validUntil;
 
     public CommerceAspectItem validUntil(Date validUntil, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
@@ -138,13 +125,12 @@ public class CommerceAspectItem {
         this.validUntil = formatter.format(validUntil);
         return this;
     }
+
     public CommerceAspectItem validUntil(String timestamp) {
         DateHelpers.validateDateString(timestamp);
         this.validUntil = timestamp;
         return this;
     }
-
-    private String accountingKey;
 
     public CommerceAspectItem accountingKey(String accountingKey) {
         this.accountingKey = accountingKey;

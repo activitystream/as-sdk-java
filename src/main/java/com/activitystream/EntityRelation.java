@@ -39,6 +39,7 @@ public class EntityRelation {
         this.startDate = formatter.format(startDate);
         return this;
     }
+
     public EntityRelation validFrom(String timestamp) {
         DateHelpers.validateDateString(timestamp);
         this.startDate = timestamp;

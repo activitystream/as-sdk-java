@@ -1,6 +1,6 @@
 package com.activitystream.aspects;
 
-public class InventoryAspect extends AspectBase{
+public class InventoryAspect extends AspectBase {
 
     public InventoryAspect() {
         aspectPropertyMap.put("inventory.items_in_stock", new AspectProperty(IsRequired.False));

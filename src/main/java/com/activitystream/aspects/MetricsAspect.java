@@ -5,7 +5,7 @@ import com.activitystream.Aspect;
 import java.util.Map;
 import java.util.Set;
 
-public class MetricsAspect implements Aspect{
+public class MetricsAspect implements Aspect {
 
     private Map<String, Double> dimensions;
 

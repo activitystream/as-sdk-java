@@ -15,7 +15,7 @@ public class AspectBase implements Aspect {
         for (Map.Entry<String, AspectProperty> aspect : aspectPropertyMap.entrySet()) {
             if (aspect.getValue().required && aspect.getValue().value == null)
                 throw new RuntimeException("Property " + aspect.getValue() + " is required ");
-            if (aspect.getValue().value != null){
+            if (aspect.getValue().value != null) {
                 String[] levels = aspect.getKey().split("\\.");
                 String aspectPropertyKey = levels[levels.length - 1];
                 levels = Arrays.copyOf(levels, levels.length - 1);

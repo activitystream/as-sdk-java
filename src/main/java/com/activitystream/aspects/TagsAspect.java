@@ -7,7 +7,7 @@ import java.util.*;
 public class TagsAspect implements Aspect {
     private List<String> tags = new ArrayList<>();
 
-    public TagsAspect(String ... tags) {
+    public TagsAspect(String... tags) {
         Collections.addAll(this.tags, tags);
     }
 

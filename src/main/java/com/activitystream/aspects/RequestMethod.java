@@ -2,6 +2,7 @@ package com.activitystream.aspects;
 
 public enum RequestMethod {
     GET, POST, DELETE, PUT;
+
     @Override
     public String toString() {
         if (this == GET) return "GET";

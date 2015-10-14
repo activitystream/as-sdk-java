@@ -7,19 +7,10 @@ import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Event {
-    private EventType event;
-    private List<EntityRole> involved = new ArrayList<>();
-    private List<Aspect> aspects = new ArrayList<>();
-    private String timestamp;
-    private String origin;
-    private Map props;
-    private String description;
-
     private static String sdkVersion;
 
     static {
@@ -29,11 +20,20 @@ public class Event {
             prop.load(in);
             in.close();
             String version = prop.getProperty("version");
-            if (!version.contains("$")) sdkVersion = "java-"+version; else sdkVersion = null;
+            if (!version.contains("$")) sdkVersion = "java-" + version;
+            else sdkVersion = null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private EventType event;
+    private List<EntityRole> involved = new ArrayList<>();
+    private List<Aspect> aspects = new ArrayList<>();
+    private String timestamp;
+    private String origin;
+    private Map props;
+    private String description;
 
     public Event(String type) { this.event = new EventType(type); }
 
@@ -55,7 +55,7 @@ public class Event {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
 
-        this.timestamp =  formatter.format(timestamp);
+        this.timestamp = formatter.format(timestamp);
         return this;
     }
 

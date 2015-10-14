@@ -1,6 +1,6 @@
 package com.activitystream.aspects;
 
-public class LocationAspect extends AspectBase{
+public class LocationAspect extends AspectBase {
 
     public static final String LOCATION_LATLONG = "geo_location.latlong";
     public static final String LOCATION_TYPE = "geo_location.type";

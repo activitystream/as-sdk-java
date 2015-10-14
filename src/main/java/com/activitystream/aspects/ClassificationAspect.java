@@ -8,13 +8,12 @@ import java.util.*;
 public class ClassificationAspect implements Aspect {
 
     private String type;
+    private String[] categories;
 
     public ClassificationAspect type(String type) {
         this.type = type;
         return this;
     }
-
-    private String[] categories;
 
     public ClassificationAspect categories(String... categories) {
         this.categories = categories;
