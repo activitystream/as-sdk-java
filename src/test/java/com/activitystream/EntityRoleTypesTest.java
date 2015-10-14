@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class EntityRelationTypesTest {
+public class EntityRoleTypesTest {
     @Test
     public void should_allow_extending_predefined_links(){
         EntityRoleType PARTY_A = EntityRoleType.ACTOR.extend("PARTY_A");
