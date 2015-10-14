@@ -11,8 +11,11 @@ public class EntityRelationType {
         this.aka = aka;
     }
 
-    public String toJson() {
+    public String value() {
         return aka;
     }
 
+    public EntityRelationType extend(String extenstion) {
+        return new EntityRelationType(aka + ":" + extenstion);
+    }
 }
