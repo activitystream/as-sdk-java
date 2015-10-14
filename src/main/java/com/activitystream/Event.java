@@ -20,11 +20,6 @@ public class Event {
     private Map props;
     private String description;
 
-    public Event(String type) { this.event = new EventType(type); }
-    public Event(EventType type) {
-        this.event = type;
-    }
-
     private static String sdkVersion;
 
     static {
@@ -39,6 +34,13 @@ public class Event {
             throw new RuntimeException(e);
         }
     }
+
+    public Event(String type) { this.event = new EventType(type); }
+
+    public Event(EventType type) {
+        this.event = type;
+    }
+
     public Event involves(EntityRole... role) {
         this.involved.addAll(Arrays.asList(role));
         return this;
