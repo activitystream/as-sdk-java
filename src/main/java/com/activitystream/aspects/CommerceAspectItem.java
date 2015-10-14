@@ -123,6 +123,11 @@ public class CommerceAspectItem {
         this.validFrom = formatter.format(validFrom);
         return this;
     }
+    public CommerceAspectItem validFrom(String timestamp) {
+        DateHelpers.validateDateString(timestamp);
+        this.validFrom = timestamp;
+        return this;
+    }
 
     private String validUntil;
 
@@ -131,6 +136,11 @@ public class CommerceAspectItem {
         formatter.setTimeZone(timeZone);
 
         this.validUntil = formatter.format(validUntil);
+        return this;
+    }
+    public CommerceAspectItem validUntil(String timestamp) {
+        DateHelpers.validateDateString(timestamp);
+        this.validUntil = timestamp;
         return this;
     }
 

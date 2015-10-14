@@ -18,18 +18,13 @@ public class TimedAspect implements Aspect {
     public TimedAspect begins(Date starts, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
-
         this.starts = formatter.format(starts);
         return this;
     }
 
-    public TimedAspect begins(String starts) {
-        try {
-            DateHelpers.dateFormatter.parse(starts);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        this.starts = starts;
+    public TimedAspect begins(String timestamp) {
+        DateHelpers.validateDateString(timestamp);
+        this.starts = timestamp;
         return this;
     }
 
@@ -38,18 +33,12 @@ public class TimedAspect implements Aspect {
     public TimedAspect ends(Date ends, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
-
         this.ends = formatter.format(ends);
         return this;
     }
 
     public TimedAspect ends(String timestamp) {
-        try {
-            DateHelpers.dateFormatter.parse(timestamp);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
+        DateHelpers.validateDateString(timestamp);
         this.ends = timestamp;
         return this;
     }

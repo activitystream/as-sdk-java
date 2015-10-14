@@ -39,12 +39,23 @@ public class EntityRelation {
         this.startDate = formatter.format(startDate);
         return this;
     }
+    public EntityRelation validFrom(String timestamp) {
+        DateHelpers.validateDateString(timestamp);
+        this.startDate = timestamp;
+        return this;
+    }
 
     public EntityRelation activeUntil(Date endDate, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
 
         this.endDate = formatter.format(endDate);
+        return this;
+    }
+
+    public EntityRelation activeUntil(String timestamp) {
+        DateHelpers.validateDateString(timestamp);
+        this.endDate = timestamp;
         return this;
     }
 
