@@ -96,7 +96,7 @@ public class EventTest extends EventTestBase {
                                         "properties", map("favourite_programming_language", "javascript"),
                                         "aspects", map(
                                                 "classification", map(
-                                                        "action", "type"
+                                                        "type", "type"
                                                 )
 
                                         ),

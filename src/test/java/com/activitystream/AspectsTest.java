@@ -128,16 +128,26 @@ public class AspectsTest extends EventTestBase {
     public void classification_aspect() {
         Event ev = event("action")
                 .aspects(classification()
-                                .categories(new String[]{"Nature", "Waterfalls"})
-                                .type("Poi")
+                                .type("car")
+                                .categories("Europe", "Sweden", "family")
+                                .variant("station wagon")
+                                .make("Volvo")
+                                .model("244GL")
+                                .size("family")
+                                .year(1976)
                 );
 
         Map expected = map(
                 "type", "action",
                 "aspects", map(
                         "classification", map(
-                                "action", "Poi",
-                                "categories", list("Nature", "Waterfalls")
+                                "type", "car",
+                                "categories", list("Europe", "Sweden", "family"),
+                                "variant" , "station wagon",
+                                "model", "244GL",
+                                "make", "Volvo",
+                                "size", "family",
+                                "year" , 1976
                         )
                 )
         );
