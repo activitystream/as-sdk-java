@@ -10,7 +10,7 @@ public class PageviewAspect implements Aspect {
     private String path;
     private Map pathProps = Factories.getMap();
     private List keywords;
-    private RequestMethod method;
+    private RequestMethod method = RequestMethod.GET;
     private Integer responseCode;
     private Integer size;
     private String protocol;
