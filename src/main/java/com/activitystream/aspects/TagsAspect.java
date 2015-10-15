@@ -13,6 +13,6 @@ public class TagsAspect implements Aspect {
 
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
-        if (tags.size() > 0) jsonObject.put("tags", tags);
+        jsonObject.put("tags", tags);
     }
 }

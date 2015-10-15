@@ -52,8 +52,8 @@ public class TimedAspect implements Aspect {
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
         }
-        if (starts != null) timed.put("begins", starts);
-        if (ends != null) timed.put("ends", ends);
+        timed.put("begins", starts);
+        timed.put("ends", ends);
         timed.put("action", type.toString());
         jsonObject.put("timed", timed);
     }

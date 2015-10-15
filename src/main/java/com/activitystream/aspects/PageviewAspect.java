@@ -72,16 +72,15 @@ public class PageviewAspect implements Aspect {
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
         Map result = Factories.getMap();
-        if (path != null) result.put("path", path);
-        if (pathProps != null && pathProps.size() > 0) result.put("path_properties", pathProps);
-        if (keywords != null) result.put("keywords", keywords);
-        if (method != null) result.put("method", method.toString());
-        if (responseCode != null) result.put("response_code", responseCode);
-        if (size != null) result.put("size", size);
-        if (protocol != null) result.put("protocol", protocol);
-        if (referrer != null) result.put("referrer", referrer);
-        if (referrerProperties != null && referrerProperties.size() > 0)
-            result.put("referrer_properties", referrerProperties);
+        result.put("path", path);
+        if (pathProps != null) result.put("path_properties", pathProps);
+        result.put("keywords", keywords);
+        result.put("method", method.toString());
+        result.put("response_code", responseCode);
+        result.put("size", size);
+        result.put("protocol", protocol);
+        result.put("referrer", referrer);
+        result.put("referrer_properties", referrerProperties);
         if (pageContent != null) {
             List pageContentItems = new ArrayList();
             for (EntityRelation entityRelation : pageContent) {
