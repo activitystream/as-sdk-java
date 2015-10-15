@@ -15,8 +15,7 @@ public class DimensionsAspect implements Aspect {
 
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
-        if (dimensions != null) {
-            jsonObject.put("dimensions", dimensions);
-        }
+        jsonObject.put("dimensions", dimensions);
+
     }
 }

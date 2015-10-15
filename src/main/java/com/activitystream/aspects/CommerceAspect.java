@@ -2,29 +2,23 @@ package com.activitystream.aspects;
 
 import com.activitystream.Aspect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class CommerceAspect implements Aspect {
 
-    private CommerceAspectItem[] items = new CommerceAspectItem[]{};
+    private List<CommerceAspectItem> items = new ArrayList<>();
 
     public CommerceAspect items(CommerceAspectItem... items) {
-        this.items = items;
+        this.items.addAll(Arrays.asList(items));
         return this;
     }
 
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
-        if (items.length > 0) {
-            List inv = new ArrayList();
-            for (CommerceAspectItem item : items) {
-                inv.add(item.toJson(processed));
-            }
-            jsonObject.put("items", inv);
+        List inv = new ArrayList();
+        for (CommerceAspectItem item : items) {
+            if (item != null) inv.add(item.toJson(processed));
         }
-
+        jsonObject.put("items", inv);
     }
 }

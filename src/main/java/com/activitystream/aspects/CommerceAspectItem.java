@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CommerceAspectItem {
-    private EntityRole[] involved = new EntityRole[]{};
-    private Aspect[] aspects = new Aspect[]{};
+    private List<EntityRole> involved = new ArrayList<>();
+    private List<Aspect> aspects = new ArrayList<>();
     private Double commissionFixed;
     private Double commissionPercentage;
     private Double discountPercentage;
@@ -29,13 +29,13 @@ public class CommerceAspectItem {
     private String validUntil;
     private String accountingKey;
 
-    public CommerceAspectItem involves(EntityRole... role) {
-        this.involved = role;
+    public CommerceAspectItem involves(EntityRole... roles) {
+        this.involved.addAll(Arrays.asList(roles));
         return this;
     }
 
     public CommerceAspectItem aspects(Aspect... aspects) {
-        this.aspects = aspects;
+        this.aspects.addAll(Arrays.asList(aspects));
         return this;
     }
 
@@ -144,46 +144,42 @@ public class CommerceAspectItem {
     public Map toJson(Set<String> processed) {
         Map obj = Factories.getMap();
 
-        if (involved.length > 0) {
-            List inv = new ArrayList();
-            for (int i = 0; i < involved.length; i++) {
-                inv.add(involved[i].toJson(processed));
-            }
-            obj.put("involves", inv);
+        List inv = new ArrayList();
+        for (EntityRole anInvolved : involved) {
+            if (anInvolved != null) inv.add(anInvolved.toJson(processed));
         }
+        obj.put("involves", inv);
 
-        if (accountingKey != null) obj.put("accounting_key", accountingKey);
-        if (commissionFixed != null) obj.put("commission_fixed", commissionFixed);
-        if (commissionPercentage != null) obj.put("commission_percentage", commissionPercentage);
-        if (discountPercentage != null) obj.put("discount_percentage", discountPercentage);
-        if (taxPercentage != null) obj.put("tax_percentage", taxPercentage);
-        if (totalInStock != null) obj.put("total_in_stock", totalInStock);
-        if (totalForSale != null) obj.put("total_for_sale", totalForSale);
-        if (currency != null) obj.put("currency", currency);
-        if (validFrom != null) obj.put("valid_from", validFrom);
-        if (validUntil != null) obj.put("valid_until", validUntil);
-        if (priceCategory != null) obj.put("price_category", priceCategory);
-        if (variant != null) obj.put("variant", variant);
-        if (description != null) obj.put("description", description);
-        if (itemPrice != null) obj.put("item_price", itemPrice);
-        if (itemCount != null) obj.put("item_count", itemCount);
+        obj.put("accounting_key", accountingKey);
+        obj.put("commission_fixed", commissionFixed);
+        obj.put("commission_percentage", commissionPercentage);
+        obj.put("discount_percentage", discountPercentage);
+        obj.put("tax_percentage", taxPercentage);
+        obj.put("total_in_stock", totalInStock);
+        obj.put("total_for_sale", totalForSale);
+        obj.put("currency", currency);
+        obj.put("valid_from", validFrom);
+        obj.put("valid_until", validUntil);
+        obj.put("price_category", priceCategory);
+        obj.put("variant", variant);
+        obj.put("description", description);
+        obj.put("item_price", itemPrice);
+        obj.put("item_count", itemCount);
 
-        if (serialNumbers.size() > 0) {
-            List serials = new ArrayList();
-            for (Entity serialNumber : serialNumbers) {
+        List serials = new ArrayList();
+        for (Entity serialNumber : serialNumbers) {
+            if (serialNumber != null) {
                 Map n = Factories.getMap();
                 serialNumber.addToObject(n, processed);
                 serials.add(n);
             }
-            obj.put("serial_numbers", serials);
         }
-        if (aspects.length > 0) {
-            Map aspectsJson = Factories.getMap();
-            for (Aspect aspect : aspects) {
-                aspect.addToObject(aspectsJson, processed);
-            }
-            obj.put("aspects", aspectsJson);
+        obj.put("serial_numbers", serials);
+        Map aspectsJson = Factories.getMap();
+        for (Aspect aspect : aspects) {
+            if (aspect != null) aspect.addToObject(aspectsJson, processed);
         }
+        obj.put("aspects", aspectsJson);
         return obj;
     }
 }

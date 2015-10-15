@@ -8,7 +8,7 @@ import java.util.*;
 public class ClassificationAspect implements Aspect {
 
     private String type;
-    private String[] categories;
+    private List<String> categories = new ArrayList<>();
 
     public ClassificationAspect type(String type) {
         this.type = type;
@@ -16,7 +16,7 @@ public class ClassificationAspect implements Aspect {
     }
 
     public ClassificationAspect categories(String... categories) {
-        this.categories = categories;
+        this.categories.addAll(Arrays.asList(categories));
         return this;
     }
 
@@ -24,11 +24,7 @@ public class ClassificationAspect implements Aspect {
     public void addToObject(Map jsonObject, Set<String> processed) {
         Map classification = Factories.getMap();
         classification.put("action", type);
-        if (categories != null) {
-            List jsonArray = new ArrayList();
-            Collections.addAll(jsonArray, categories);
-            classification.put("categories", jsonArray);
-        }
+        classification.put("categories", categories);
         jsonObject.put("classification", classification);
     }
 }

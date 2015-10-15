@@ -14,7 +14,7 @@ public class PageviewAspect implements Aspect {
     private Integer responseCode;
     private Integer size;
     private String protocol;
-    private List<EntityRelation> pageContent;
+    private List<EntityRelation> pageContent = new ArrayList<>();
     private String referrer;
     private Map referrerProperties;
 
@@ -54,7 +54,6 @@ public class PageviewAspect implements Aspect {
     }
 
     public PageviewAspect pageContent(EntityRelation... pageContent) {
-        this.pageContent = new ArrayList<>();
         Collections.addAll(this.pageContent, pageContent);
         return this;
     }
@@ -81,13 +80,11 @@ public class PageviewAspect implements Aspect {
         result.put("protocol", protocol);
         result.put("referrer", referrer);
         result.put("referrer_properties", referrerProperties);
-        if (pageContent != null) {
-            List pageContentItems = new ArrayList();
-            for (EntityRelation entityRelation : pageContent) {
-                pageContentItems.add(entityRelation.toJson(processed));
-            }
-            result.put("page_content", pageContentItems);
+        List pageContentItems = new ArrayList();
+        for (EntityRelation entityRelation : pageContent) {
+            if (entityRelation != null) pageContentItems.add(entityRelation.toJson(processed));
         }
+        result.put("page_content", pageContentItems);
         jsonObject.put("pageview", result);
     }
 }

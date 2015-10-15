@@ -97,27 +97,23 @@ public class Event {
         obj.put("description", description);
         obj.put("occurred_at", timestamp);
 
-        if (involved.size() > 0) {
-            List inv = new ArrayList();
-            for (EntityRole anInvolved : involved) {
-                if (anInvolved != null) {
-                    inv.add(anInvolved.toJson(processed));
-                }
+        List inv = new ArrayList();
+        for (EntityRole anInvolved : involved) {
+            if (anInvolved != null) {
+                inv.add(anInvolved.toJson(processed));
             }
-            obj.put("involves", inv);
         }
+        obj.put("involves", inv);
 
-        if (aspects.size() > 0) {
-            Map aspectsJson = Factories.getMap();
-            for (Aspect aspect : aspects) {
-                if (aspect != null) {
-                    aspect.addToObject(aspectsJson, processed);
-                }
+        Map aspectsJson = Factories.getMap();
+        for (Aspect aspect : aspects) {
+            if (aspect != null) {
+                aspect.addToObject(aspectsJson, processed);
             }
-            obj.put("aspects", aspectsJson);
         }
+        obj.put("aspects", aspectsJson);
         obj.put("properties", props);
-        if (sdkVersion != null) obj.put("_v", sdkVersion);
+        obj.put("_v", sdkVersion);
         Trimmer.trimMap(obj);
         return obj;
     }
