@@ -99,7 +99,9 @@ public class Event {
         if (involved.size() > 0) {
             List inv = new ArrayList();
             for (EntityRole anInvolved : involved) {
-                inv.add(anInvolved.toJson(processed));
+                if (anInvolved != null) {
+                    inv.add(anInvolved.toJson(processed));
+                }
             }
             obj.put("involves", inv);
         }

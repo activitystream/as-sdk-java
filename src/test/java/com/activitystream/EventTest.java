@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import static com.activitystream.EntityRoleType.ACTOR;
+import static com.activitystream.EntityRoleType.INVOLVES;
 import static com.activitystream.Predefined.AKA;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,6 +43,27 @@ public class EventTest extends EventTestBase {
                                 "properties", map(
                                         "a", "b"
                                 )
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void should_allow_for_null_as_role_for_those_cases_that_we_do_not_have_the_role_available() {
+        Event ev = event("action")
+                .involves(role(ACTOR, entity(EMPLOYEE, "Petar")), null, role(INVOLVES, entity(EMPLOYEE, "Stefan")));
+        Map expected = map(
+                "type", "action",
+                "involves", list(
+                        map(
+                                "entity_ref", "Employee/Petar",
+                                "role", "ACTOR"
+                        ),
+                        map(
+                                "entity_ref", "Employee/Stefan",
+                                "role", "INVOLVES"
                         )
                 )
         );

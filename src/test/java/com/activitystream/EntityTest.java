@@ -9,6 +9,7 @@ import java.util.Set;
 import static com.activitystream.EventTestBase.list;
 import static com.activitystream.EventTestBase.map;
 import static com.activitystream.Predefined.ACTOR;
+import static com.activitystream.Predefined.ASSOCIATED_WITH;
 import static com.activitystream.Predefined.INVOLVES;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -114,5 +115,29 @@ public class EntityTest {
         );
 
         assertThat(ev.toMap().entrySet(), equalTo(expected.entrySet()));
+    }
+    @Test
+    public void should_allow_for_null_relation_to_facilitate_the_builder_pattern() {
+        Entity entity1 = entity("Person", "Petar");
+        Entity entity2 = entity("Person", "Stefan");
+
+        Entity group = entity("Group", "ASCore").relations(rel().link(ASSOCIATED_WITH, entity1), null, rel().link(ASSOCIATED_WITH, entity2));
+
+        Map expected = map(
+                "type", "as.api.entity",
+                "entity_ref", "Group/ASCore",
+                "relations", list(
+                        map(
+                                "type", "ASSOCIATED_WITH",
+                                "entity_ref", "Person/Petar"
+                        ),
+                        map(
+                                "type", "ASSOCIATED_WITH",
+                                "entity_ref", "Person/Stefan"
+                        )
+                )
+        );
+
+        assertThat(group.toMap().entrySet(), equalTo(expected.entrySet()));
     }
 }

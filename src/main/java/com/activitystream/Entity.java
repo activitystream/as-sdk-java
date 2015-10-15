@@ -80,7 +80,9 @@ public class Entity {
             if (relations.size() > 0) {
                 List inv = new ArrayList();
                 for (EntityRelation relation : relations) {
-                    inv.add(relation.toJson(processed));
+                    if (relation != null) {
+                        inv.add(relation.toJson(processed));
+                    }
                 }
                 value.put("relations", inv);
             }
