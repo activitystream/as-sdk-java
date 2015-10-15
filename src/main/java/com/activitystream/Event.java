@@ -3,6 +3,7 @@ package com.activitystream;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
+import com.activitystream.underware.Trimmer;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class Event {
     }
 
     public Event involves(EntityRole... role) {
-        this.involved.addAll(Arrays.asList(role));
+        if (role != null) this.involved.addAll(Arrays.asList(role));
         return this;
     }
 
@@ -92,9 +93,9 @@ public class Event {
         Map obj = Factories.getMap();
         Set<String> processed = new HashSet<>();
         obj.put("type", event.id);
-        if (origin != null) obj.put("origin", origin);
-        if (description != null) obj.put("description", description);
-        if (timestamp != null) obj.put("occurred_at", timestamp);
+        obj.put("origin", origin);
+        obj.put("description", description);
+        obj.put("occurred_at", timestamp);
 
         if (involved.size() > 0) {
             List inv = new ArrayList();
@@ -109,12 +110,16 @@ public class Event {
         if (aspects.size() > 0) {
             Map aspectsJson = Factories.getMap();
             for (Aspect aspect : aspects) {
-                aspect.addToObject(aspectsJson, processed);
+                if (aspect != null) {
+                    aspect.addToObject(aspectsJson, processed);
+                }
             }
             obj.put("aspects", aspectsJson);
         }
-        if (props != null) obj.put("properties", props);
+        obj.put("properties", props);
         if (sdkVersion != null) obj.put("_v", sdkVersion);
+        Trimmer.trimMap(obj);
         return obj;
     }
+
 }

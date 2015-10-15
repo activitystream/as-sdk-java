@@ -23,7 +23,7 @@ public class ClassificationAspect implements Aspect {
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
         Map classification = Factories.getMap();
-        if (type != null) classification.put("action", type);
+        classification.put("action", type);
         if (categories != null) {
             List jsonArray = new ArrayList();
             Collections.addAll(jsonArray, categories);

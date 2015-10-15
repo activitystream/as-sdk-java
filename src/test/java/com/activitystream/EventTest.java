@@ -249,4 +249,19 @@ public class EventTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void should_trim_down_empty_lists_and_maps_when_serializing() {
+        Event ev = event("action")
+                .involves(null)
+                .aspects(null, null)
+                .properties(m());
+
+        Map expected = map(
+                "type", "action"
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }

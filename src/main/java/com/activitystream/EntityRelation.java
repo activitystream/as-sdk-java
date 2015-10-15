@@ -71,10 +71,10 @@ public class EntityRelation {
         Map obj = Factories.getMap();
 
         obj.put("type", linkType.value());
-        if (weight != null) obj.put("weight", weight);
-        if (startDate != null) obj.put("valid_from", startDate);
-        if (endDate != null) obj.put("active_until", endDate);
-        if (props != null) obj.put("properties", props);
+        obj.put("weight", weight);
+        obj.put("valid_from", startDate);
+        obj.put("active_until", endDate);
+        obj.put("properties", props);
         entity.addToObject(obj, processed);
 
         return obj;

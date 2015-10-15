@@ -31,7 +31,7 @@ public class EntityRole {
     public Map toJson(Set<String> processed) {
         Map obj = Factories.getMap();
         obj.put("role", involvement);
-        if (props != null) obj.put("properties", props);
+        obj.put("properties", props);
         ent.addToObject(obj, processed);
         return obj;
     }

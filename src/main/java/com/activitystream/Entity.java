@@ -2,6 +2,7 @@ package com.activitystream;
 
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
+import com.activitystream.underware.Trimmer;
 import org.json.simple.JSONObject;
 
 import java.util.*;
@@ -77,25 +78,19 @@ public class Entity {
             Map value = Factories.getMap();
             value.put("entity_ref", entityId);
 
-            if (relations.size() > 0) {
-                List inv = new ArrayList();
-                for (EntityRelation relation : relations) {
-                    if (relation != null) {
-                        inv.add(relation.toJson(processed));
-                    }
+            List inv = new ArrayList();
+            for (EntityRelation relation : relations) {
+                if (relation != null) {
+                    inv.add(relation.toJson(processed));
                 }
-                value.put("relations", inv);
             }
-            if (props.size() > 0) {
-                value.put("properties", props);
+            value.put("relations", inv);
+            value.put("properties", props);
+            Map aspectsJson = Factories.getMap();
+            for (Aspect aspect : aspects) {
+                aspect.addToObject(aspectsJson, processed);
             }
-            if (aspects.size() > 0) {
-                Map aspectsJson = Factories.getMap();
-                for (Aspect aspect : aspects) {
-                    aspect.addToObject(aspectsJson, processed);
-                }
-                value.put("aspects", aspectsJson);
-            }
+            value.put("aspects", aspectsJson);
             return value;
         }
         return jsonObject;
@@ -108,6 +103,7 @@ public class Entity {
     public Map toMap() {
         Map map = addToObject(new HashSet<String>());
         map.put("type", "as.api.entity");
+        Trimmer.trimMap(map);
         return map;
     }
 }
