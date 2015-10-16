@@ -4,29 +4,13 @@ import com.activitystream.helpers.DateHelpers;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 import com.activitystream.underware.Trimmer;
+import com.activitystream.underware.Version;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Event {
-    private static String sdkVersion;
-
-    static {
-        try {
-            Properties prop = new Properties();
-            InputStream in = Event.class.getResourceAsStream("/info.properties");
-            prop.load(in);
-            in.close();
-            String version = prop.getProperty("version");
-            if (!version.contains("$")) sdkVersion = "java-" + version;
-            else sdkVersion = null;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private EventType event;
     private List<EntityRole> involved = new ArrayList<>();
@@ -113,7 +97,7 @@ public class Event {
         }
         obj.put("aspects", aspectsJson);
         obj.put("properties", props);
-        obj.put("_v", sdkVersion);
+        obj.put("_v", Version.sdkVersion);
         Trimmer.trimMap(obj);
         return obj;
     }

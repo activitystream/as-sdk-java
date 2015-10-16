@@ -3,6 +3,7 @@ package com.activitystream;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 import com.activitystream.underware.Trimmer;
+import com.activitystream.underware.Version;
 import org.json.simple.JSONObject;
 
 import java.util.*;
@@ -103,6 +104,7 @@ public class Entity {
     public Map toMap() {
         Map map = addToObject(new HashSet<String>());
         map.put("type", "as.api.entity");
+        map.put("_v", Version.sdkVersion);
         Trimmer.trimMap(map);
         return map;
     }
