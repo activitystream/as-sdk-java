@@ -364,4 +364,40 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void messaging_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        messaging()
+                        .content("hi, how is it going?")
+                        .subject("a question for you")
+                        .from("one@all.com")
+                        .to("two@all.com", "three@all.com")
+                        .group(true)
+                        .properties(m().key("a").value(12))
+                        .url("http://google.com")
+                        .cc("two@all.com", "three@all.com")
+                        .bcc("two@all.com", "three@all.com")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "messaging", map(
+                                "subject", "a question for you",
+                                "content", "hi, how is it going?",
+                                "from", "one@all.com",
+                                "to", list("two@all.com", "three@all.com"),
+                                "group", true,
+                                "url", "http://google.com",
+                                "properties", map("a", 12),
+                                "bcc", list("two@all.com", "three@all.com"),
+                                "cc", list("two@all.com", "three@all.com")
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }

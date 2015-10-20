@@ -55,6 +55,8 @@ public class Sugar {
 
     public static InventoryAspect inventory() { return new InventoryAspect(); }
 
+    public static MessagingAspect messaging() { return new MessagingAspect(); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }

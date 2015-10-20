@@ -44,5 +44,9 @@ public class AspectBase implements Aspect {
         public AspectProperty(IsRequired required) {
             this.required = required == IsRequired.True;
         }
+        public AspectProperty(IsRequired required, Object value) {
+            this(required);
+            this.value = value;
+        }
     }
 }
