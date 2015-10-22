@@ -1,16 +1,19 @@
 package com.activitystream;
 
 public class Predefined {
-    public static EntityRoleType ACTOR = EntityRoleType.ACTOR;
-    public static EntityRoleType AFFECTS = EntityRoleType.AFFECTS;
-    public static EntityRoleType INVOLVES = EntityRoleType.INVOLVES;
-    public static EntityRoleType OBSERVED = EntityRoleType.OBSERVED;
-    public static EntityRoleType REFERENCES = EntityRoleType.REFERENCES;
-    public static EntityRoleType TRADE = EntityRoleType.TRADE;
-    public static EntityRoleType CARTED = EntityRoleType.CARTED;
-    public static EntityRoleType UNCARTED = EntityRoleType.UNCARTED;
-    public static EntityRoleType PURCHASED = EntityRoleType.PURCHASED;
-    public static EntityRoleType CANCELLED = EntityRoleType.CANCELLED;
+    public static final EntityRoleType ACTOR = EntityRoleType.ACTOR;
+    public static final EntityRoleType AFFECTS = EntityRoleType.AFFECTS;
+    public static final EntityRoleType INVOLVES = EntityRoleType.INVOLVES;
+    public static final EntityRoleType OBSERVED = EntityRoleType.OBSERVED;
+    public static final EntityRoleType REFERENCES = EntityRoleType.REFERENCES;
+    public static final EntityRoleType TRADE = EntityRoleType.TRADE;
+    public static final EntityRoleType MESSAGING = EntityRoleType.MESSAGING;
+    public static final EntityRoleType CARTED = TRADE.extend("CARTED");
+    public static final EntityRoleType UNCARTED = TRADE.extend("UNCARTED");
+    public static final EntityRoleType PURCHASED = TRADE.extend("PURCHASED");
+    public static final EntityRoleType CANCELLED = TRADE.extend("CANCELLED");
+    public static final EntityRoleType MESSAGING_FROM = MESSAGING.extend("FROM");
+    public static final EntityRoleType MESSAGING_TO = MESSAGING.extend("TO");
 
     public static EntityRelationType AKA = new EntityRelationType("AKA");
     public static EntityRelationType MEMBER_OF = new EntityRelationType("MEMBER_OF");
