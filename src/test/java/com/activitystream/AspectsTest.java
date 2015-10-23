@@ -9,18 +9,19 @@ import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Time;
 import java.text.ParseException;
 import java.util.Map;
 import java.util.TimeZone;
 
 import static com.activitystream.EntityRoleType.ACTOR;
-import static com.activitystream.Predefined.FEATURED;
+import static com.activitystream.Predefined.*;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AspectsTest extends EventTestBase {
+    public static final EntityRoleType MESSAGING_CC = MESSAGING.extend("CC");
+    public static final EntityRoleType MESSAGING_BCC = MESSAGING.extend("BCC");
     public static EntityRoleType PURCHASED = EntityRoleType.AFFECTS.extend("PURCHASED");
 
     @Test
@@ -62,8 +63,9 @@ public class AspectsTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
     @Test
-    public void ecommerce() throws ParseException {
+    public void commerce_aspect() throws ParseException {
         EntityType POI = new EntityType("Poi");
         EntityType Serial = new EntityType("Serial");
         Event ev = event("action")
@@ -143,17 +145,18 @@ public class AspectsTest extends EventTestBase {
                         "classification", map(
                                 "type", "car",
                                 "categories", list("Europe", "Sweden", "family"),
-                                "variant" , "station wagon",
+                                "variant", "station wagon",
                                 "model", "244GL",
                                 "make", "Volvo",
                                 "size", "family",
-                                "year" , 1976
+                                "year", 1976
                         )
                 )
         );
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
     @Test
     public void timed_aspect() throws ParseException {
         Event ev = event("action")
@@ -263,6 +266,7 @@ public class AspectsTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
     @Test
     public void dimensions_aspect() throws MalformedURLException {
         Event ev = event("action")
@@ -323,9 +327,9 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(
                         locale()
-                            .locale("en-GB")
-                            .currency("USD")
-                            .timezone(TimeZone.getTimeZone("GMT+01"))
+                                .locale("en-GB")
+                                .currency("USD")
+                                .timezone(TimeZone.getTimeZone("GMT+01"))
                 );
 
         Map expected = map(
@@ -347,8 +351,8 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(
                         inventory()
-                        .itemsForSale(10D)
-                        .itemsInStock(100D)
+                                .itemsForSale(10D)
+                                .itemsInStock(100D)
                 );
 
         Map expected = map(
@@ -369,30 +373,62 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(
                         messaging()
-                        .content("hi, how is it going?")
-                        .subject("a question for you")
-                        .from("one@all.com")
-                        .to("two@all.com", "three@all.com")
-                        .group(true)
-                        .properties(m().key("a").value(12))
-                        .url("http://google.com")
-                        .cc("two@all.com", "three@all.com")
-                        .bcc("two@all.com", "three@all.com")
+                                .involves(
+                                        role(MESSAGING_FROM, entity(EMAIL, "one@all.com")),
+                                        role(MESSAGING_TO, entity(EMAIL, "two@all.com")),
+                                        role(MESSAGING_TO, entity(EMAIL, "three@all.com")),
+                                        role(MESSAGING_CC, entity(EMAIL, "two@all.com")),
+                                        role(MESSAGING_CC, entity(EMAIL, "three@all.com")),
+                                        role(MESSAGING_BCC, entity(EMAIL, "two@all.com")),
+                                        role(MESSAGING_BCC, entity(EMAIL, "three@all.com"))
+                                )
+                                .content("hi, how is it going?")
+                                .subject("a question for you")
+                                .group(true)
+                                .properties(m().key("a").value(12))
+                                .url("http://google.com")
                 );
 
         Map expected = map(
                 "type", "action",
                 "aspects", map(
                         "messaging", map(
+                                "involves", list(
+                                        map(
+                                                "role", "MESSAGING:FROM",
+                                                "entity_ref", "Email/one@all.com"
+                                        ),
+                                        map(
+                                                "role", "MESSAGING:TO",
+                                                "entity_ref", "Email/two@all.com"
+                                        ),
+                                        map(
+                                                "role", "MESSAGING:TO",
+                                                "entity_ref", "Email/three@all.com"
+                                        ),
+                                        map(
+                                                "role", "MESSAGING:CC",
+                                                "entity_ref", "Email/two@all.com"
+                                        ),
+                                        map(
+                                                "role", "MESSAGING:CC",
+                                                "entity_ref", "Email/three@all.com"
+                                        ),
+                                        map(
+                                                "role", "MESSAGING:BCC",
+                                                "entity_ref", "Email/two@all.com"
+                                        ),
+                                        map(
+                                                "role", "MESSAGING:BCC",
+                                                "entity_ref", "Email/three@all.com"
+                                        )
+                                ),
+
                                 "subject", "a question for you",
                                 "content", "hi, how is it going?",
-                                "from", "one@all.com",
-                                "to", list("two@all.com", "three@all.com"),
                                 "group", true,
                                 "url", "http://google.com",
-                                "properties", map("a", 12),
-                                "bcc", list("two@all.com", "three@all.com"),
-                                "cc", list("two@all.com", "three@all.com")
+                                "properties", map("a", 12)
                         )
                 )
         );

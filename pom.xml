@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.activitystream</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.3.5</version>
+    <version>0.3.6</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>For a description please see https://github.com/activitystream/as-sdk-java</description>
     <url>https://github.com/activitystream/as-sdk-java</url>
