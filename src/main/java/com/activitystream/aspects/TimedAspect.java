@@ -54,7 +54,7 @@ public class TimedAspect implements Aspect {
         }
         timed.put("begins", starts);
         timed.put("ends", ends);
-        timed.put("action", type.toString());
+        timed.put("type", type.toString());
         jsonObject.put("timed", timed);
     }
 }
