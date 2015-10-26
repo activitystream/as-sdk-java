@@ -19,6 +19,7 @@ public class EntityRelation {
     private String startDate;
     private String endDate;
     private Double weight;
+    private String externalId;
 
 
     public EntityRelation link(EntityRelationType linkType, Entity entity) {
@@ -65,12 +66,18 @@ public class EntityRelation {
         return this;
     }
 
+    public EntityRelation externalId(String id) {
+        this.externalId = id;
+        return this;
+    }
+
     public Map toJson(Set<String> processed) {
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
         Map obj = Factories.getMap();
 
         obj.put("type", linkType.value());
+        obj.put("external_id", externalId);
         obj.put("weight", weight);
         obj.put("valid_from", startDate);
         obj.put("active_until", endDate);
@@ -79,5 +86,4 @@ public class EntityRelation {
 
         return obj;
     }
-
 }

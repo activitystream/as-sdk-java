@@ -191,6 +191,38 @@ public class EventTest extends EventTestBase {
     }
 
     @Test
+    public void should_allow_specifying_an_external_id_on_a_role() {
+        Event ev = event("action")
+                .involves(role(ACTOR, entity(PERSON, "Petar")
+                                .relations(
+                                        rel().link(AKA, entity(PERSON, "Petar")).externalId("Irene")
+                                )
+                ));
+        Map expected = map(
+                "type", "action",
+                "involves", list(
+                        map(
+                                "role", "ACTOR",
+                                "entity", map(
+                                        "entity_ref", "Person/Petar",
+                                        "relations", list(
+                                                map(
+                                                        "type", "AKA",
+                                                        "entity_ref", "Person/Petar",
+                                                        "external_id", "Irene"
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+
+    @Test
     public void should_allow_overriding_of_aspects() {
         Event ev = event("action")
                 .aspects(clientIp("1"), clientIp("2"));

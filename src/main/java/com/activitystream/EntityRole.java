@@ -14,8 +14,8 @@ public class EntityRole {
     private final Entity ent;
     private Map props;
 
-    public EntityRole(EntityRoleType involvment, Entity ent) {
-        this.involvement = involvment.value();
+    public EntityRole(EntityRoleType involvement, Entity ent) {
+        this.involvement = involvement.value();
         this.ent = ent;
     }
 

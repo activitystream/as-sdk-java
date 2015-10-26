@@ -48,13 +48,11 @@ public class Entity {
             Map value = Factories.getMap();
             value.put("entity_ref", entityId);
 
-            if (relations.size() > 0) {
-                List inv = new ArrayList();
-                for (EntityRelation relation : relations) {
-                    inv.add(relation.toJson(processed));
-                }
-                value.put("relations", inv);
+            List inv = new ArrayList();
+            for (EntityRelation relation : relations) {
+                inv.add(relation.toJson(processed));
             }
+            value.put("relations", inv);
             if (props.size() > 0) {
                 value.put("properties", props);
             }
