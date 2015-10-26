@@ -13,6 +13,7 @@ public class EntityRole {
     private final String involvement;
     private final Entity ent;
     private Map props;
+    private String externalId;
 
     public EntityRole(EntityRoleType involvement, Entity ent) {
         this.involvement = involvement.value();
@@ -28,9 +29,15 @@ public class EntityRole {
         return properties(props.map());
     }
 
+    public EntityRole externalId(String id) {
+        this.externalId = id;
+        return this;
+    }
+
     public Map toJson(Set<String> processed) {
         Map obj = Factories.getMap();
         obj.put("role", involvement);
+        obj.put("external_id", externalId);
         obj.put("properties", props);
         ent.addToObject(obj, processed);
         return obj;

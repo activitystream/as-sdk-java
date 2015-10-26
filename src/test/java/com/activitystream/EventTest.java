@@ -191,7 +191,7 @@ public class EventTest extends EventTestBase {
     }
 
     @Test
-    public void should_allow_specifying_an_external_id_on_a_role() {
+    public void should_allow_specifying_an_external_id_on_a_relation() {
         Event ev = event("action")
                 .involves(role(ACTOR, entity(PERSON, "Petar")
                                 .relations(
@@ -213,6 +213,25 @@ public class EventTest extends EventTestBase {
                                                 )
                                         )
                                 )
+                        )
+                )
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void should_allow_specifying_an_external_id_on_a_role() {
+        Event ev = event("action")
+                .involves(role(ACTOR, entity(PERSON, "Petar")).externalId("Irene"));
+        Map expected = map(
+                "type", "action",
+                "involves", list(
+                        map(
+                                "role", "ACTOR",
+                                "external_id", "Irene",
+                                "entity_ref", "Person/Petar"
                         )
                 )
         );
