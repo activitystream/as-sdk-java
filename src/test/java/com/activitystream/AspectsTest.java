@@ -171,7 +171,7 @@ public class AspectsTest extends EventTestBase {
                         "timed", map(
                                 "begins", "2015-11-24T18:00:00.000+01",
                                 "ends", "2015-11-24T22:00:00.000+02",
-                                "type", "valid"
+                                "type", "period"
                         )
                 )
         );

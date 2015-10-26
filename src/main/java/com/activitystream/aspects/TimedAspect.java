@@ -13,7 +13,7 @@ import java.util.TimeZone;
 public class TimedAspect implements Aspect {
     private String starts;
     private String ends;
-    private TimedStatus type = TimedStatus.VALID;
+    private TimedStatus type = TimedStatus.PERIOD;
 
     public TimedAspect begins(Date starts, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
