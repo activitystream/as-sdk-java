@@ -69,7 +69,7 @@ public class Entity {
         }
     }
 
-    public Map addToObject(Set<String> processed) {
+    Map toMap(Set<String> processed) {
         Map jsonObject = Factories.getMap();
         String entityId = type.toJson() + "/" + id;
         if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())) {
@@ -102,7 +102,7 @@ public class Entity {
     }
 
     public Map toMap() {
-        Map map = addToObject(new HashSet<String>());
+        Map map = toMap(new HashSet<String>());
         map.put("type", "as.api.entity");
         map.put("_v", Version.sdkVersion);
         Trimmer.trimMap(map);
