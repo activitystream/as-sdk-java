@@ -17,9 +17,12 @@ public class Sugar {
 
     public static Entity entity(String type, String id) { return entity(new EntityType(type), id); }
 
+    public static Comment comment(String comment) { return new Comment(comment);}
+
     public static EntityRelation rel() { return new EntityRelation(); }
 
     public static EntityRole role(EntityRoleType role, Entity entity) { return new EntityRole(role, entity); }
+    public static CommentEntityRole role(CommentEntityRoleType role, Entity entity) { return new CommentEntityRole(role, entity); }
 
     // Aspects
 
