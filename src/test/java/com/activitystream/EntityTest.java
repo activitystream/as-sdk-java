@@ -16,7 +16,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class EntityTest {
-    Set<String> processed = new HashSet<>();
     @Test
     public void should_render_as_ref_entity_when_only_id_is_present() {
         Entity entity = entity("Person", "id");
