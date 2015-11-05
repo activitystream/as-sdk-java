@@ -436,4 +436,27 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void address_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        address("Klapparstigur 25-27")
+                            .city("Reykjavik")
+                            .countryCode("IS")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "address", map(
+                                "city", "Reykjavik",
+                                "country_code", "IS",
+                                "address", "Klapparstigur 25-27"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }

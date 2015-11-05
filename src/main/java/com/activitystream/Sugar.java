@@ -57,6 +57,8 @@ public class Sugar {
 
     public static MessagingAspect messaging() { return new MessagingAspect(); }
 
+    public static AddressAspect address(String streetAndNumber) { return new AddressAspect().streetAndNumber(streetAndNumber); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }
