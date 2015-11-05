@@ -82,7 +82,7 @@ public class PageviewAspect implements Aspect {
         result.put("referrer_properties", referrerProperties);
         List pageContentItems = new ArrayList();
         for (EntityRelation entityRelation : pageContent) {
-            if (entityRelation != null) pageContentItems.add(entityRelation.toJson(processed));
+            if (entityRelation != null) pageContentItems.add(entityRelation.render(processed));
         }
         result.put("page_content", pageContentItems);
         jsonObject.put("pageview", result);

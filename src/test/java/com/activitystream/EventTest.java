@@ -315,4 +315,19 @@ public class EventTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void should_skip_role_when_entity_id_is_null_or_empty_string() {
+        Event ev = event("action")
+                .involves(role(ACTOR, entity("Person", null)), role(ACTOR, entity("Person", "")))
+                .aspects(null, null)
+                .properties(m());
+
+        Map expected = map(
+                "type", "action"
+        );
+
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }

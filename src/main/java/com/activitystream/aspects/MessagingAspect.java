@@ -66,7 +66,7 @@ public class MessagingAspect extends AspectBase {
     public void addToObject(Map aspectJson, Set<String> processed) {
         List inv = new ArrayList();
         for (EntityRole anInvolved : roles) {
-            if (anInvolved != null) inv.add(anInvolved.toJson(processed));
+            if (anInvolved != null) inv.add(anInvolved.render(processed));
         }
         aspectPropertyMap.get("messaging.involves").value = inv;
         super.addToObject(aspectJson, processed);

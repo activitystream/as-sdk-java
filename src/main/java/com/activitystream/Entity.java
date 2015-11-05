@@ -3,6 +3,7 @@ package com.activitystream;
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
 import com.activitystream.underware.Trimmer;
+import com.activitystream.underware.Tuple;
 import com.activitystream.underware.Version;
 import org.json.simple.JSONObject;
 
@@ -39,10 +40,11 @@ public class Entity {
         return this;
     }
 
-    public void addToObject(Map jsonObject, Set<String> processed) {
+    public Tuple<String, Object> render(Set<String> processed) {
+        if (id == null || id.trim().isEmpty()) return null;
         String entityId = type.toJson() + "/" + id;
         if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())) {
-            jsonObject.put("entity_ref", entityId);
+            return new Tuple<>("entity_ref", (Object)entityId);
         } else {
             processed.add(this.toString());
             Map value = Factories.getMap();
@@ -50,7 +52,7 @@ public class Entity {
 
             List inv = new ArrayList();
             for (EntityRelation relation : relations) {
-                inv.add(relation.toJson(processed));
+                inv.add(relation.render(processed));
             }
             value.put("relations", inv);
             if (props.size() > 0) {
@@ -63,7 +65,7 @@ public class Entity {
                 }
                 value.put("aspects", aspectsJson);
             }
-            jsonObject.put("entity", value);
+            return new Tuple<>("entity", (Object)value);
         }
     }
 
@@ -80,7 +82,7 @@ public class Entity {
             List inv = new ArrayList();
             for (EntityRelation relation : relations) {
                 if (relation != null) {
-                    inv.add(relation.toJson(processed));
+                    inv.add(relation.render(processed));
                 }
             }
             value.put("relations", inv);

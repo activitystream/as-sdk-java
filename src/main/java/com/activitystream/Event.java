@@ -84,7 +84,7 @@ public class Event {
         List inv = new ArrayList();
         for (EntityRole anInvolved : involved) {
             if (anInvolved != null) {
-                inv.add(anInvolved.toJson(processed));
+                inv.add(anInvolved.render(processed));
             }
         }
         obj.put("involves", inv);

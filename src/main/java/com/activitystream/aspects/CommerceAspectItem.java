@@ -5,6 +5,7 @@ import com.activitystream.Entity;
 import com.activitystream.EntityRole;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
+import com.activitystream.underware.Tuple;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -146,7 +147,7 @@ public class CommerceAspectItem {
 
         List inv = new ArrayList();
         for (EntityRole anInvolved : involved) {
-            if (anInvolved != null) inv.add(anInvolved.toJson(processed));
+            if (anInvolved != null) inv.add(anInvolved.render(processed));
         }
         obj.put("involves", inv);
 
@@ -170,8 +171,11 @@ public class CommerceAspectItem {
         for (Entity serialNumber : serialNumbers) {
             if (serialNumber != null) {
                 Map n = Factories.getMap();
-                serialNumber.addToObject(n, processed);
-                serials.add(n);
+                final Tuple<String, Object> entity = serialNumber.render(processed);
+                if (entity != null){
+                    n.put(entity.x, entity.y);
+                    serials.add(n);
+                }
             }
         }
         obj.put("serial_numbers", serials);

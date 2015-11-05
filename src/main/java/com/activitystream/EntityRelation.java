@@ -2,6 +2,7 @@ package com.activitystream;
 
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
+import com.activitystream.underware.Tuple;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -71,19 +72,23 @@ public class EntityRelation {
         return this;
     }
 
-    public Map toJson(Set<String> processed) {
+    public Map render(Set<String> processed) {
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
-        Map obj = Factories.getMap();
+        final Tuple<String, Object> entityTuple = entity.render(processed);
+        if (entityTuple != null) {
+            Map obj = Factories.getMap();
 
-        obj.put("type", linkType.value());
-        obj.put("external_id", externalId);
-        obj.put("weight", weight);
-        obj.put("valid_from", startDate);
-        obj.put("active_until", endDate);
-        obj.put("properties", props);
-        entity.addToObject(obj, processed);
+            obj.put("type", linkType.value());
+            obj.put("external_id", externalId);
+            obj.put("weight", weight);
+            obj.put("valid_from", startDate);
+            obj.put("active_until", endDate);
+            obj.put("properties", props);
+            obj.put(entityTuple.x, entityTuple.y);
+            return obj;
+        }
 
-        return obj;
+        return null;
     }
 }

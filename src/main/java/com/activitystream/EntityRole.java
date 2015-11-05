@@ -2,6 +2,7 @@ package com.activitystream;
 
 import com.activitystream.helpers.MapCreator;
 import com.activitystream.underware.Factories;
+import com.activitystream.underware.Tuple;
 
 import java.util.Map;
 import java.util.Set;
@@ -34,12 +35,16 @@ public class EntityRole {
         return this;
     }
 
-    public Map toJson(Set<String> processed) {
-        Map obj = Factories.getMap();
-        obj.put("role", involvement);
-        obj.put("external_id", externalId);
-        obj.put("properties", props);
-        ent.addToObject(obj, processed);
-        return obj;
+    public Map render(Set<String> processed) {
+        final Tuple<String, Object> entityTuple = ent.render(processed);
+        if (entityTuple != null) {
+            Map obj = Factories.getMap();
+            obj.put("role", involvement);
+            obj.put("external_id", externalId);
+            obj.put("properties", props);
+            obj.put(entityTuple.x, entityTuple.y);
+            return obj;
+        }
+        return null;
     }
 }
