@@ -62,6 +62,10 @@ public class Sugar {
 
     public static AddressAspect address(String streetAndNumber) { return new AddressAspect().streetAndNumber(streetAndNumber); }
 
+    public static AttachmentsAspect attachments(Attachment... attachments) { return new AttachmentsAspect(attachments); }
+
+    public static Attachment attachment(String url) { return new Attachment(url); }
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }

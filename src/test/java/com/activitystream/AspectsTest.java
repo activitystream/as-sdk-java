@@ -441,8 +441,8 @@ public class AspectsTest extends EventTestBase {
         Event ev = event("action")
                 .aspects(
                         address("Klapparstigur 25-27")
-                            .city("Reykjavik")
-                            .countryCode("IS")
+                                .city("Reykjavik")
+                                .countryCode("IS")
                 );
 
         Map expected = map(
@@ -453,6 +453,35 @@ public class AspectsTest extends EventTestBase {
                                 "country_code", "IS",
                                 "address", "Klapparstigur 25-27"
                         )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void attachment_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        attachments(
+                                attachment("http://google.com")
+                                        .filename("file_name")
+                                        .size(2345D)
+                                        .properties(mstr().key("smu").value("fle").map())
+                        ));
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "attachments", list(
+                                map(
+                                "url", "http://google.com",
+                                "filename", "file_name",
+                                "size", 2345D,
+                                "properties", map(
+                                        "smu", "fle"
+                                )
+                        ))
                 )
         );
         Map actual = ev.toMap();
