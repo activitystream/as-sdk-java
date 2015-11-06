@@ -352,6 +352,7 @@ public class AspectsTest extends EventTestBase {
                 .aspects(
                         inventory()
                                 .itemsForSale(10D)
+                                .itemsSold(5D)
                                 .itemsInStock(100D)
                 );
 
@@ -360,6 +361,7 @@ public class AspectsTest extends EventTestBase {
                 "aspects", map(
                         "inventory", map(
                                 "items_for_sale", 10D,
+                                "items_sold", 5D,
                                 "items_in_stock", 100D
                         )
                 )
