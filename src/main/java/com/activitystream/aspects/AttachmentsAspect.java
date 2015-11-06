@@ -12,6 +12,11 @@ public class AttachmentsAspect implements Aspect {
         this.attachment.addAll(Arrays.asList(attachments));
     }
 
+    public AttachmentsAspect add(Attachment... attachments) {
+        this.attachment.addAll(Arrays.asList(attachments));
+        return this;
+    }
+
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
         List inv = new ArrayList();
