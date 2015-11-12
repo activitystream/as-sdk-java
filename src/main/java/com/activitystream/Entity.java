@@ -52,7 +52,8 @@ public class Entity {
 
             List inv = new ArrayList();
             for (EntityRelation relation : relations) {
-                inv.add(relation.render(processed));
+                if ( relation != null )
+                    inv.add(relation.render(processed));
             }
             value.put("relations", inv);
             if (props.size() > 0) {
