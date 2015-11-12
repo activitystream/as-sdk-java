@@ -139,4 +139,32 @@ public class EntityTest {
 
         assertThat(group.toMap().entrySet(), equalTo(expected.entrySet()));
     }
+
+    @Test
+    public void should_allow_for_some_null_aspects_to_facilitate_the_builder_pattern() {
+        Entity group = entity("Group", "ASCore").aspects(clientIp("2323"), null);
+
+        Map expected = map(
+                "type", "as.api.entity",
+                "entity_ref", "Group/ASCore",
+                "aspects", map(
+                        "client_ip", "2323"
+                )
+        );
+
+        assertThat(group.toMap().entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void should_allow_for_all_null_aspects_to_facilitate_the_builder_pattern() {
+        Entity group = entity("Group", "ASCore").aspects(null, null);
+
+        Map expected = map(
+                "type", "as.api.entity",
+                "entity_ref", "Group/ASCore"
+        );
+
+        assertThat(group.toMap().entrySet(), equalTo(expected.entrySet()));
+    }
+
 }

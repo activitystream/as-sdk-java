@@ -44,7 +44,7 @@ public class Entity {
         if (id == null || id.trim().isEmpty()) return null;
         String entityId = type.toJson() + "/" + id;
         if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())) {
-            return new Tuple<>("entity_ref", (Object)entityId);
+            return new Tuple<>("entity_ref", (Object) entityId);
         } else {
             processed.add(this.toString());
             Map value = Factories.getMap();
@@ -52,7 +52,7 @@ public class Entity {
 
             List inv = new ArrayList();
             for (EntityRelation relation : relations) {
-                if ( relation != null )
+                if (relation != null)
                     inv.add(relation.render(processed));
             }
             value.put("relations", inv);
@@ -62,40 +62,13 @@ public class Entity {
             if (aspects.size() > 0) {
                 Map aspectsJson = Factories.getMap();
                 for (Aspect aspect : aspects) {
-                    aspect.addToObject(aspectsJson, processed);
+                    if (aspect != null)
+                        aspect.addToObject(aspectsJson, processed);
                 }
                 value.put("aspects", aspectsJson);
             }
-            return new Tuple<>("entity", (Object)value);
+            return new Tuple<>("entity", (Object) value);
         }
-    }
-
-    Map toMap(Set<String> processed) {
-        Map jsonObject = Factories.getMap();
-        String entityId = type.toJson() + "/" + id;
-        if ((relations.size() == 0 && props.size() == 0 && aspects.size() == 0) || processed.contains(this.toString())) {
-            jsonObject.put("entity_ref", entityId);
-        } else {
-            processed.add(this.toString());
-            Map value = Factories.getMap();
-            value.put("entity_ref", entityId);
-
-            List inv = new ArrayList();
-            for (EntityRelation relation : relations) {
-                if (relation != null) {
-                    inv.add(relation.render(processed));
-                }
-            }
-            value.put("relations", inv);
-            value.put("properties", props);
-            Map aspectsJson = Factories.getMap();
-            for (Aspect aspect : aspects) {
-                aspect.addToObject(aspectsJson, processed);
-            }
-            value.put("aspects", aspectsJson);
-            return value;
-        }
-        return jsonObject;
     }
 
     public String toJson() {
@@ -103,7 +76,12 @@ public class Entity {
     }
 
     public Map toMap() {
-        Map map = toMap(new HashSet<String>());
+        Map map = Factories.getMap();
+        final Tuple<String, Object> render = render(new HashSet<String>());
+        if (render.x.equals("entity")) map = (Map) render.y;
+        else {
+            map.put(render.x, render.y);
+        }
         map.put("type", "as.api.entity");
         map.put("_v", Version.sdkVersion);
         Trimmer.trimMap(map);
