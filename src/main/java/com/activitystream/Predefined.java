@@ -12,6 +12,7 @@ public class Predefined {
     public static final EntityRoleType UNCARTED = TRADE.extend("UNCARTED");
     public static final EntityRoleType PURCHASED = TRADE.extend("PURCHASED");
     public static final EntityRoleType CANCELLED = TRADE.extend("CANCELLED");
+    public static final EntityRoleType RETURNED = TRADE.extend("RETURNED");
     public static final EntityRoleType MESSAGING_FROM = MESSAGING.extend("FROM");
     public static final EntityRoleType MESSAGING_TO = MESSAGING.extend("TO");
 
