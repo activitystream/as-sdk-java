@@ -21,11 +21,11 @@ public class CommentTest {
                 "comment", "that car is totally worth it",
                 "involves", list(
                         map(
-                                "role", "COMMENTS",
+                                "role", "COMMENT:COMMENTS",
                                 "entity_ref", "Person/A"
                         ),
                         map(
-                                "role", "COMMENTED_ON",
+                                "role", "COMMENT:COMMENTED_ON",
                                 "entity_ref", "Car/Volvo"
                         )
                 )

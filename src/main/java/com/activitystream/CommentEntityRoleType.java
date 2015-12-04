@@ -1,20 +1,21 @@
 package com.activitystream;
 
 public class CommentEntityRoleType {
-    public static final CommentEntityRoleType COMMENTS = new CommentEntityRoleType("COMMENTS");
-    public static final CommentEntityRoleType COMMENTED_ON = new CommentEntityRoleType("COMMENTED_ON");
-    public static final CommentEntityRoleType MENTIONS = new CommentEntityRoleType("MENTIONS");
-    private final String actor;
+    public static final CommentEntityRoleType COMMENT = new CommentEntityRoleType("COMMENT");
+    public static final CommentEntityRoleType COMMENTS = COMMENT.extend("COMMENTS");
+    public static final CommentEntityRoleType COMMENTED_ON = COMMENT.extend("COMMENTED_ON");
+    public static final CommentEntityRoleType MENTIONS = COMMENT.extend("MENTIONS");
+    private final String role;
 
-    private CommentEntityRoleType(String actor) {
-        this.actor = actor;
+    private CommentEntityRoleType(String role) {
+        this.role = role;
     }
 
     public String value() {
-        return actor;
+        return role;
     }
 
     public CommentEntityRoleType extend(String ext) {
-        return new CommentEntityRoleType(actor + ":" + ext);
+        return new CommentEntityRoleType(role + ":" + ext);
     }
 }

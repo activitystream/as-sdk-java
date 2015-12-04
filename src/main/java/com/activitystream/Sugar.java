@@ -22,6 +22,7 @@ public class Sugar {
     public static EntityRelation rel() { return new EntityRelation(); }
 
     public static EntityRole role(EntityRoleType role, Entity entity) { return new EntityRole(role, entity); }
+
     public static CommentEntityRole role(CommentEntityRoleType role, Entity entity) { return new CommentEntityRole(role, entity); }
 
     // Aspects
