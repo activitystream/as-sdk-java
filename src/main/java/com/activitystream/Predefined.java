@@ -13,8 +13,9 @@ public class Predefined {
     public static final EntityRoleType PURCHASED = TRADE.extend("PURCHASED");
     public static final EntityRoleType CANCELLED = TRADE.extend("CANCELLED");
     public static final EntityRoleType RETURNED = TRADE.extend("RETURNED");
-    public static final EntityRoleType MESSAGING_FROM = MESSAGING.extend("FROM");
-    public static final EntityRoleType MESSAGING_TO = MESSAGING.extend("TO");
+    public static final EntityRoleType SENT_TO = EntityRoleType.SENT_TO;
+    public static final EntityRoleType SENT_TO_CC = EntityRoleType.SENT_TO_CC;
+    public static final EntityRoleType SENT_TO_BCC = EntityRoleType.SENT_TO_BCC;
 
     public static EntityRelationType AKA = new EntityRelationType("AKA");
     public static EntityRelationType MEMBER_OF = new EntityRelationType("MEMBER_OF");

@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import static com.activitystream.EntityRoleType.ACTOR;
+import static com.activitystream.EntityRoleType.SENT_BY;
 import static com.activitystream.Predefined.*;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -376,13 +377,13 @@ public class AspectsTest extends EventTestBase {
                 .aspects(
                         messaging()
                                 .involves(
-                                        role(MESSAGING_FROM, entity(EMAIL, "one@all.com")),
-                                        role(MESSAGING_TO, entity(EMAIL, "two@all.com")),
-                                        role(MESSAGING_TO, entity(EMAIL, "three@all.com")),
-                                        role(MESSAGING_CC, entity(EMAIL, "two@all.com")),
-                                        role(MESSAGING_CC, entity(EMAIL, "three@all.com")),
-                                        role(MESSAGING_BCC, entity(EMAIL, "two@all.com")),
-                                        role(MESSAGING_BCC, entity(EMAIL, "three@all.com"))
+                                        role(SENT_BY, entity(EMAIL, "one@all.com")),
+                                        role(SENT_TO, entity(EMAIL, "two@all.com")),
+                                        role(SENT_TO, entity(EMAIL, "three@all.com")),
+                                        role(SENT_TO_CC, entity(EMAIL, "two@all.com")),
+                                        role(SENT_TO_CC, entity(EMAIL, "three@all.com")),
+                                        role(SENT_TO_BCC, entity(EMAIL, "two@all.com")),
+                                        role(SENT_TO_BCC, entity(EMAIL, "three@all.com"))
                                 )
                                 .content("hi, how is it going?")
                                 .subject("a question for you")
@@ -397,31 +398,31 @@ public class AspectsTest extends EventTestBase {
                         "messaging", map(
                                 "involves", list(
                                         map(
-                                                "role", "MESSAGING:FROM",
+                                                "role", "SENT_BY",
                                                 "entity_ref", "Email/one@all.com"
                                         ),
                                         map(
-                                                "role", "MESSAGING:TO",
+                                                "role", "SENT_TO",
                                                 "entity_ref", "Email/two@all.com"
                                         ),
                                         map(
-                                                "role", "MESSAGING:TO",
+                                                "role", "SENT_TO",
                                                 "entity_ref", "Email/three@all.com"
                                         ),
                                         map(
-                                                "role", "MESSAGING:CC",
+                                                "role", "SENT_TO_CC",
                                                 "entity_ref", "Email/two@all.com"
                                         ),
                                         map(
-                                                "role", "MESSAGING:CC",
+                                                "role", "SENT_TO_CC",
                                                 "entity_ref", "Email/three@all.com"
                                         ),
                                         map(
-                                                "role", "MESSAGING:BCC",
+                                                "role", "SENT_TO_BCC",
                                                 "entity_ref", "Email/two@all.com"
                                         ),
                                         map(
-                                                "role", "MESSAGING:BCC",
+                                                "role", "SENT_TO_BCC",
                                                 "entity_ref", "Email/three@all.com"
                                         )
                                 ),
