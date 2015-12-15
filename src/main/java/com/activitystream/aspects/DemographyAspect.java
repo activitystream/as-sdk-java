@@ -1,5 +1,7 @@
 package com.activitystream.aspects;
 
+import com.activitystream.aspects.demography.*;
+
 public class DemographyAspect extends AspectBase{
 
     public DemographyAspect() {
@@ -82,6 +84,11 @@ public class DemographyAspect extends AspectBase{
         return this;
     }
 
+    public DemographyAspect housing(HousingStatus housing) {
+        aspectPropertyMap.get("demography.housing").value = housing.getStatus();
+        return this;
+    }
+
     public DemographyAspect income(String income) {
         aspectPropertyMap.get("demography.income").value = income;
         return this;
@@ -94,6 +101,11 @@ public class DemographyAspect extends AspectBase{
 
     public DemographyAspect ethnicity(String ethnicity) {
         aspectPropertyMap.get("demography.ethnicity").value = ethnicity;
+        return this;
+    }
+
+    public DemographyAspect ethnicity(EthnicityStatus ethnicity) {
+        aspectPropertyMap.get("demography.ethnicity").value = ethnicity.getStatus();
         return this;
     }
 }

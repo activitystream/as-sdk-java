@@ -1,6 +1,9 @@
 package com.activitystream;
 
-import com.activitystream.aspects.*;
+import com.activitystream.aspects.ClientDeviceAspect;
+import com.activitystream.aspects.ClientIPAddressAspect;
+import com.activitystream.aspects.RequestMethod;
+import com.activitystream.aspects.demography.*;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 import org.junit.Test;
@@ -502,9 +505,9 @@ public class AspectsTest extends EventTestBase {
                             .education(EducationStatus.NURSERY_SCHOOL)
                             .disability("autism")
                             .employment(EmploymentStatus.EMPLOYED)
-                            .ethnicity("Hispanic")
+                            .ethnicity(EthnicityStatus.HISPANIC)
                             .familySize(4)
-                            .housing("Partially Owned")
+                            .housing(HousingStatus.PARTIALLY_OWNED)
                             .income("1-10000000 kr")
                 );
 

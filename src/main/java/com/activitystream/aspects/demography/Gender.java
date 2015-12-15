@@ -1,4 +1,4 @@
-package com.activitystream.aspects;
+package com.activitystream.aspects.demography;
 
 public enum Gender {
     FEMALE("Female"),
