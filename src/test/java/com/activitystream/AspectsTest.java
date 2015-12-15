@@ -1,8 +1,6 @@
 package com.activitystream;
 
-import com.activitystream.aspects.ClientDeviceAspect;
-import com.activitystream.aspects.ClientIPAddressAspect;
-import com.activitystream.aspects.RequestMethod;
+import com.activitystream.aspects.*;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 import org.junit.Test;
@@ -485,6 +483,48 @@ public class AspectsTest extends EventTestBase {
                                         "smu", "fle"
                                 )
                         ))
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void gender_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        demography()
+                            .gender(Gender.FEMALE)
+                            .birthYear(1976)
+                            .birthMonth(1)
+                            .birthDay(1)
+                            .maritalStatus(MaritalStatus.SINGLE)
+                            .education("Nursery school")
+                            .disability("autism")
+                            .employment("software developer")
+                            .ethnicity("Hispanic")
+                            .familySize(4)
+                            .housing("Partially Owned")
+                            .income("1-10000000 kr")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "demography", map(
+                                "gender", "Female",
+                                "birth_year", 1976,
+                                "birth_month", 1,
+                                "birth_day", 1,
+                                "marital_status", "Single",
+                                "education", "Nursery school",
+                                "disability", "autism",
+                                "employment", "software developer",
+                                "ethnicity", "Hispanic",
+                                "family_size", 4,
+                                "housing", "Partially Owned",
+                                "income", "1-10000000 kr"
+                        )
                 )
         );
         Map actual = ev.toMap();

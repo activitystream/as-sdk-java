@@ -67,6 +67,9 @@ public class Sugar {
 
     public static Attachment attachment(String url) { return new Attachment(url); }
 
+    public static DemographyAspect demography() { return new DemographyAspect(); }
+
+
     // helpers to create strongly typed maps
 
     public static MapCreator<String, Object> m() { return new MapCreator<>(); }
