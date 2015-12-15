@@ -57,6 +57,11 @@ public class DemographyAspect extends AspectBase{
         return this;
     }
 
+    public DemographyAspect education(EducationStatus education) {
+        aspectPropertyMap.get("demography.education").value = education.getStatus();
+        return this;
+    }
+
     public DemographyAspect familySize(Integer familySize) {
         aspectPropertyMap.get("demography.family_size").value = familySize;
         return this;
@@ -64,6 +69,11 @@ public class DemographyAspect extends AspectBase{
 
     public DemographyAspect employment(String employment) {
         aspectPropertyMap.get("demography.employment").value = employment;
+        return this;
+    }
+
+    public DemographyAspect employment(EmploymentStatus employment) {
+        aspectPropertyMap.get("demography.employment").value = employment.getStatus();
         return this;
     }
 

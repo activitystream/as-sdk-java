@@ -499,9 +499,9 @@ public class AspectsTest extends EventTestBase {
                             .birthMonth(1)
                             .birthDay(1)
                             .maritalStatus(MaritalStatus.SINGLE)
-                            .education("Nursery school")
+                            .education(EducationStatus.NURSERY_SCHOOL)
                             .disability("autism")
-                            .employment("software developer")
+                            .employment(EmploymentStatus.EMPLOYED)
                             .ethnicity("Hispanic")
                             .familySize(4)
                             .housing("Partially Owned")
@@ -519,7 +519,7 @@ public class AspectsTest extends EventTestBase {
                                 "marital_status", "Single",
                                 "education", "Nursery school",
                                 "disability", "autism",
-                                "employment", "software developer",
+                                "employment", "Employed",
                                 "ethnicity", "Hispanic",
                                 "family_size", 4,
                                 "housing", "Partially Owned",
