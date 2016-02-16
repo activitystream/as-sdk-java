@@ -69,6 +69,8 @@ public class Sugar {
 
     public static DemographyAspect demography() { return new DemographyAspect(); }
 
+    public static CampaignAspect campaign(String id) { return new CampaignAspect(id); }
+
 
     // helpers to create strongly typed maps
 

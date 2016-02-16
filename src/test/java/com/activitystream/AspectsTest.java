@@ -533,5 +533,31 @@ public class AspectsTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+    @Test
+    public void campaign_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        campaign("campaign_id")
+                            .source("MailPlatform")
+                            .medium("email")
+                            .content("whatevs")
+                            .term("money for phone")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "campaign", map(
+                                "medium", "email",
+                                "source", "MailPlatform",
+                                "content", "whatevs",
+                                "term", "money for phone",
+                                "id", "campaign_id"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
 
 }
