@@ -8,6 +8,7 @@ public class EntityRoleType {
     public static final EntityRoleType SENT_TO_CC = new EntityRoleType("SENT_TO_CC");
 
 
+    public static final EntityRoleType VIEWED = new EntityRoleType("VIEWED");
     public static final EntityRoleType TRADE = new EntityRoleType("TRADE");
     public static final EntityRoleType ACTOR = new EntityRoleType("ACTOR");
     public static final EntityRoleType AFFECTS = new EntityRoleType("AFFECTS");
