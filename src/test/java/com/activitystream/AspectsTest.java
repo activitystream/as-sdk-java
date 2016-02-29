@@ -1,5 +1,6 @@
 package com.activitystream;
 
+import com.activitystream.aspects.AffiliateType;
 import com.activitystream.aspects.ClientDeviceAspect;
 import com.activitystream.aspects.ClientIPAddressAspect;
 import com.activitystream.aspects.RequestMethod;
@@ -191,6 +192,9 @@ public class AspectsTest extends EventTestBase {
                                 .pathProperties(Factories.getMap())
                                 .keywords("a", "b", "c")
                                 .method(RequestMethod.GET)
+                                .title("some title")
+                                .type("product page")
+                                .categories("a", "b")
                                 .referrer("http://localhost")
                                 .referrerProperties(referrerProps)
                                 .responseCode(200)
@@ -211,6 +215,9 @@ public class AspectsTest extends EventTestBase {
                                 , "response_code", 200
                                 , "size", 100
                                 , "protocol", "HTTP"
+                                , "title", "some title"
+                                , "type", "product page"
+                                , "categories", list("a", "b")
                                 , "page_content", list(
                                         map("type", "FEATURED", "entity_ref", "Person/Jane Doe")
                                 )
@@ -533,6 +540,7 @@ public class AspectsTest extends EventTestBase {
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
+
     @Test
     public void campaign_aspect() throws MalformedURLException {
         Event ev = event("action")
@@ -553,6 +561,27 @@ public class AspectsTest extends EventTestBase {
                                 "content", "whatevs",
                                 "term", "money for phone",
                                 "id", "campaign_id"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void affiliate_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        affiliate("domain.com")
+                            .type(AffiliateType.DIRECT)
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "affiliate", map(
+                                "type", "Direct",
+                                "id", "domain.com"
                         )
                 )
         );

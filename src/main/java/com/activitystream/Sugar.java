@@ -71,6 +71,8 @@ public class Sugar {
 
     public static CampaignAspect campaign(String id) { return new CampaignAspect(id); }
 
+    public static AffiliateAspect affiliate(String id) { return new AffiliateAspect(id); }
+
 
     // helpers to create strongly typed maps
 
