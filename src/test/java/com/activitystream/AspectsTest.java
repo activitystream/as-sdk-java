@@ -1,9 +1,6 @@
 package com.activitystream;
 
-import com.activitystream.aspects.AffiliateType;
-import com.activitystream.aspects.ClientDeviceAspect;
-import com.activitystream.aspects.ClientIPAddressAspect;
-import com.activitystream.aspects.RequestMethod;
+import com.activitystream.aspects.*;
 import com.activitystream.aspects.demography.*;
 import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
@@ -582,6 +579,77 @@ public class AspectsTest extends EventTestBase {
                         "affiliate", map(
                                 "type", "Direct",
                                 "id", "domain.com"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void trafficSource_campaign_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        trafficSource(TrafficSourceType.CAMPAIGN)
+                                .source("MailPlatform")
+                                .medium("email")
+                                .content("whatevs")
+                                .term("money for phone")
+                                .campaign("campaign")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "traffic_source", map(
+                                "medium", "email",
+                                "source", "MailPlatform",
+                                "content", "whatevs",
+                                "term", "money for phone",
+                                "campaign", "campaign",
+                                "type", "campaign"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void trafficSource_referrer_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        trafficSource(TrafficSourceType.REFERRAL)
+                                .referrer("fle.com")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "traffic_source", map(
+                                "type", "referral",
+                                "referrer", "fle.com"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
+    @Test
+    public void trafficSource_direct_traffic_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        trafficSource(TrafficSourceType.DIRECT)
+                                .referrer("fle.com")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "traffic_source", map(
+                                "type", "direct",
+                                "referrer", "fle.com"
                         )
                 )
         );

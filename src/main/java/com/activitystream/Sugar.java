@@ -73,6 +73,8 @@ public class Sugar {
 
     public static AffiliateAspect affiliate(String id) { return new AffiliateAspect(id); }
 
+    public static TrafficSourceAspect trafficSource(TrafficSourceType trafficSourceType) { return new TrafficSourceAspect(trafficSourceType); }
+
 
     // helpers to create strongly typed maps
 
