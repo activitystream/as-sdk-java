@@ -27,9 +27,12 @@ public class Sugar {
 
     // Aspects
 
-    public static CommerceAspect commerce(CommerceAspectItem... items) { return new CommerceAspect().items(items); }
+    @Deprecated
+    public static ItemsAspect commerce(AspectItem... items) { return new ItemsAspect(items); }
 
-    public static CommerceAspectItem item() { return new CommerceAspectItem(); }
+    public static ItemsAspect items(AspectItem... items) { return new ItemsAspect(items); }
+
+    public static AspectItem item() { return new AspectItem(); }
 
     public static ClassificationAspect classification() { return new ClassificationAspect(); }
 

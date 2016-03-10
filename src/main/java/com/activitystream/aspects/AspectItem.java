@@ -10,7 +10,7 @@ import com.activitystream.underware.Tuple;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class CommerceAspectItem {
+public class AspectItem {
     private List<EntityRole> involved = new ArrayList<>();
     private List<Aspect> aspects = new ArrayList<>();
     private Double commissionFixed;
@@ -30,82 +30,82 @@ public class CommerceAspectItem {
     private String validUntil;
     private String accountingKey;
 
-    public CommerceAspectItem involves(EntityRole... roles) {
+    public AspectItem involves(EntityRole... roles) {
         this.involved.addAll(Arrays.asList(roles));
         return this;
     }
 
-    public CommerceAspectItem aspects(Aspect... aspects) {
+    public AspectItem aspects(Aspect... aspects) {
         this.aspects.addAll(Arrays.asList(aspects));
         return this;
     }
 
-    public CommerceAspectItem commissionFixed(Double commissionFixed) {
+    public AspectItem commissionFixed(Double commissionFixed) {
         this.commissionFixed = commissionFixed;
         return this;
     }
 
-    public CommerceAspectItem commissionPercentage(Double commissionPercentage) {
+    public AspectItem commissionPercentage(Double commissionPercentage) {
         this.commissionPercentage = commissionPercentage;
         return this;
     }
 
-    public CommerceAspectItem discountPercentage(Double discountPercentage) {
+    public AspectItem discountPercentage(Double discountPercentage) {
         this.discountPercentage = discountPercentage;
         return this;
     }
 
-    public CommerceAspectItem taxPercentage(Double taxPercentage) {
+    public AspectItem taxPercentage(Double taxPercentage) {
         this.taxPercentage = taxPercentage;
         return this;
     }
 
-    public CommerceAspectItem itemCount(Integer itemCount) {
+    public AspectItem itemCount(Integer itemCount) {
         this.itemCount = itemCount;
         return this;
     }
 
-    public CommerceAspectItem itemPrice(Double itemPrice) {
+    public AspectItem itemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
         return this;
     }
 
-    public CommerceAspectItem description(String description) {
+    public AspectItem description(String description) {
         this.description = description;
         return this;
     }
 
-    public CommerceAspectItem variant(String variant) {
+    public AspectItem variant(String variant) {
         this.variant = variant;
         return this;
     }
 
-    public CommerceAspectItem priceCategory(String priceCategory) {
+    public AspectItem priceCategory(String priceCategory) {
         this.priceCategory = priceCategory;
         return this;
     }
 
-    public CommerceAspectItem currency(String currency) {
+    public AspectItem currency(String currency) {
         this.currency = currency;
         return this;
     }
 
-    public CommerceAspectItem totalInStock(Double totalInStock) {
+    public AspectItem totalInStock(Double totalInStock) {
         this.totalInStock = totalInStock;
         return this;
     }
 
-    public CommerceAspectItem totalForSale(Double totalForSale) {
+    public AspectItem totalForSale(Double totalForSale) {
         this.totalForSale = totalForSale;
         return this;
     }
 
-    public CommerceAspectItem serialNumbers(Entity... serialNumbers) {
+    public AspectItem serialNumbers(Entity... serialNumbers) {
         this.serialNumbers.addAll(Arrays.asList(serialNumbers));
         return this;
     }
 
-    public CommerceAspectItem validFrom(Date validFrom, TimeZone timeZone) {
+    public AspectItem validFrom(Date validFrom, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
 
@@ -113,13 +113,13 @@ public class CommerceAspectItem {
         return this;
     }
 
-    public CommerceAspectItem validFrom(String timestamp) {
+    public AspectItem validFrom(String timestamp) {
         DateHelpers.validateDateString(timestamp);
         this.validFrom = timestamp;
         return this;
     }
 
-    public CommerceAspectItem validUntil(Date validUntil, TimeZone timeZone) {
+    public AspectItem validUntil(Date validUntil, TimeZone timeZone) {
         SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
         formatter.setTimeZone(timeZone);
 
@@ -127,18 +127,18 @@ public class CommerceAspectItem {
         return this;
     }
 
-    public CommerceAspectItem validUntil(String timestamp) {
+    public AspectItem validUntil(String timestamp) {
         DateHelpers.validateDateString(timestamp);
         this.validUntil = timestamp;
         return this;
     }
 
-    public CommerceAspectItem accountingKey(String accountingKey) {
+    public AspectItem accountingKey(String accountingKey) {
         this.accountingKey = accountingKey;
         return this;
     }
 
-    public CommerceAspectItem properties() {
+    public AspectItem properties() {
         return this;
     }
 
