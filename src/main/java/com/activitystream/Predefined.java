@@ -33,6 +33,7 @@ public class Predefined {
     public static EntityRelationType FEATURED = new EntityRelationType("FEATURED");
     public static EntityRelationType HOSTED_AT = new EntityRelationType("HOSTED_AT");
     public static EntityRelationType MANUFACTURED_BY = new EntityRelationType("MANUFACTURED_BY");
+    public static EntityRelationType INTEGRAL_TO = new EntityRelationType("INTEGRAL_TO");
 
     public static CommentEntityRoleType COMMENTS = CommentEntityRoleType.COMMENTS;
     public static CommentEntityRoleType COMMENTED_ON = CommentEntityRoleType.COMMENTED_ON;
