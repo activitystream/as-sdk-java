@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -126,6 +127,61 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void items_aspect() {
+    	Map<String, String> dimensions = new HashMap<String, String>();
+        dimensions.put("seat_category", "LOXAM Syd ( D ) - Ø106");
+        dimensions.put("ticket_type_name", "Loxam Midt - Barn U/16");
+    	Map<String, String> properties = new HashMap<String, String>();
+    	properties.put("seat_label", "LOXAM Øvre, Tårn 21-30-109");
+        
+    	Event ev = event("action")
+		.aspects(items(
+			item()
+			.involves(
+				role(ACTOR, entity("Customer", "1")),
+				role(TRADE.extend("PURCHASED"), entity("Product", "2"))
+			)
+			.currency("ISK")
+			.itemPrice(100.0)
+			.itemCount(2)
+			.dimensions(dimensions)
+			.properties(properties)
+		));
+    	
+    	Map expected = map(
+			"type", "action", 
+			"aspects", map(
+				"items", list(
+						map(
+						"involves", list( 
+							map(
+								"role", "ACTOR",
+								"entity_ref", "Customer/1"
+							),
+							map(
+								"role", "TRADE:PURCHASED",
+								"entity_ref", "Product/2"
+							)
+						),
+						"currency", "ISK",
+						"item_price", 100.0,
+						"item_count", 2,
+						"dimensions", map(
+							"seat_category", "LOXAM Syd ( D ) - Ø106",
+							"ticket_type_name", "Loxam Midt - Barn U/16"
+						),
+						"properties", map("seat_label", "LOXAM Øvre, Tårn 21-30-109")
+					)
+				)
+			)
+		);
+    	
+    	Map actual = ev.toMap();
+    	
+    	assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+    
     @Test
     public void classification_aspect() {
         Event ev = event("action")

@@ -16,6 +16,5 @@ public class DimensionsAspect implements Aspect {
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
         jsonObject.put("dimensions", dimensions);
-
     }
 }

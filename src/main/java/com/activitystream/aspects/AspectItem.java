@@ -29,6 +29,8 @@ public class AspectItem {
     private String validFrom;
     private String validUntil;
     private String accountingKey;
+    private Map<String, String> dimensions;
+    private Map<String, String> properties;
 
     public AspectItem involves(EntityRole... roles) {
         this.involved.addAll(Arrays.asList(roles));
@@ -138,8 +140,20 @@ public class AspectItem {
         return this;
     }
 
-    public AspectItem properties() {
-        return this;
+    public AspectItem properties(Map<String, String> properties) {
+    	if (this.properties == null) {
+    		this.properties = new HashMap<String, String>();
+    	}
+    	this.properties.putAll(properties);
+    	return this;
+    }
+    
+    public AspectItem dimensions(Map<String, String> dimensions) {
+    	if (this.dimensions == null) {
+    		this.dimensions = new HashMap<String, String>();
+    	}
+    	this.dimensions.putAll(dimensions);
+    	return this;
     }
 
     public Map toJson(Set<String> processed) {
@@ -184,6 +198,9 @@ public class AspectItem {
             if (aspect != null) aspect.addToObject(aspectsJson, processed);
         }
         obj.put("aspects", aspectsJson);
+        obj.put("dimensions", dimensions);
+        obj.put("properties", properties);
+        
         return obj;
     }
 }
