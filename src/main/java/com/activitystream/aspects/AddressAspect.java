@@ -44,4 +44,8 @@ public class AddressAspect extends AspectBase {
         return this;
     }
 
+    public AddressAspect state(String state) {
+        aspectPropertyMap.get("address.state").value = state;
+        return this;
+    }
 }
