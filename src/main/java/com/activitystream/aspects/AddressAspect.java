@@ -6,6 +6,7 @@ public class AddressAspect extends AspectBase {
         aspectPropertyMap.put("address.address", new AspectProperty(IsRequired.True));
         aspectPropertyMap.put("address.address2", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("address.city", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("address.state", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("address.country_code", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("address.zip_code", new AspectProperty(IsRequired.False));
     }
