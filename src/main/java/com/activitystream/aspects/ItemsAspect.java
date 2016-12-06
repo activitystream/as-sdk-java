@@ -9,7 +9,12 @@ public class ItemsAspect implements Aspect {
     private List<AspectItem> items = new ArrayList<>();
 
     public ItemsAspect(AspectItem... items) {
-        this.items.addAll(Arrays.asList(items));
+        add(items);
+    }
+
+    public ItemsAspect add(AspectItem... items) {
+        Collections.addAll(this.items, items);
+        return this;
     }
 
     @Override
