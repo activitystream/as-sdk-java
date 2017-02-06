@@ -101,7 +101,8 @@ public class Entity {
             map.put(render.x, render.y);
         }
         map.put("type", "as.api.entity");
-		map.put("occurred_at", timestamp);
+        if (timestamp != null)
+        	map.put("occurred_at", timestamp);
         map.put("_v", Version.sdkVersion);
         Trimmer.trimMap(map);
         return map;
