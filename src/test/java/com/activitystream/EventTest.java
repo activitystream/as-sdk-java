@@ -18,6 +18,7 @@ import static org.junit.Assert.fail;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
@@ -85,6 +86,10 @@ public class EventTest extends EventTestBase {
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
     	Map<String, String> properties = new HashMap<>();
     	properties.put("favourite_programming_language", "javascript"); //Dodato*/
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        isoFormat.setTimeZone(TimeZone.getTimeZone("Etc/GMT-8"));
+        Date date = isoFormat.parse("2014-12-01T18:00:00.000+08");
+        String date_1 = (String) isoFormat.format(date);
         Event ev = event("action")
                 .involves(role(ACTOR, entity(PERSON, "Petar")
                        // .properties(m().key("favourite_programming_language").value("javascript"))
@@ -93,7 +98,7 @@ public class EventTest extends EventTestBase {
                                         classification().type("type")
                                 )
                                 .relations(
-                                        rel().link(AKA, entity(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"), TimeZone.getTimeZone("GMT+08")),
+                                        rel().link(AKA, entity(EMAIL, "pshomov@gmail.com")).validFrom(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse("2014-12-01T10:00:00.000+00"), TimeZone.getTimeZone("GMT+08")),
                                         rel().link(AKA, entity(TWITTER, "pshomov")),
                                         rel().link(AKA, entity(BUILDING, "Laugavegur 26"))
                                 )
@@ -109,7 +114,7 @@ public class EventTest extends EventTestBase {
                                         "relations", list(
                                                 map(
                                                         "type", "AKA",
-                                                        "valid_from", "2014-12-01T17:00:00.000+08",
+                                                        "valid_from", date_1,
                                                         "entity_ref", "Email/pshomov@gmail.com"
                                                        // "valid_from", "2014-12-01T18:00:00.000+08"
                                                 ),
@@ -156,17 +161,21 @@ public class EventTest extends EventTestBase {
     //OVAJ
     @Test
     public void should_create_event_with_all_attributes() throws ParseException {
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        isoFormat.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
+        Date date = isoFormat.parse("2014-12-01T11:00:00.000+01");
+        String date_1 = (String) isoFormat.format(date);
         Event ev = event("action")
                 .origin("browserX")
                 .description("some text")
                 .properties(m().key("favourite_programming_language").value("javascript"))
-                .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T11:00:00.000+01"), TimeZone.getTimeZone("GMT+01"));
+                .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse("2014-12-01T10:00:00.000+00"), TimeZone.getTimeZone("GMT+01"));
 
         Map expected = map(
                 "type", "action",
                 "origin", "browserX",
                 "description", "some text",
-                "occurred_at", "2014-12-01T11:00:00.000+01",
+                "occurred_at", date_1,
                 "properties", map("favourite_programming_language", "javascript")
                //2014-12-01T10:00:00
                 
