@@ -2,10 +2,7 @@ package com.activitystream;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import static com.activitystream.EventTestBase.list;
 import static com.activitystream.EventTestBase.map;
 import static com.activitystream.Predefined.ACTOR;

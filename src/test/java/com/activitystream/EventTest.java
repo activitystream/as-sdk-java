@@ -25,7 +25,6 @@ import java.util.TimeZone;
 import org.junit.Test;
 
 import com.activitystream.aspects.AddressAspect;
-import com.sun.xml.fastinfoset.sax.Properties;
 
 public class EventTest extends EventTestBase {
     public static final EntityType BUILDING = new EntityType("Building");
