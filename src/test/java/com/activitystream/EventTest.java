@@ -1,21 +1,31 @@
 package com.activitystream;
 
-import com.activitystream.aspects.AddressAspect;
-import org.junit.Test;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Map;
-import java.util.TimeZone;
-
 import static com.activitystream.EntityRoleType.ACTOR;
 import static com.activitystream.EntityRoleType.INVOLVES;
 import static com.activitystream.Predefined.AKA;
-import static com.activitystream.Sugar.*;
+import static com.activitystream.Sugar.classification;
+import static com.activitystream.Sugar.clientDevice;
+import static com.activitystream.Sugar.clientIp;
+import static com.activitystream.Sugar.entity;
+import static com.activitystream.Sugar.event;
+import static com.activitystream.Sugar.m;
+import static com.activitystream.Sugar.rel;
+import static com.activitystream.Sugar.role;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.fail;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TimeZone;
+
+import org.junit.Test;
+
+import com.activitystream.aspects.AddressAspect;
+import com.sun.xml.fastinfoset.sax.Properties;
 
 public class EventTest extends EventTestBase {
     public static final EntityType BUILDING = new EntityType("Building");
@@ -71,12 +81,15 @@ public class EventTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
-
+//OVAJ
     @Test
     public void should_create_event_with_involved_embedded_actor() throws ParseException {
+    	Map<String, String> properties = new HashMap<>();
+    	properties.put("favourite_programming_language", "javascript"); //Dodato*/
         Event ev = event("action")
                 .involves(role(ACTOR, entity(PERSON, "Petar")
-                                .properties(m().key("favourite_programming_language").value("javascript"))
+                       // .properties(m().key("favourite_programming_language").value("javascript"))
+                		.properties(properties)
                                 .aspects(
                                         classification().type("type")
                                 )
@@ -85,6 +98,7 @@ public class EventTest extends EventTestBase {
                                         rel().link(AKA, entity(TWITTER, "pshomov")),
                                         rel().link(AKA, entity(BUILDING, "Laugavegur 26"))
                                 )
+                               // .properties(m().key("favourite_programming_language").value("javascript"))
                 ));
         Map expected = map(
                 "type", "action",
@@ -93,14 +107,29 @@ public class EventTest extends EventTestBase {
                                 "role", "ACTOR",
                                 "entity", map(
                                         "entity_ref", "Person/Petar",
+                                        "relations", list(
+                                                map(
+                                                        "type", "AKA",
+                                                        "valid_from", "2014-12-01T17:00:00.000+08",
+                                                        "entity_ref", "Email/pshomov@gmail.com"
+                                                       // "valid_from", "2014-12-01T18:00:00.000+08"
+                                                ),
+                                                map(
+                                                        "type", "AKA",
+                                                        "entity_ref", "Twitter/pshomov"
+                                                ),
+                                                map(
+                                                        "type", "AKA",
+                                                        "entity_ref", "Building/Laugavegur 26"
+                                                )),
                                         "properties", map("favourite_programming_language", "javascript"),
                                         "aspects", map(
                                                 "classification", map(
                                                         "type", "type"
                                                 )
 
-                                        ),
-                                        "relations", list(
+                                        )
+                                      /*  "relations", list(
                                                 map(
                                                         "type", "AKA",
                                                         "entity_ref", "Email/pshomov@gmail.com",
@@ -113,31 +142,35 @@ public class EventTest extends EventTestBase {
                                                 map(
                                                         "type", "AKA",
                                                         "entity_ref", "Building/Laugavegur 26"
-                                                )
+                                                )*/
+                                                
                                         )
                                 )
                         )
-                )
-        );
+                );
+       // );
 
         Map actual = ev.toMap();
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    //OVAJ
     @Test
     public void should_create_event_with_all_attributes() throws ParseException {
         Event ev = event("action")
                 .origin("browserX")
                 .description("some text")
                 .properties(m().key("favourite_programming_language").value("javascript"))
-                .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T10:00:00"), TimeZone.getTimeZone("GMT+01"));
+                .occurred(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2014-12-01T11:00:00.000+01"), TimeZone.getTimeZone("GMT+01"));
 
         Map expected = map(
                 "type", "action",
+                "origin", "browserX",
                 "description", "some text",
-                "properties", map("favourite_programming_language", "javascript"),
                 "occurred_at", "2014-12-01T11:00:00.000+01",
-                "origin", "browserX"
+                "properties", map("favourite_programming_language", "javascript")
+               //2014-12-01T10:00:00
+                
         );
 
         Map actual = ev.toMap();
