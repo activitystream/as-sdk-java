@@ -14,17 +14,17 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         return this;
     }
     public PriceCategoryInventoryAspect itemsInStock(Double itemsInStock) {
-        aspectPropertyMap.get("inventory.items_in_stock").value = itemsInStock;
+        aspectPropertyMap.get("inventory.category_inventory.items_in_stock").value = itemsInStock;
         return this;
     }
 
     public PriceCategoryInventoryAspect itemsForSale(Double itemsForSale) {
-        aspectPropertyMap.get("inventory.items_for_sale").value = itemsForSale;
+        aspectPropertyMap.get("inventory.category_inventory.items_for_sale").value = itemsForSale;
         return this;
     }
 
     public PriceCategoryInventoryAspect itemsSold(Double itemsSold) {
-        aspectPropertyMap.get("inventory.items_sold").value = itemsSold;
+        aspectPropertyMap.get("inventory.category_inventory.items_sold").value = itemsSold;
         return this;
     }
 }

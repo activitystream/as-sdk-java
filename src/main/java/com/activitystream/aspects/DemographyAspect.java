@@ -17,7 +17,7 @@ public class DemographyAspect extends AspectBase{
         aspectPropertyMap.put("demography.income", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("demography.disability", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("demography.ethnicity", new AspectProperty(IsRequired.False));
-        aspectPropertyMap.put("dempgraphy.birht_date", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("dempgraphy.birth_date", new AspectProperty(IsRequired.False));
     }
 
     public DemographyAspect gender(Gender gender) {
