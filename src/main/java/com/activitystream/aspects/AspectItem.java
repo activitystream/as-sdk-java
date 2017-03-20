@@ -20,6 +20,7 @@ public class AspectItem {
     private Integer itemCount;
     private Double itemPrice;
     private String description;
+    private String type;
     private String variant;
     private String priceType;
     private String priceCategory;
@@ -75,6 +76,11 @@ public class AspectItem {
 
     public AspectItem description(String description) {
         this.description = description;
+        return this;
+    }
+
+    public AspectItem type(String type){
+        this.type = type;
         return this;
     }
 
