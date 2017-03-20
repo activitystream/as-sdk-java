@@ -3,7 +3,7 @@ package com.activitystream.aspects;
 public class AddressAspect extends AspectBase {
 
     public AddressAspect() {
-        aspectPropertyMap.put("address.address", new AspectProperty(IsRequired.True));
+        aspectPropertyMap.put("address.address", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("address.address2", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("address.city", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("address.state", new AspectProperty(IsRequired.False));
