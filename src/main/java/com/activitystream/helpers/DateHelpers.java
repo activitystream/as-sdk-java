@@ -6,11 +6,13 @@ import java.text.SimpleDateFormat;
 
 public class DateHelpers {
 
+    public static DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     public static void validateDateString(String timestamp) {
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        SimpleDateFormat formatter = (SimpleDateFormat) dateFormatter.clone();
 
         try {
-            dateFormatter.parse(timestamp);
+            formatter.parse(timestamp);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
