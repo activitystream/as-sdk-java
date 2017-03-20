@@ -21,6 +21,7 @@ public class AspectItem {
     private Double itemPrice;
     private String description;
     private String variant;
+    private String priceType;
     private String priceCategory;
     private String currency;
     private Double totalInStock;
@@ -79,6 +80,11 @@ public class AspectItem {
 
     public AspectItem variant(String variant) {
         this.variant = variant;
+        return this;
+    }
+
+    public AspectItem priceCategory(String priceType) {
+        this.priceType = priceType;
         return this;
     }
 
