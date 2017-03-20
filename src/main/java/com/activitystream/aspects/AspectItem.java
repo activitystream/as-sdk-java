@@ -83,7 +83,7 @@ public class AspectItem {
         return this;
     }
 
-    public AspectItem priceCategory(String priceType) {
+    public AspectItem priceType(String priceType) {
         this.priceType = priceType;
         return this;
     }
