@@ -187,8 +187,11 @@ public class AspectItem {
         obj.put("currency", currency);
         obj.put("valid_from", validFrom);
         obj.put("valid_until", validUntil);
-        obj.put("price_category", priceCategory);
+        obj.put("type",type);
         obj.put("variant", variant);
+        obj.put("price_type",priceType);
+        obj.put("price_category", priceCategory);
+
         obj.put("description", description);
         obj.put("item_price", itemPrice);
         obj.put("item_count", itemCount);
