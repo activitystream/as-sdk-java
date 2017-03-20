@@ -17,6 +17,7 @@ public class DemographyAspect extends AspectBase{
         aspectPropertyMap.put("demography.income", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("demography.disability", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("demography.ethnicity", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("dempgraphy.birht_date", new AspectProperty(IsRequired.False));
     }
 
     public DemographyAspect gender(Gender gender) {
@@ -41,6 +42,11 @@ public class DemographyAspect extends AspectBase{
 
     public DemographyAspect birthDay(Integer birthDay) {
         aspectPropertyMap.get("demography.birth_day").value = birthDay;
+        return this;
+    }
+
+    public DemographyAspect birthDate(String birthDate){
+        aspectPropertyMap.get("demography.birth_date").value = birthDate;
         return this;
     }
 
