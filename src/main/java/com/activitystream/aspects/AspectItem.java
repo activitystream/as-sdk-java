@@ -33,6 +33,7 @@ public class AspectItem {
     private String accountingKey;
     private Map<String, String> dimensions;
     private Map<String, String> properties;
+    private String complementary;
 
     public AspectItem involves(EntityRole... roles) {
         this.involved.addAll(Arrays.asList(roles));
@@ -86,6 +87,11 @@ public class AspectItem {
 
     public AspectItem variant(String variant) {
         this.variant = variant;
+        return this;
+    }
+    
+    public AspectItem complementary(String complementary) {
+        this.complementary = complementary;
         return this;
     }
 
@@ -191,6 +197,7 @@ public class AspectItem {
         obj.put("variant", variant);
         obj.put("price_type",priceType);
         obj.put("price_category", priceCategory);
+        obj.put("complementary", complementary);
 
         obj.put("description", description);
         obj.put("item_price", itemPrice);
