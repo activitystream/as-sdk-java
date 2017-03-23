@@ -11,7 +11,7 @@ public class InventoryAspect extends AspectBase {
         aspectPropertyMap.put("inventory.items_in_stock", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_for_sale", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_sold", new AspectProperty(IsRequired.False));
-        aspectPropertyMap.put("inventory.category_inventory", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("inventory.price_categories", new AspectProperty(IsRequired.False));
     }
 
     public InventoryAspect itemsInStock(Double itemsInStock) {
@@ -31,7 +31,7 @@ public class InventoryAspect extends AspectBase {
 
     public InventoryAspect addPriceCategory(PriceCategoryInventoryAspect pc) {
         this.items.add(pc.toJson());
-        aspectPropertyMap.get("inventory.category_inventory").value = this.items;
+        aspectPropertyMap.get("inventory.price_categories").value = this.items;
         return this;
     }
 }
