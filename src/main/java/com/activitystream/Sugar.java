@@ -64,6 +64,8 @@ public class Sugar {
 
     public static MessagingAspect messaging() { return new MessagingAspect(); }
 
+    public static AddressAspect address() { return new AddressAspect(); }
+
     public static AddressAspect address(String streetAndNumber) { return new AddressAspect().streetAndNumber(streetAndNumber); }
 
     public static AttachmentsAspect attachments(Attachment... attachments) { return new AttachmentsAspect(attachments); }
