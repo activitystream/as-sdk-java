@@ -11,8 +11,35 @@ import static com.activitystream.Predefined.INVOLVES;
 import static com.activitystream.Sugar.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.hamcrest.CoreMatchers.not;
 public class EntityTest {
+
+    @Test
+    public void should_render_as_preprocess_if_marked_so() {
+        Entity testEntity = entity("Cabinet", "id").preprocess().properties(m().key("a").value("b"));
+        Map expected = map(
+                "type", "as.api.entity.preprocess",
+                "entity_ref", "Cabinet/id",
+                "properties", map("a", "b")
+        );
+
+        Map actual = testEntity.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+
+    }
+
+    @Test
+    public void should_fail_on_empty_constructor(){
+        Entity entity = null;
+        try {
+            entity = new Entity();
+            assertThat("Empty constructor should fail.", entity, not(entity));
+        }
+        catch (UnsupportedOperationException nope){
+            assertThat(entity, equalTo(null));
+        }
+
+    }
     @Test
     public void should_render_as_ref_entity_when_only_id_is_present() {
         Entity entity = entity("Person", "id");

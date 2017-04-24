@@ -9,35 +9,44 @@ import com.activitystream.underware.Version;
 import org.json.simple.JSONObject;
 
 import java.text.SimpleDateFormat;
-
 import java.util.*;
 
 public class Entity {
+
     private EntityType type;
     private String id;
-	private String timestamp;
+    private String timestamp;
     private List<EntityRelation> relations = new ArrayList<>();
     private Map props = Factories.getMap();
     private List<Aspect> aspects = new ArrayList<>();
+
+    private String ASMessageType = "as.api.entity";
+
+    public Entity() {
+        throw new UnsupportedOperationException("Entity requires an id and a type.");
+    }
 
     public Entity(EntityType type, String id) {
         this.type = type;
         this.id = id;
     }
-	
-	public Entity occurred(Date timestamp, TimeZone timeZone) {
-		SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
-		formatter.setTimeZone(timeZone);
+    public Entity preprocess(){
+         this.ASMessageType = "as.api.entity.preprocess";
+         return this;
+    }
+    public Entity occurred(Date timestamp, TimeZone timeZone) {
+        SimpleDateFormat formatter = (SimpleDateFormat) DateHelpers.dateFormatter.clone();
+        formatter.setTimeZone(timeZone);
 
-		this.timestamp = formatter.format(timestamp);
-		return this;
-   }
-   
-   public Entity occurred(String timestamp) {
-		DateHelpers.validateDateString(timestamp);
-		this.timestamp = timestamp;
-		return this;
-   }
+        this.timestamp = formatter.format(timestamp);
+        return this;
+    }
+
+    public Entity occurred(String timestamp) {
+        DateHelpers.validateDateString(timestamp);
+        this.timestamp = timestamp;
+        return this;
+    }
 
     public Entity properties(Map props) {
         this.props = props;
@@ -96,13 +105,15 @@ public class Entity {
     public Map toMap() {
         Map map = Factories.getMap();
         final Tuple<String, Object> render = render(new HashSet<String>());
-        if (render.x.equals("entity")) map = (Map) render.y;
-        else {
+        if (render.x.equals("entity")) {
+            map = (Map) render.y;
+        } else {
             map.put(render.x, render.y);
         }
-        map.put("type", "as.api.entity");
+
+        map.put("type", this.ASMessageType);
         if (timestamp != null)
-        	map.put("occurred_at", timestamp);
+            map.put("occurred_at", timestamp);
         map.put("_v", Version.sdkVersion);
         Trimmer.trimMap(map);
         return map;
