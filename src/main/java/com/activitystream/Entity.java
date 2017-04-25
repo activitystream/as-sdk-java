@@ -20,6 +20,8 @@ public class Entity {
     private Map props = Factories.getMap();
     private List<Aspect> aspects = new ArrayList<>();
 
+    private String partition;
+
     private String ASMessageType = "as.api.entity";
 
     public Entity() {
@@ -64,6 +66,11 @@ public class Entity {
 
     public Entity aspects(Aspect... aspects) {
         this.aspects.addAll(Arrays.asList(aspects));
+        return this;
+    }
+
+    public Entity partition(String partition){
+        this.partition = partition;
         return this;
     }
 

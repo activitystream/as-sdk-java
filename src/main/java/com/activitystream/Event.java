@@ -19,6 +19,7 @@ public class Event {
     private String origin;
     private Map props;
     private String description;
+    private String partition;
 
     public Event(String type) { this.event = new EventType(type); }
 
@@ -50,6 +51,11 @@ public class Event {
         return this;
     }
 
+    public Event partition(String partition){
+        this.partition = partition;
+        return this;
+    }
+    
     public Event origin(String origin) {
         this.origin = origin;
         return this;
