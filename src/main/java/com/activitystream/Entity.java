@@ -101,6 +101,9 @@ public class Entity {
                 }
                 value.put("aspects", aspectsJson);
             }
+            if(partition != null){
+                value.put("partition",partition);
+            }
             return new Tuple<>("entity", (Object) value);
         }
     }

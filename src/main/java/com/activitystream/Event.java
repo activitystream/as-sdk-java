@@ -86,6 +86,8 @@ public class Event {
         obj.put("origin", origin);
         obj.put("description", description);
         obj.put("occurred_at", timestamp);
+        if(partition != null)
+            obj.put("partition",partition);
 
         List inv = new ArrayList();
         for (EntityRole anInvolved : involved) {

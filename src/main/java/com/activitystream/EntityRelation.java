@@ -21,11 +21,19 @@ public class EntityRelation {
     private String endDate;
     private Double weight;
     private String externalId;
+    private String direction;
 
 
     public EntityRelation link(EntityRelationType linkType, Entity entity) {
         this.linkType = linkType;
         this.entity = entity;
+        return this;
+    }
+
+    public EntityRelation link(EntityRelationType linkType, Entity entity, String direction) {
+        this.linkType = linkType;
+        this.entity = entity;
+        this.direction = direction;
         return this;
     }
 
@@ -72,6 +80,11 @@ public class EntityRelation {
         return this;
     }
 
+    public EntityRelation direction(String direction){
+        this.direction = direction;
+        return this;
+    }
+
     public Map render(Set<String> processed) {
         if (entity == null) throw new RuntimeException("relationship must have linked entity");
 
@@ -80,6 +93,7 @@ public class EntityRelation {
             Map obj = Factories.getMap();
 
             obj.put("type", linkType.value());
+            obj.put("$direction",direction);
             obj.put("external_id", externalId);
             obj.put("weight", weight);
             obj.put("valid_from", startDate);
