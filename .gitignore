@@ -1,6 +1,5 @@
 .gradle/
 .idea/
-build/
 *.i??
 target/
 dependency-reduced-pom.xml
