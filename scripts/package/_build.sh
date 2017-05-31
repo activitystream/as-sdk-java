@@ -2,7 +2,8 @@
 
 set -euxo pipefail
 
-REVISION=$1
+ACCESS=$1 # public or private
+REVISION=$2
 
 DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 export ROOT="`cd "${DIR}/../.."; pwd`"

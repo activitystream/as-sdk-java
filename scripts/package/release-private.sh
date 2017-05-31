@@ -7,4 +7,4 @@ REVISION=$1
 DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 export ROOT="`cd "${DIR}/../.."; pwd`"
 
-$ROOT/scripts/package/_build.sh $REVISION clean deploy
+$ROOT/scripts/package/_build.sh private $REVISION clean deploy
