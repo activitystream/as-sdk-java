@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Entity {
+public class Entity implements TransformableToJson {
 
     private EntityType type;
     private String id;
@@ -107,7 +107,8 @@ public class Entity {
             return new Tuple<>("entity", (Object) value);
         }
     }
-
+    
+    @Override
     public String toJson() {
         return JSONObject.toJSONString(toMap()).replace("\\/", "/");
     }

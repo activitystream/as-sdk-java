@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Event {
+public class Event implements TransformableToJson{
 
     private EventType event;
     private List<EntityRole> involved = new ArrayList<>();
@@ -74,7 +74,8 @@ public class Event {
         this.description = description;
         return this;
     }
-
+    
+    @Override
     public String toJson() {
         return JSONObject.toJSONString(toMap()).replace("\\/", "/");
     }
