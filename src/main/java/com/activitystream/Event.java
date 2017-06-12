@@ -20,6 +20,7 @@ public class Event implements TransformableToJson{
     private Map props;
     private String description;
     private String partition;
+    private Integer importance;
 
     public Event(String type) { this.event = new EventType(type); }
 
@@ -48,6 +49,11 @@ public class Event implements TransformableToJson{
     public Event occurred(String timestamp) {
         DateHelpers.validateDateString(timestamp);
         this.timestamp = timestamp;
+        return this;
+    }
+
+    public Event importance(Integer importance){
+        this.importance = importance;
         return this;
     }
 
@@ -87,6 +93,8 @@ public class Event implements TransformableToJson{
         obj.put("origin", origin);
         obj.put("description", description);
         obj.put("occurred_at", timestamp);
+        if(importance != null)
+            obj.put("importance", importance);
         if(partition != null)
             obj.put("partition",partition);
 
