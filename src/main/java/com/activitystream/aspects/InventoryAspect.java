@@ -32,7 +32,7 @@ public class InventoryAspect extends AspectBase {
     }
 
     public InventoryAspect itemsUnavailable(Double itemsUnavailable) {
-        aspectPropertyMap.get("inventory.items_for_sale").value = itemsUnavailable;
+        aspectPropertyMap.get("inventory.items_unavailable").value = itemsUnavailable;
         return this;
     }
 
