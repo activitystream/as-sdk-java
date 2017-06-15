@@ -23,37 +23,31 @@ public class PriceCategoryInventoryAspect extends AspectBase {
     }
 
     public PriceCategoryInventoryAspect priceCategory(String priceCategory){
-        //aspectPropertyMap.get("inventory.category_inventory.price_category").value = priceCategory;
         this.priceCategory = priceCategory;
         return this;
     }
     public PriceCategoryInventoryAspect itemsInStock(Double itemsInStock) {
-        //aspectPropertyMap.get("inventory.category_inventory.items_in_stock").value = itemsInStock;
         this.itemsInStock = itemsInStock;
         return this;
     }
 
     public PriceCategoryInventoryAspect itemsReserved(Double itemsReserved) {
-        //aspectPropertyMap.get("inventory.category_inventory.items_in_stock").value = itemsInStock;
         this.itemsReserved = itemsReserved;
         return this;
     }
 
     public PriceCategoryInventoryAspect itemsForSale(Double itemsForSale) {
-        //aspectPropertyMap.get("inventory.category_inventory.items_for_sale").value = itemsForSale;
         this.itemsForSale = itemsForSale;
         return this;
     }
 
     public PriceCategoryInventoryAspect itemsSold(Double itemsSold) {
-        //aspectPropertyMap.get("inventory.category_inventory.items_sold").value = itemsSold;
         this.itemsSold = itemsSold;
         return this;
     }
 
     public PriceCategoryInventoryAspect itemsUnavailable(Double itemsUnavailable) {
-        //aspectPropertyMap.get("inventory.category_inventory.items_sold").value = itemsSold;
-        this.itemsSold = itemsSold;
+        this.itemsUnavailable = itemsUnavailable;
         return this;
     }
 
