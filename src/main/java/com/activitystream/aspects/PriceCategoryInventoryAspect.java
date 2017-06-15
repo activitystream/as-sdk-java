@@ -10,6 +10,8 @@ public class PriceCategoryInventoryAspect extends AspectBase {
     private Double itemsInStock;
     private Double itemsForSale;
     private Double itemsSold;
+    private Double itemsReserved;
+    private Double itemsUnavailable;
 
     public PriceCategoryInventoryAspect() {
         /*
@@ -31,6 +33,12 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         return this;
     }
 
+    public PriceCategoryInventoryAspect itemsReserved(Double itemsReserved) {
+        //aspectPropertyMap.get("inventory.category_inventory.items_in_stock").value = itemsInStock;
+        this.itemsReserved = itemsReserved;
+        return this;
+    }
+
     public PriceCategoryInventoryAspect itemsForSale(Double itemsForSale) {
         //aspectPropertyMap.get("inventory.category_inventory.items_for_sale").value = itemsForSale;
         this.itemsForSale = itemsForSale;
@@ -43,12 +51,20 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         return this;
     }
 
+    public PriceCategoryInventoryAspect itemsUnavailable(Double itemsUnavailable) {
+        //aspectPropertyMap.get("inventory.category_inventory.items_sold").value = itemsSold;
+        this.itemsSold = itemsSold;
+        return this;
+    }
+
     public Map toJson() {
         Map result = Factories.getMap();
         result.put("price_category", priceCategory);
         result.put("items_in_stock", itemsInStock);
         result.put("items_for_sale", itemsForSale);
         result.put("items_sold", itemsSold);
+        result.put("items_reserved",itemsReserved);
+        result.put("items_unavailable",itemsUnavailable);
         return result;
     }
 }

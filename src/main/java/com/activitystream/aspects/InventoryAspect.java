@@ -11,11 +11,17 @@ public class InventoryAspect extends AspectBase {
         aspectPropertyMap.put("inventory.items_in_stock", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_for_sale", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_sold", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("inventory.items_reserved", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.price_categories", new AspectProperty(IsRequired.False));
     }
 
     public InventoryAspect itemsInStock(Double itemsInStock) {
         aspectPropertyMap.get("inventory.items_in_stock").value = itemsInStock;
+        return this;
+    }
+
+    public InventoryAspect itemsReserved(Double itemsReserved) {
+        aspectPropertyMap.get("inventory.items_reserved").value = itemsReserved;
         return this;
     }
 
