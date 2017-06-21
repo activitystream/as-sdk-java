@@ -47,8 +47,8 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         return this;
     }
 
-    /**
-     * @Deprecated - Only here for backwards compatibility - use itemsUnsellable instead
+    /*
+     * @deprecated - Only here for backwards compatibility - use itemsUnsellable instead
      */
     public PriceCategoryInventoryAspect itemsUnavailable(Double itemsUnavailable) {
         //Redirecting to the non-deprecated function.
