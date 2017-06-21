@@ -11,7 +11,8 @@ public class PriceCategoryInventoryAspect extends AspectBase {
     private Double itemsForSale;
     private Double itemsSold;
     private Double itemsReserved;
-    private Double itemsUnavailable;
+    private Double itemsUnsellable;
+
 
     public PriceCategoryInventoryAspect() {
         /*
@@ -46,8 +47,16 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         return this;
     }
 
+    /**
+     * @Deprecated - Only here for backwards compatibility - use itemsUnsellable instead
+     */
     public PriceCategoryInventoryAspect itemsUnavailable(Double itemsUnavailable) {
-        this.itemsUnavailable = itemsUnavailable;
+        //Redirecting to the non-deprecated function.
+        return this.itemsUnsellable(itemsUnavailable);
+    }
+
+    public PriceCategoryInventoryAspect itemsUnsellable(Double itemsUnsellable) {
+        this.itemsUnsellable = itemsUnsellable;
         return this;
     }
 
@@ -58,7 +67,7 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         result.put("items_for_sale", itemsForSale);
         result.put("items_sold", itemsSold);
         result.put("items_reserved",itemsReserved);
-        result.put("items_unavailable",itemsUnavailable);
+        result.put("items_unsellable", itemsUnsellable);
         return result;
     }
 }

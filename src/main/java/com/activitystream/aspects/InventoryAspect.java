@@ -12,7 +12,7 @@ public class InventoryAspect extends AspectBase {
         aspectPropertyMap.put("inventory.items_for_sale", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_sold", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_reserved", new AspectProperty(IsRequired.False));
-        aspectPropertyMap.put("inventory.items_unavailable", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("inventory.items_unsellable", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.price_categories", new AspectProperty(IsRequired.False));
     }
 
@@ -31,8 +31,16 @@ public class InventoryAspect extends AspectBase {
         return this;
     }
 
+    /**
+     * @deprecated - Only here for backwards compatibility - use itemsUnsellable instead
+     * TODO: Kill this when the integration platform stops using this.
+     */
     public InventoryAspect itemsUnavailable(Double itemsUnavailable) {
-        aspectPropertyMap.get("inventory.items_unavailable").value = itemsUnavailable;
+        return this.itemsUnsellable(itemsUnavailable);
+    }
+
+    public InventoryAspect itemsUnsellable(Double itemsUnsellable) {
+        aspectPropertyMap.get("inventory.items_unsellable").value = itemsUnsellable;
         return this;
     }
 
