@@ -22,6 +22,7 @@ public class EntityRelation {
     private Double weight;
     private String externalId;
     private String direction;
+    private Boolean delete;
 
 
     public EntityRelation link(EntityRelationType linkType, Entity entity) {
@@ -75,6 +76,11 @@ public class EntityRelation {
         return this;
     }
 
+    public EntityRelation delete(boolean delete) {
+        this.delete = delete;
+        return this;
+    }
+
     public EntityRelation externalId(String id) {
         this.externalId = id;
         return this;
@@ -94,6 +100,7 @@ public class EntityRelation {
 
             obj.put("type", linkType.value());
             obj.put("$direction",direction);
+            obj.put("$delete", delete);
             obj.put("external_id", externalId);
             obj.put("weight", weight);
             obj.put("valid_from", startDate);
