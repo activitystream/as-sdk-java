@@ -5,10 +5,7 @@ import com.activitystream.helpers.DateHelpers;
 import com.activitystream.underware.Factories;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 public class TimedAspect implements Aspect {
     private String starts;
@@ -48,13 +45,20 @@ public class TimedAspect implements Aspect {
 
     @Override
     public void addToObject(Map jsonObject, Set<String> processed) {
-        Map timed = Factories.getMap();
+        Map timeStamps = Factories.getMap();
+        Map timedMap = Factories.getMap();
         if (starts == null && ends == null) {
             throw new RuntimeException("timed aspect needs a start or an end");
         }
-        timed.put("begins", starts);
-        timed.put("ends", ends);
-        timed.put("type", type.toString());
-        jsonObject.put("timed", timed);
+        timeStamps.put("begins", starts);
+        timeStamps.put("ends", ends);
+
+
+        Map existingMap = (Map<String, Map>)jsonObject.get("timed");
+        if (existingMap == null){
+            existingMap = Factories.getMap();
+        }
+        existingMap.put(type.toString(), timeStamps);
+        jsonObject.put("timed", existingMap);
     }
 }

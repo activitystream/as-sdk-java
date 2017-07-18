@@ -216,18 +216,24 @@ public class AspectsTest extends EventTestBase {
     @Test
     public void timed_aspect() throws ParseException {
         Event ev = event("action")
-                .aspects(timed()
-                                .begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"), TimeZone.getTimeZone("GMT+1"))
-                                .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"), TimeZone.getTimeZone("GMT+2"))
-                );
+                .aspects(
+                        timed().begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"), TimeZone.getTimeZone("GMT+1"))
+                            .ends(DateHelpers.dateFormatter.parse("2015-11-24T20:00:00.000Z"), TimeZone.getTimeZone("GMT+2"))
+                            .type(TimedStatus.PERIOD))
+                .aspects(timed().begins(DateHelpers.dateFormatter.parse("2015-11-24T17:00:00.000Z"), TimeZone.getTimeZone("GMT+1"))
+                        .type(TimedStatus.ONSALE));
 
         Map expected = map(
                 "type", "action",
                 "aspects", map(
                         "timed", map(
+                                "period", map(
                                 "begins", "2015-11-24T18:00:00.000+01",
-                                "ends", "2015-11-24T22:00:00.000+02",
-                                "type", "period"
+                                "ends", "2015-11-24T22:00:00.000+02"
+                                ),
+                                "onsale", map(
+                                        "begins", "2015-11-24T18:00:00.000+01"
+                                )
                         )
                 )
         );
