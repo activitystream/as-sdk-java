@@ -80,6 +80,7 @@ public class Sugar {
 
     public static TrafficSourceAspect trafficSource(TrafficSourceType trafficSourceType) { return new TrafficSourceAspect(trafficSourceType); }
 
+    public static ResolvableAspect resolvableAspect(String externalId) { return new ResolvableAspect(externalId); }
 
     // helpers to create strongly typed maps
 

@@ -719,4 +719,25 @@ public class AspectsTest extends EventTestBase {
         assertThat(actual.entrySet(), equalTo(expected.entrySet()));
     }
 
+    @Test
+    public void resolvable_aspect() throws MalformedURLException {
+        Event ev = event("action")
+                .aspects(
+                        resolvableAspect("123465")
+                                .batchId("16513")
+                );
+
+        Map expected = map(
+                "type", "action",
+                "aspects", map(
+                        "resolvable", map(
+                                "externalId", "123465",
+                                "batchId", "16513"
+                        )
+                )
+        );
+        Map actual = ev.toMap();
+        assertThat(actual.entrySet(), equalTo(expected.entrySet()));
+    }
+
 }
