@@ -15,6 +15,7 @@ public class EntityRoleType {
     public static final EntityRoleType INVOLVES = new EntityRoleType("INVOLVES");
     public static final EntityRoleType OBSERVED = new EntityRoleType("OBSERVED");
     public static final EntityRoleType REFERENCES = new EntityRoleType("REFERENCES");
+    public static final EntityRoleType RATED_BY = new EntityRoleType("RATED_BY");
     private final String actor;
 
     private EntityRoleType(String actor) {

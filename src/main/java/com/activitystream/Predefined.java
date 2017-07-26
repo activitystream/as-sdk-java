@@ -18,6 +18,7 @@ public class Predefined {
     public static final EntityRoleType SENT_TO_CC = EntityRoleType.SENT_TO_CC;
     public static final EntityRoleType SENT_TO_BCC = EntityRoleType.SENT_TO_BCC;
     public static final EntityRoleType VIEWED = EntityRoleType.VIEWED;
+    public static final EntityRoleType RATED_BY = EntityRoleType.RATED_BY;
 
     public static EntityRelationType AKA = new EntityRelationType("AKA");
     public static EntityRelationType MEMBER_OF = new EntityRelationType("MEMBER_OF");
