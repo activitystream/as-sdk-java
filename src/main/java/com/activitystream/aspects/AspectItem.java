@@ -34,6 +34,7 @@ public class AspectItem {
     private Map<String, String> dimensions;
     private Map<String, String> properties;
     private String complementary;
+    private Set<String> lineIds;
 
     public AspectItem involves(EntityRole... roles) {
         this.involved.addAll(Arrays.asList(roles));
@@ -174,6 +175,14 @@ public class AspectItem {
     	return this;
     }
 
+    public AspectItem lineIds(Set<String> lineIds){
+        if (this.lineIds == null){
+            this.lineIds = new HashSet<String>();
+        }
+        this.lineIds.addAll(lineIds);
+        return this;        
+    }
+
     public Map toJson(Set<String> processed) {
         Map obj = Factories.getMap();
 
@@ -222,6 +231,7 @@ public class AspectItem {
         obj.put("aspects", aspectsJson);
         obj.put("dimensions", dimensions);
         obj.put("properties", properties);
+        obj.put("line_ids", lineIds);
         
         return obj;
     }
