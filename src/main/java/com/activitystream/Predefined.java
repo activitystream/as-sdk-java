@@ -31,6 +31,7 @@ public class Predefined {
     public static EntityRelationType ON_BEHALF_OF = new EntityRelationType("ON_BEHALF_OF");
     public static EntityRelationType HAS_RELATIONS_TO = new EntityRelationType("HAS_RELATIONS_TO");
     public static EntityRelationType LOCATED_AT = new EntityRelationType("LOCATED_AT");
+    public static EntityRelationType LOCATED_IN = new EntityRelationType("LOCATED_IN");
     public static EntityRelationType FEATURED = new EntityRelationType("FEATURED");
     public static EntityRelationType HOSTED_AT = new EntityRelationType("HOSTED_AT");
     public static EntityRelationType MANUFACTURED_BY = new EntityRelationType("MANUFACTURED_BY");
