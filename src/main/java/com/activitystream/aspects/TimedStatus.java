@@ -1,7 +1,7 @@
 package com.activitystream.aspects;
 
 public enum TimedStatus {
-    VALID, DUE, SCHEDULE, PERIOD, ONSALE, DOOR, DURATION, AVAILABLE, BEGINS, ACTIVE;
+    VALID, DUE, SCHEDULE, PERIOD, ONSALE, DOOR, DURATION, AVAILABLE, BEGINS, ACTIVE, PRESALE;
 
     @Override
     public String toString() {
@@ -15,6 +15,7 @@ public enum TimedStatus {
         if (this == AVAILABLE) return "available";
         if (this == BEGINS) return "begins";
         if (this == ACTIVE) return "active";
+        if (this == PRESALE) return "presale";
         throw new RuntimeException("unhandled action of timed action");
     }
 }
