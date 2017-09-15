@@ -13,6 +13,7 @@ public class InventoryAspect extends AspectBase {
         aspectPropertyMap.put("inventory.items_sold", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_reserved", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.items_unsellable", new AspectProperty(IsRequired.False));
+        aspectPropertyMap.put("inventory.items_complimentary", new AspectProperty(IsRequired.False));
         aspectPropertyMap.put("inventory.price_categories", new AspectProperty(IsRequired.False));
     }
 
@@ -49,9 +50,15 @@ public class InventoryAspect extends AspectBase {
         return this;
     }
 
+    public InventoryAspect itemsComplimentary(double itemsComplimentary) {
+        aspectPropertyMap.get("inventory.items_complimentary").value = this.items;
+        return this;
+    }
+    
     public InventoryAspect addPriceCategory(PriceCategoryInventoryAspect pc) {
         this.items.add(pc.toJson());
         aspectPropertyMap.get("inventory.price_categories").value = this.items;
         return this;
     }
+    
 }
