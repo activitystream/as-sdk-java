@@ -51,7 +51,7 @@ public class InventoryAspect extends AspectBase {
     }
 
     public InventoryAspect itemsComplimentary(double itemsComplimentary) {
-        aspectPropertyMap.get("inventory.items_complimentary").value = this.items;
+        aspectPropertyMap.get("inventory.items_complimentary").value = itemsComplimentary;
         return this;
     }
     
