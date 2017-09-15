@@ -12,6 +12,7 @@ public class PriceCategoryInventoryAspect extends AspectBase {
     private Double itemsSold;
     private Double itemsReserved;
     private Double itemsUnsellable;
+    private Double itemsComplimentary;
 
 
     public PriceCategoryInventoryAspect() {
@@ -60,6 +61,11 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         return this;
     }
 
+    public PriceCategoryInventoryAspect itemsComplimentary(Double itemsComplimentary) {
+        this.itemsComplimentary = itemsComplimentary;
+        return this;
+    }
+    
     public Map toJson() {
         Map result = Factories.getMap();
         result.put("price_category", priceCategory);
@@ -68,6 +74,7 @@ public class PriceCategoryInventoryAspect extends AspectBase {
         result.put("items_sold", itemsSold);
         result.put("items_reserved",itemsReserved);
         result.put("items_unsellable", itemsUnsellable);
+        result.put("items_complimentary", itemsComplimentary);
         return result;
     }
 }
