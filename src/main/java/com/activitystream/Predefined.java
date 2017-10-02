@@ -13,7 +13,7 @@ public class Predefined {
     public static final EntityRoleType PURCHASED = TRADE.extend("PURCHASED");
     public static final EntityRoleType CANCELLED = TRADE.extend("CANCELLED");
     public static final EntityRoleType RETURNED = TRADE.extend("RETURNED");
-    public static final EntityRoleType RESERVED = TRADE.extend("RETURNED");
+    public static final EntityRoleType RESERVED = TRADE.extend("RESERVED");
     public static final EntityRoleType SENT_BY = EntityRoleType.SENT_BY;
     public static final EntityRoleType SENT_TO = EntityRoleType.SENT_TO;
     public static final EntityRoleType SENT_TO_CC = EntityRoleType.SENT_TO_CC;
