@@ -20,6 +20,7 @@ public class Event implements TransformableToJson{
     private Map props;
     private String description;
     private String partition;
+    private String header;
     private Integer importance;
 
     public Event(String type) { this.event = new EventType(type); }
@@ -62,6 +63,11 @@ public class Event implements TransformableToJson{
         return this;
     }
     
+    public Event header(String header){
+        this.header = header;
+        return this;
+    }
+    
     public Event origin(String origin) {
         this.origin = origin;
         return this;
@@ -93,10 +99,12 @@ public class Event implements TransformableToJson{
         obj.put("origin", origin);
         obj.put("description", description);
         obj.put("occurred_at", timestamp);
-        if(importance != null)
+        if (importance != null)
             obj.put("importance", importance);
-        if(partition != null)
-            obj.put("partition",partition);
+        if (partition != null)
+            obj.put("partition", partition);
+        if (header != null)
+            obj.put("_tid", header);
 
         List inv = new ArrayList();
         for (EntityRole anInvolved : involved) {

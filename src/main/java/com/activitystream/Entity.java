@@ -19,10 +19,12 @@ public class Entity implements TransformableToJson {
     private List<EntityRelation> relations = new ArrayList<>();
     private Map props = Factories.getMap();
     private List<Aspect> aspects = new ArrayList<>();
-
+    
     private String partition;
 
     private String ASMessageType = "as.api.entity";
+    
+    private String header;
 
     public Entity() {
         throw new UnsupportedOperationException("Entity requires an id and a type.");
@@ -73,6 +75,11 @@ public class Entity implements TransformableToJson {
         this.partition = partition;
         return this;
     }
+    
+    public Entity header(String header){
+        this.header = header;
+        return this;
+    }
 
     public Tuple<String, Object> render(Set<String> processed) {
         if (id == null || id.trim().isEmpty()) return null;
@@ -101,8 +108,11 @@ public class Entity implements TransformableToJson {
                 }
                 value.put("aspects", aspectsJson);
             }
-            if(partition != null){
-                value.put("partition",partition);
+            if (partition != null) {
+                value.put("partition", partition);
+            }
+            if (header != null) {
+                value.put("_tid", header);
             }
             return new Tuple<>("entity", (Object) value);
         }
